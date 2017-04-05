@@ -57,8 +57,8 @@ public class AppConfig implements ApplicationContextAware {
 
     @Bean
     @Primary
-    public DataSource dataSource(@Named(value = "baseConfig") BaseConfig baseConfig) throws Exception {
-        return DataSourceFactory.create(baseConfig.getDataSourceConfig());
+    public DataSource dataSource(@Named(value = "propsConfig") PropsConfig propsConfig) throws Exception {
+        return DataSourceFactory.create(propsConfig.getDataSourceConfig());
     }
 
     @Bean
@@ -84,13 +84,13 @@ public class AppConfig implements ApplicationContextAware {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, BaseConfig baseConfig) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, PropsConfig propsConfig) {
 
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource);
         entityManagerFactory.setPackagesToScan(PackageManager.BASE);
 
-        BaseConfig.DataSourceConfig.HibernateConfig hibernateConfig = baseConfig.getDataSourceConfig().getHibernateConfig();
+        PropsConfig.DataSourceConfig.HibernateConfig hibernateConfig = propsConfig.getDataSourceConfig().getHibernateConfig();
         entityManagerFactory.setJpaVendorAdapter(hibernateConfig.getHibernateJpaVendorAdapter());
         entityManagerFactory.setJpaProperties(hibernateConfig.getAdditionalProperties());
 
@@ -108,12 +108,12 @@ public class AppConfig implements ApplicationContextAware {
     }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(SpringManagedTransactionFactory springManagedTransactionFactory, DataSource dataSource, BaseConfig baseConfig) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(SpringManagedTransactionFactory springManagedTransactionFactory, DataSource dataSource, PropsConfig propsConfig) throws Exception {
 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setTypeAliasesPackage(PackageManager.DOMAIN);
-        sqlSessionFactoryBean.setTypeHandlers(baseConfig.getMyBatisTypeHandlers());
+        sqlSessionFactoryBean.setTypeHandlers(propsConfig.getMyBatisTypeHandlers());
         sqlSessionFactoryBean.setTransactionFactory(springManagedTransactionFactory);
         sqlSessionFactoryBean.setMapperLocations(context.getResources("classpath:mybatis/**/*.xml"));
         sqlSessionFactoryBean.setDatabaseIdProvider(databaseIdProvider());
@@ -181,8 +181,8 @@ public class AppConfig implements ApplicationContextAware {
 
     //@Bean(name = "baseConfig")
     @Bean
-    public BaseConfig baseConfig() {
-        return new BaseConfig();
+    public PropsConfig propsConfig() {
+        return new PropsConfig();
     }
 
     @Bean
@@ -196,11 +196,11 @@ public class AppConfig implements ApplicationContextAware {
     }
 
     @Bean
-    public LogbackAppender logbackAppender(BaseErrorLogService errorLogService, BaseConfig baseConfig) throws Exception {
+    public LogbackAppender logbackAppender(BaseErrorLogService errorLogService, PropsConfig propsConfig) throws Exception {
 
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
 
-        LogbackAppender logbackAppender = new LogbackAppender(errorLogService, baseConfig);
+        LogbackAppender logbackAppender = new LogbackAppender(errorLogService, propsConfig);
 
         logbackAppender.setContext(loggerContext);
         logbackAppender.setName("logbackAppender");

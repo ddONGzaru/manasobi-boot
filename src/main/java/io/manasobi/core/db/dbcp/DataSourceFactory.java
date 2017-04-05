@@ -1,6 +1,6 @@
 package io.manasobi.core.db.dbcp;
 
-import io.manasobi.config.BaseConfig;
+import io.manasobi.config.PropsConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 
@@ -9,7 +9,7 @@ import java.sql.Connection;
 @Slf4j
 public class DataSourceFactory {
 
-    public static DBCP2DataSource create(String dataSourceId, BaseConfig.DataSourceConfig dataSourceConfig) throws Exception {
+    public static DBCP2DataSource create(String dataSourceId, PropsConfig.DataSourceConfig dataSourceConfig) throws Exception {
 
         try {
             DBCP2DataSource DBCP2DataSource = new ModelMapper().map(dataSourceConfig, DBCP2DataSource.class);
@@ -25,7 +25,7 @@ public class DataSourceFactory {
         }
     }
 
-    public static DBCP2DataSource create(BaseConfig.DataSourceConfig dataSourceConfig) throws Exception {
+    public static DBCP2DataSource create(PropsConfig.DataSourceConfig dataSourceConfig) throws Exception {
         return create("MainDataSource", dataSourceConfig);
     }
 }
