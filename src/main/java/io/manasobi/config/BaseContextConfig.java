@@ -2,10 +2,12 @@ package io.manasobi.config;
 
 import ch.qos.logback.classic.Level;
 import io.manasobi.core.code.Types;
+import io.manasobi.core.mybatis.typehandler.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.TypeHandler;
 import org.hibernate.cfg.Environment;
 import org.hibernate.dialect.*;
 import org.springframework.beans.BeansException;
@@ -53,6 +55,18 @@ public class BaseContextConfig implements ApplicationContextAware {
 
     public Modeler getModelerConfig() {
         return modeler == null ? new Modeler() : modeler;
+    }
+
+    public TypeHandler<?>[] getMyBatisTypeHandlers() {
+
+        return new TypeHandler<?>[]{
+                new InstantTypeHandler(),
+                new LocalDateTimeTypeHandler(),
+                new LocalDateTypeHandler(),
+                new LocalTimeTypeHandler(),
+                new OffsetDateTimeTypeHandler(),
+                new ZonedDateTimeTypeHandler()
+        };
     }
 
     @Data
@@ -242,18 +256,8 @@ public class BaseContextConfig implements ApplicationContextAware {
                 return additionalProperties;
             }
         }
-    }
 
-    /*public TypeHandler<?>[] getMyBatisTypeHandlers() {
-        return new TypeHandler<?>[]{
-                new InstantTypeHandler(),
-                new LocalDateTimeTypeHandler(),
-                new LocalDateTypeHandler(),
-                new LocalTimeTypeHandler(),
-                new OffsetDateTimeTypeHandler(),
-                new ZonedDateTimeTypeHandler()
-        };
-    }*/
+    }
 
     /*private Application application = new Application();*/
 

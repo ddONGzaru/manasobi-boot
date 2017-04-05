@@ -2,6 +2,7 @@ package io.manasobi.core.domain.user;
 
 import com.querydsl.core.BooleanBuilder;
 import io.manasobi.core.base.BaseService;
+import io.manasobi.core.code.Types;
 import io.manasobi.core.domain.user.auth.UserAuth;
 import io.manasobi.core.domain.user.auth.UserAuthService;
 import io.manasobi.core.domain.user.role.UserRole;
@@ -33,6 +34,8 @@ public class UserService extends BaseService<User, String> {
     @Inject
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    private final String INIT_PASSWORD = "1234";
+
     @Inject
     public UserService(UserRepo userRepo) {
         super(userRepo);
@@ -51,6 +54,24 @@ public class UserService extends BaseService<User, String> {
         doSaveJob(user);
     }
 
+    public void resetPassword(String userCode) {
+
+        User user = findUser(userCode);
+        user.setUserPs(bCryptPasswordEncoder.encode(INIT_PASSWORD));
+        user.setUserStatus(Types.UserStatus.ACCOUNT_LOCK);
+
+        userRepo.save(user);
+    }
+
+    public void updatePassword(String userCode, String userPs) {
+
+        User user = findUser(userCode);
+        user.setUserPs(bCryptPasswordEncoder.encode(userPs));
+        user.setUserStatus(Types.UserStatus.NORMAL);
+
+        userRepo.save(user);
+    }
+
     private void doSaveJob(User user) {
 
         updateUserEntity(user);
@@ -66,7 +87,8 @@ public class UserService extends BaseService<User, String> {
 
         if (originalUser == null) {
 
-            user.setUserPs(bCryptPasswordEncoder.encode("1234"));
+            user.setUserPs(bCryptPasswordEncoder.encode(INIT_PASSWORD));
+            user.setUserStatus(Types.UserStatus.ACCOUNT_LOCK);
 
             UserRole userRole = new UserRole();
             userRole.setUserCd(user.getUserCd());

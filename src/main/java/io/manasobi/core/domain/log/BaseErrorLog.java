@@ -7,7 +7,7 @@ import java.time.Clock;
 import java.time.Instant;
 
 @Data
-public class AXBootErrorLog {
+public class BaseErrorLog {
 
     private String phase;
     private String system;

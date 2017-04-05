@@ -1,18 +1,18 @@
 package io.manasobi.core.security;
 
-import io.onsemiro.core.code.AXBootTypes;
-import io.onsemiro.core.code.Constants;
-import io.onsemiro.core.domain.program.Program;
-import io.onsemiro.core.domain.program.ProgramService;
-import io.onsemiro.core.domain.program.menu.Menu;
-import io.onsemiro.core.domain.program.menu.MenuService;
-import io.onsemiro.core.domain.user.SessionUser;
-import io.onsemiro.core.domain.user.User;
-import io.onsemiro.core.domain.user.UserService;
-import io.onsemiro.core.domain.user.auth.menu.AuthGroupMenu;
-import io.onsemiro.core.domain.user.auth.menu.AuthGroupMenuService;
-import io.onsemiro.core.vo.ScriptSessionVO;
-import io.onsemiro.utils.*;
+import io.manasobi.core.code.Constants;
+import io.manasobi.core.code.Types;
+import io.manasobi.core.domain.program.Program;
+import io.manasobi.core.domain.program.ProgramService;
+import io.manasobi.core.domain.program.menu.Menu;
+import io.manasobi.core.domain.program.menu.MenuService;
+import io.manasobi.core.domain.user.SessionUser;
+import io.manasobi.core.domain.user.User;
+import io.manasobi.core.domain.user.UserService;
+import io.manasobi.core.domain.user.auth.menu.AuthGroupMenu;
+import io.manasobi.core.domain.user.auth.menu.AuthGroupMenuService;
+import io.manasobi.core.vo.ScriptSessionVO;
+import io.manasobi.utils.*;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,11 +57,7 @@ public class TokenAuthenticationService {
     }
 
     public int tokenExpiry() {
-        if (PhaseUtils.isProduction()) {
-            return 60 * 50;
-        } else {
-            return 60 * 10 * 10 * 10 * 10;
-        }
+        return 60 * 60 * 8; // 60초(1분) * 60분(1시간) * 8시간 => 8시간
     }
 
     public void addAuthentication(HttpServletResponse response, UserAuthentication authentication) throws IOException {
@@ -109,7 +105,7 @@ public class TokenAuthenticationService {
                         requestUtils.setAttribute("pageName", menu.getMenuNm());
                         requestUtils.setAttribute("pageRemark", program.getRemark());
 
-                        if (program.getAuthCheck().equals(AXBootTypes.Used.YES.getLabel())) {
+                        if (program.getAuthCheck().equals(Types.Used.YES.getLabel())) {
                             AuthGroupMenu authGroupMenu = authGroupMenuService.getCurrentAuthGroupMenu(menuId, user);
                             if (authGroupMenu == null) {
                                 throw new AccessDeniedException("Access is denied");
@@ -153,11 +149,7 @@ public class TokenAuthenticationService {
 
     private void updateLastLoginDate(SessionUser sessionUser) {
 
-        User user = new User();
-        user.setUserCd(sessionUser.getUserCd());
-        user.setUserNm(sessionUser.getUserNm());
-        user.setUserPs(sessionUser.getUserPs());
-        user.setMenuGrpCd(sessionUser.getMenuGrpCd());
+        User user = userService.findUser(sessionUser.getUserCd());
         user.setLastLoginDate(Instant.now(Clock.systemUTC()));
 
         userService.save(user);

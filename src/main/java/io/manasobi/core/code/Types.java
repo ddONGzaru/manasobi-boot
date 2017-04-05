@@ -105,7 +105,7 @@ public class Types {
     }
 
     public enum UserStatus implements LabelEnum {
-        ACCOUNT_LOCK("ACCOUNT_LOCK"), NORMAL("NORMAL");
+        ACCOUNT_LOCK("LOCK"), NORMAL("NORMAL");
 
         private final String label;
 

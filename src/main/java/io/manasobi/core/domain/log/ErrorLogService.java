@@ -8,9 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import javax.persistence.Query;
 
-
 @Service
-public class ErrorLogService extends BaseService<ErrorLog, Long> implements AXBootErrorLogService {
+public class ErrorLogService extends BaseService<ErrorLog, Long> implements BaseErrorLogService {
 
     private ErrorLogRepo errorLogRepo;
 
@@ -21,8 +20,8 @@ public class ErrorLogService extends BaseService<ErrorLog, Long> implements AXBo
     }
 
     @Override
-    public void save(AXBootErrorLog axBootErrorLog) {
-        ErrorLog errorLog = ModelMapperUtils.map(axBootErrorLog, ErrorLog.class);
+    public void save(BaseErrorLog baseErrorLog) {
+        ErrorLog errorLog = ModelMapperUtils.map(baseErrorLog, ErrorLog.class);
         save(errorLog);
     }
 

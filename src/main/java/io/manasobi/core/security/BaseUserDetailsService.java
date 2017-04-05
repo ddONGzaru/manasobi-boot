@@ -56,6 +56,7 @@ public class BaseUserDetailsService implements UserDetailsService {
         sessionUser.setUserCd(user.getUserCd());
         sessionUser.setUserNm(user.getUserNm());
         sessionUser.setUserPs(user.getUserPs());
+        sessionUser.setUserStatus(user.getUserStatus());
         sessionUser.setMenuGrpCd(user.getMenuGrpCd());
 
         userRoleList.forEach(r -> sessionUser.addAuthority(r.getRoleCd()));

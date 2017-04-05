@@ -9,6 +9,7 @@ import io.manasobi.core.domain.user.UserVO;
 import io.manasobi.core.parameter.RequestParams;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -20,6 +21,9 @@ public class UserController extends BaseController {
 
     @Inject
     private UserService userService;
+
+    @Inject
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping
     public Responses.PageResponse list(Pageable pageable, RequestParams<User> requestParams) {
@@ -36,6 +40,18 @@ public class UserController extends BaseController {
     @GetMapping(params = "userCd")
     public User get(RequestParams requestParams) {
         return userService.getUser(requestParams);
+    }
+
+    @GetMapping(params = "resetPassword")
+    public ApiResponse resetPassword(String userCode) {
+        userService.resetPassword(userCode);
+        return ok();
+    }
+
+    @GetMapping(params = "updatePassword")
+    public ApiResponse updatePassword(String userCode, String userPs) {
+        userService.updatePassword(userCode, userPs);
+        return ok();
     }
 
     @PutMapping

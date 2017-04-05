@@ -5,8 +5,8 @@ import ch.qos.logback.classic.spi.StackTraceElementProxy;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
 import ch.qos.logback.core.util.ContextUtil;
 import io.manasobi.config.BaseContextConfig;
-import io.manasobi.core.domain.log.ErrorLog;
-import io.manasobi.core.domain.log.ErrorLogService;
+import io.manasobi.core.domain.log.BaseErrorLog;
+import io.manasobi.core.domain.log.BaseErrorLogService;
 import io.manasobi.utils.JsonUtils;
 import io.manasobi.utils.MDCUtils;
 import io.manasobi.utils.PhaseUtils;
@@ -30,13 +30,13 @@ import java.util.List;
 @Getter
 public class LogbackAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
-    private ErrorLogService errorLogService;
+    private BaseErrorLogService errorLogService;
 
     private BaseContextConfig contextConfig;
 
     private BaseContextConfig.Logging loggingConfig;
 
-    public LogbackAppender(ErrorLogService errorLogService, BaseContextConfig contextConfig) {
+    public LogbackAppender(BaseErrorLogService errorLogService, BaseContextConfig contextConfig) {
         this.errorLogService = errorLogService;
         this.contextConfig = contextConfig;
         this.loggingConfig = contextConfig.getLoggingConfig();
@@ -57,7 +57,7 @@ public class LogbackAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
         if (loggingEvent.getLevel().isGreaterOrEqual(loggingConfig.getLevel())) {
 
-            ErrorLog errorLog = getErrorLog(loggingEvent);
+            BaseErrorLog errorLog = getErrorLog(loggingEvent);
 
             if (loggingConfig.getDatabase().isEnabled()) {
                 if (loggingConfig.getSlack().isEnabled()) {
@@ -76,11 +76,11 @@ public class LogbackAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
         }
     }
 
-    private void toJandi(ErrorLog errorLog) {
+    private void toJandi(BaseErrorLog errorLog) {
 
     }
 
-    private void toSlack(ErrorLog errorLog) {
+    private void toSlack(BaseErrorLog errorLog) {
         SlackApi slackApi = new SlackApi(loggingConfig.getSlack().getWebHookUrl());
 
         List<SlackField> fields = new ArrayList<>();
@@ -167,13 +167,13 @@ public class LogbackAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
         slackApi.call(slackMessage);
     }
 
-    private void toDatabase(ErrorLog errorLog) {
+    private void toDatabase(BaseErrorLog errorLog) {
         errorLogService.save(errorLog);
     }
 
-    public ErrorLog getErrorLog(ILoggingEvent loggingEvent) {
+    public BaseErrorLog getErrorLog(ILoggingEvent loggingEvent) {
 
-        ErrorLog errorLog = new ErrorLog();
+        BaseErrorLog errorLog = new BaseErrorLog();
         errorLog.setPhase(PhaseUtils.phase());
         errorLog.setSystem(contextConfig.getSystemName());
         errorLog.setLoggerName(loggingEvent.getLoggerName());

@@ -1,6 +1,7 @@
 package io.manasobi.core.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.manasobi.core.code.Types;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,6 +33,8 @@ public class SessionUser implements UserDetails {
     private String menuHash;
 
     private long expires;
+
+    private Types.UserStatus userStatus;
 
     private String lastLoginDate;
 

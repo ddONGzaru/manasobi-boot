@@ -1,8 +1,8 @@
 package io.manasobi.core.domain.log;
 
-public interface AXBootErrorLogService {
+public interface BaseErrorLogService {
 
-    void save(AXBootErrorLog errorLog);
+    void save(BaseErrorLog errorLog);
 
     void deleteAllLogs();
 
