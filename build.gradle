@@ -1,29 +1,78 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.2.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		//springBootVersion = SPRING_BOOT_VERSION
 	}
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
-repositories {
-	mavenCentral()
+plugins {
+	id 'java'
+	id 'groovy'
+	id 'idea'
+	id 'eclipse'
+	id 'org.springframework.boot'     version '1.5.2.RELEASE'
+	id "org.flywaydb.flyway"          version '4.0.3'
+	//id 'io.franzbecker.gradle-lombok' version '1.8'
 }
 
+/* _____ base config _____ */
+apply from: 'config-base.gradle'
 
-dependencies {
-	compile('org.springframework.boot:spring-boot-starter')
-	compileOnly('org.projectlombok:lombok')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+/* _____ querydsl config _____ */
+apply from: 'config-querydsl.gradle'
+
+/* _____ dependencies config _____ */
+apply from: 'dependencies.gradle'
+
+jar {
+	baseName = 'manasobi-boot'
+	version = '1.0.0-SNAPSHOT'
+}
+
+/* _____ build task :: parkstore-app-server _____ */
+task buildApp(type: Copy) {
+
+	def appYmlPath = "${sourceSets.main.output.classesDir}/application.yml"
+
+	from appYmlPath
+	into 'build/libs'
+
+	def logbackPath = "${sourceSets.main.output.classesDir}/logback-prod.xml"
+
+	from logbackPath
+	into 'build/libs'
+
+	rename { fileName ->
+		if (fileName == 'logback-prod.xml') {
+			fileName.replace('-prod', '')
+		}
+	}
+
+	dependsOn bootRepackage
+}
+
+/* _____ config :: flyway for local test _____ */
+
+def localUser = 'tw_jang'
+
+flyway {
+	url = 'jdbc:oracle:thin:@shinhan.cwozeqnjffgl.ap-northeast-2.rds.amazonaws.com:1521:shinhan'
+	user = localUser
+	password = 'ParkSt0re!'
+	locations = ["filesystem:${projectDir}/src/test/resources/db/migration"]
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.1'
+}
+
+task importExcelData(type:JavaExec) {
+	main = "com.bgf.shbank.db.ExcelDataImporter"
+	classpath = sourceSets.test.runtimeClasspath
+	args localUser, "ATMS_01001110.xls","ATMS_01001120.xls","ATMS_01001130.xls","ATMS_01001140.xls","ATMS_01001150.xls","ATMS_01001160.xls","ATMS_01001170.xls","ATMS_01001180.xls","ATMS_01001230.xls",
+			"ATMS_02001100.xls","ATMS_02001110.xls","ATMS_02001120.xls","ATMS_02001130.xls","ATMS_02001140.xls","ATMS_02001150.xls","ATMS_02001160.xls","ATMS_02001170.xls","ATMS_02001180.xls","ATMS_02001190.xls","ATMS_02001200.xls","ATMS_02001210.xls","ATMS_02001230.xls","ATMS_02001270.xls","ATMS_02001280.xls","ATMS_02001290.xls",
+			"ATMS_03001110.xls","ATMS_03001130.xls","ATMS_03001140.xls","ATMS_03001150.xls","ATMS_03001160.xls","ATMS_03001170.xls",
+			"ATMS_03001180.xls","ATMS_03001190.xls","ATMS_03001200.xls","ATMS_03001210.xls","ATMS_03001220.xls","ATMS_03001230.xls",
+			"ATMS_04001110.xls","ATMS_04001130.xls","ATMS_04001140.xls","ATMS_04001150.xls","ATMS_04001170.xls","ATMS_04001180.xls",
+			"ATMS_04001190.xls","ATMS_04001200.xls",
+			"ATMS_CORNER_STATUS.xls","ATMS_ERROR_STATUS.xls","ATMS_FACILITY_STATUS.xls","ATMS_TERMINAL_STATUS.xls","ATMS_AGENT_MNG.xls"
 }
