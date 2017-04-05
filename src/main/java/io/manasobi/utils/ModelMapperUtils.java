@@ -23,7 +23,7 @@ public class ModelMapperUtils {
     public static <T> List<T> mapList(List<?> listSources, Class<T> destinationClass) {
         List<T> resultList = new ArrayList<>();
 
-        if (!ArrayUtils.isEmpty(listSources)) {
+        if (ArrayUtils.isNotEmpty(listSources)) {
             for (Object source : listSources) {
                 resultList.add(map(source, destinationClass));
             }
@@ -69,6 +69,18 @@ public class ModelMapperUtils {
 
         return mapperFactory.getMapperFacade(srcType, destType).map(src);
     }
+
+    /*public static <Src, Dest> Dest map(Src src, Class<Dest> destClass) {
+
+        Type<Src> srcType = new TypeBuilder<Src>() {}.build();
+        Type<Dest> destType = new TypeBuilder<Dest>() {}.build();
+
+        MapperFactory mapperFactory = AppContextManager.getBean(MapperFactory.class);
+
+        mapperFactory.classMap(srcType, destClass).byDefault().register();
+
+        return mapperFactory.getMapperFacade(srcType, destType).map(src);
+    }*/
 
 }
 

@@ -4,7 +4,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.StackTraceElementProxy;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
 import ch.qos.logback.core.util.ContextUtil;
-import io.manasobi.config.BaseContextConfig;
+import io.manasobi.config.BaseConfig;
 import io.manasobi.core.domain.log.BaseErrorLog;
 import io.manasobi.core.domain.log.BaseErrorLogService;
 import io.manasobi.utils.JsonUtils;
@@ -32,19 +32,19 @@ public class LogbackAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
     private BaseErrorLogService errorLogService;
 
-    private BaseContextConfig contextConfig;
+    private BaseConfig baseConfig;
 
-    private BaseContextConfig.Logging loggingConfig;
+    private BaseConfig.Logging loggingConfig;
 
-    public LogbackAppender(BaseErrorLogService errorLogService, BaseContextConfig contextConfig) {
+    public LogbackAppender(BaseErrorLogService errorLogService, BaseConfig baseConfig) {
         this.errorLogService = errorLogService;
-        this.contextConfig = contextConfig;
-        this.loggingConfig = contextConfig.getLoggingConfig();
+        this.baseConfig = baseConfig;
+        this.loggingConfig = baseConfig.getLoggingConfig();
     }
 
     @PostConstruct
     public void created() {
-        this.loggingConfig = contextConfig.getLoggingConfig();
+        this.loggingConfig = baseConfig.getLoggingConfig();
     }
 
     @Override
@@ -145,8 +145,8 @@ public class LogbackAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
         slackAttachment.setFields(fields);
         slackAttachment.setTitle(title);
 
-        if (StringUtils.isNotEmpty(contextConfig.getLoggingConfig().getAdminUrl())) {
-            slackAttachment.setTitleLink(contextConfig.getLoggingConfig().getAdminUrl());
+        if (StringUtils.isNotEmpty(baseConfig.getLoggingConfig().getAdminUrl())) {
+            slackAttachment.setTitleLink(baseConfig.getLoggingConfig().getAdminUrl());
         }
 
         slackAttachment.setText(errorLog.getTrace());
@@ -175,9 +175,9 @@ public class LogbackAppender extends UnsynchronizedAppenderBase<ILoggingEvent> {
 
         BaseErrorLog errorLog = new BaseErrorLog();
         errorLog.setPhase(PhaseUtils.phase());
-        errorLog.setSystem(contextConfig.getSystemName());
+        errorLog.setSystem(baseConfig.getSystemName());
         errorLog.setLoggerName(loggingEvent.getLoggerName());
-        errorLog.setServerName(contextConfig.getServerName());
+        errorLog.setServerName(baseConfig.getServerName());
         errorLog.setHostName(getHostName());
         errorLog.setPath(MDCUtils.get(MDCUtils.REQUEST_URI_MDC));
         errorLog.setMessage(loggingEvent.getFormattedMessage());

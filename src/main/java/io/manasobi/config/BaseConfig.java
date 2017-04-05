@@ -21,9 +21,9 @@ import org.springframework.util.StringUtils;
 import java.util.Properties;
 
 @Data
-@ConfigurationProperties(prefix = "base-config", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "baseConfig", ignoreInvalidFields = true)
 @NoArgsConstructor
-public class BaseContextConfig implements ApplicationContextAware {
+public class BaseConfig implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
@@ -43,7 +43,7 @@ public class BaseContextConfig implements ApplicationContextAware {
 
     private Modeler modeler;
 
-    private static BaseContextConfig instance;
+    private static BaseConfig instance;
 
     public DataSourceConfig getDataSourceConfig() {
         return dataSource;

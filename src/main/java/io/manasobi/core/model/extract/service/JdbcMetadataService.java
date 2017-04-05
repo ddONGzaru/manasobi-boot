@@ -1,6 +1,5 @@
 package io.manasobi.core.model.extract.service;
 
-import io.manasobi.config.BaseContextConfig;
 import io.manasobi.core.db.mapper.ColumnToBeanPropertyRowMapper;
 import io.manasobi.core.model.extract.metadata.Column;
 import io.manasobi.core.model.extract.metadata.Database;

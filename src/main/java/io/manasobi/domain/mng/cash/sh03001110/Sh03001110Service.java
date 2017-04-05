@@ -1,6 +1,12 @@
 package io.manasobi.domain.mng.cash.sh03001110;
 
 import com.querydsl.core.BooleanBuilder;
+import io.manasobi.core.api.ApiException;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.base.BaseService;
+import io.manasobi.core.code.ApiStatus;
+import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.utils.ModelMapperUtils;
 import io.onsemiro.core.api.ApiException;
 import io.onsemiro.core.api.response.ApiResponse;
 import io.onsemiro.core.code.ApiStatus;
@@ -30,7 +36,7 @@ public class Sh03001110Service extends BaseService<Sh03001110, Sh03001110.Sh0300
     private Sh03001110Mapper sh03001110Mapper;
 
     @Autowired
-    private Sh03001110Repository sh03001110Repo;
+    private Sh03001110Repo sh03001110Repo;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -49,8 +55,8 @@ public class Sh03001110Service extends BaseService<Sh03001110, Sh03001110.Sh0300
     }
 
     @Inject
-    public Sh03001110Service(Sh03001110Repository sh03001110Repository) {
-        super(sh03001110Repository);
+    public Sh03001110Service(Sh03001110Repo sh03001110Repo) {
+        super(sh03001110Repo);
     }
 
     public Page<Sh03001110> find(Pageable pageable, RequestParams<Sh03001110> requestParams) {

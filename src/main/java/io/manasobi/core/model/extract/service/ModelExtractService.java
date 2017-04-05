@@ -1,7 +1,6 @@
 package io.manasobi.core.model.extract.service;
 
 import com.google.common.base.CaseFormat;
-import io.manasobi.config.BaseContextConfig;
 import io.manasobi.core.api.ApiException;
 import io.manasobi.core.code.ApiStatus;
 import io.manasobi.core.code.PackageManager;
