@@ -1,12 +1,12 @@
 package io.manasobi.controller.api.mng.equip.sh02001170;
 
-import com.bgf.shbank.domain.mng.equip.sh02001170.Sh02001170;
-import com.bgf.shbank.domain.mng.equip.sh02001170.Sh02001170Service;
-import com.bgf.shbank.domain.mng.equip.sh02001170.Sh02001170VO;
-import io.onsemiro.controller.BaseController;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.api.response.Responses;
-import io.onsemiro.core.parameter.RequestParams;
+import io.manasobi.domain.mng.equip.sh02001170.Sh02001170;
+import io.manasobi.domain.mng.equip.sh02001170.Sh02001170Service;
+import io.manasobi.domain.mng.equip.sh02001170.Sh02001170VO;
+import io.manasobi.controller.BaseController;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.api.response.Responses;
+import io.manasobi.core.parameter.RequestParams;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;

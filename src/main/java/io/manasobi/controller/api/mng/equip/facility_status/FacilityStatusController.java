@@ -1,14 +1,14 @@
 package io.manasobi.controller.api.mng.equip.facility_status;
 
-import com.bgf.shbank.domain.mng.equip.facility_status.FacilityStatus;
-import com.bgf.shbank.domain.mng.equip.facility_status.FacilityStatusService;
-import com.bgf.shbank.domain.mng.equip.facility_status.FacilityStatusVO;
-import com.bgf.shbank.utils.ModelMapperUtils;
-import io.onsemiro.controller.BaseController;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.api.response.Responses;
-import io.onsemiro.core.parameter.RequestParams;
-import io.onsemiro.utils.CommonCodeUtils;
+import io.manasobi.domain.mng.equip.facility_status.FacilityStatus;
+import io.manasobi.domain.mng.equip.facility_status.FacilityStatusService;
+import io.manasobi.domain.mng.equip.facility_status.FacilityStatusVO;
+import io.manasobi.utils.ModelMapperUtils;
+import io.manasobi.controller.BaseController;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.api.response.Responses;
+import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.utils.CommonCodeUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;

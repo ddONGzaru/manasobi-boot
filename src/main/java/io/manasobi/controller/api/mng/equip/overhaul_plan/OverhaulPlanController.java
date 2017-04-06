@@ -1,15 +1,15 @@
 package io.manasobi.controller.api.mng.equip.overhaul_plan;
 
-import com.bgf.shbank.domain.mng.equip.overhaul_plan.OverhaulPlan;
-import com.bgf.shbank.domain.mng.equip.overhaul_plan.OverhaulPlanService;
-import com.bgf.shbank.domain.mng.equip.overhaul_plan.OverhaulPlanVO;
-import com.bgf.shbank.utils.DateUtils;
-import com.bgf.shbank.utils.ModelMapperUtils;
+import io.manasobi.domain.mng.equip.overhaul_plan.OverhaulPlan;
+import io.manasobi.domain.mng.equip.overhaul_plan.OverhaulPlanService;
+import io.manasobi.domain.mng.equip.overhaul_plan.OverhaulPlanVO;
+import io.manasobi.utils.DateUtils;
+import io.manasobi.utils.ModelMapperUtils;
 import com.google.common.collect.Lists;
-import io.onsemiro.controller.BaseController;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.api.response.Responses;
-import io.onsemiro.core.parameter.RequestParams;
+import io.manasobi.controller.BaseController;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.api.response.Responses;
+import io.manasobi.core.parameter.RequestParams;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;

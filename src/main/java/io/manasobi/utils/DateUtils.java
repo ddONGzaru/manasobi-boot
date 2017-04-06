@@ -15,6 +15,7 @@
  */
 package io.manasobi.utils;
 
+import io.manasobi.domain.core.message.CommonInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
@@ -338,6 +339,14 @@ public final class DateUtils {
 
 	public static String dateTimeFormatFromLocale(Locale locale) {
 		return dateFormatFromLocale(locale) + " " + timeFormatFromLocale(locale);
+	}
+
+	public static void setCurrentDateTime(CommonInfo commonInfo) {
+
+		LocalDateTime now = LocalDateTime.now();
+
+		commonInfo.setCreateDate(DateUtils.convertToString(now, "yyyyMMdd"));
+		commonInfo.setCreateTime(DateUtils.convertToString(now, "HHmmss"));
 	}
 
 /*	public static void main(String[] args) {

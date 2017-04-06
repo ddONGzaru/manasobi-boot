@@ -1,6 +1,7 @@
 package io.manasobi.core.model.extract.service;
 
 import com.google.common.base.CaseFormat;
+import io.manasobi.config.PropsConfig;
 import io.manasobi.core.api.ApiException;
 import io.manasobi.core.code.ApiStatus;
 import io.manasobi.core.code.PackageManager;
@@ -31,7 +32,7 @@ public class ModelExtractService {
     private JdbcMetadataService jdbcMetadataService;
 
     @Inject
-    private BaseContextConfig baseContextConfig;
+    private PropsConfig propsConfig;
 
     public JPAMvcModelExtractedCode getJpaMvcModel(String tableName, String className, String apiPath) {
 
@@ -53,7 +54,7 @@ public class ModelExtractService {
         jpaMvcModelExtractedCode.setMyBatisInterface(TemplateParser.getMyBatisInterfaceTemplate(className, table, classFieldName));
         jpaMvcModelExtractedCode.setMyBatisXML(TemplateParser.getMyBatisXMLTemplate(className, table, classFieldName));
 
-        BaseContextConfig.Modeler modelerConfig = baseContextConfig.getModelerConfig();
+        PropsConfig.Modeler modelerConfig = propsConfig.getModelerConfig();
 
         if (modelerConfig.isOutput()) {
             String outputDir = modelerConfig.getOutputDir();

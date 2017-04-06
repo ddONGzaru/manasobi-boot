@@ -1,12 +1,12 @@
 package io.manasobi.controller.api.mng.cash.sh03001140;
 
-import com.bgf.shbank.domain.mng.cash.sh03001140.Sh03001140;
-import com.bgf.shbank.domain.mng.cash.sh03001140.Sh03001140Service;
-import com.bgf.shbank.domain.mng.cash.sh03001140.Sh03001140VO;
-import io.onsemiro.controller.BaseController;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.api.response.Responses;
-import io.onsemiro.core.parameter.RequestParams;
+import io.manasobi.controller.BaseController;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.api.response.Responses;
+import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.domain.mng.cash.sh03001140.Sh03001140;
+import io.manasobi.domain.mng.cash.sh03001140.Sh03001140Service;
+import io.manasobi.domain.mng.cash.sh03001140.Sh03001140VO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;

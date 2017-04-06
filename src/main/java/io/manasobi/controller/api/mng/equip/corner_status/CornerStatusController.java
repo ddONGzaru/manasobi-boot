@@ -1,14 +1,14 @@
 package io.manasobi.controller.api.mng.equip.corner_status;
 
-import com.bgf.shbank.domain.mng.equip.corner_status.CornerStatus;
-import com.bgf.shbank.domain.mng.equip.corner_status.CornerStatusService;
-import com.bgf.shbank.domain.mng.equip.corner_status.CornerStatusVO;
-import com.bgf.shbank.utils.ModelMapperUtils;
-import io.onsemiro.controller.BaseController;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.api.response.Responses;
-import io.onsemiro.core.parameter.RequestParams;
-import io.onsemiro.utils.CommonCodeUtils;
+import io.manasobi.domain.mng.equip.corner_status.CornerStatus;
+import io.manasobi.domain.mng.equip.corner_status.CornerStatusService;
+import io.manasobi.domain.mng.equip.corner_status.CornerStatusVO;
+import io.manasobi.utils.ModelMapperUtils;
+import io.manasobi.controller.BaseController;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.api.response.Responses;
+import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.utils.CommonCodeUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;

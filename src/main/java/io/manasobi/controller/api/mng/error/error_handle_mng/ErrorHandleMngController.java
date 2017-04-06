@@ -1,13 +1,13 @@
 package io.manasobi.controller.api.mng.error.error_handle_mng;
 
-import com.bgf.shbank.domain.mng.error.error_handle_mng.ErrorHandleMng;
-import com.bgf.shbank.domain.mng.error.error_handle_mng.ErrorHandleMngService;
-import com.bgf.shbank.domain.mng.error.error_handle_mng.ErrorHandleMngVO;
-import com.bgf.shbank.utils.ModelMapperUtils;
-import io.onsemiro.controller.BaseController;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.api.response.Responses;
-import io.onsemiro.core.parameter.RequestParams;
+import io.manasobi.domain.mng.error.error_handle_mng.ErrorHandleMng;
+import io.manasobi.domain.mng.error.error_handle_mng.ErrorHandleMngService;
+import io.manasobi.domain.mng.error.error_handle_mng.ErrorHandleMngVO;
+import io.manasobi.utils.ModelMapperUtils;
+import io.manasobi.controller.BaseController;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.api.response.Responses;
+import io.manasobi.core.parameter.RequestParams;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;

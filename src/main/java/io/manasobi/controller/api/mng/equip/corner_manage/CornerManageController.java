@@ -1,14 +1,14 @@
 package io.manasobi.controller.api.mng.equip.corner_manage;
 
-import com.bgf.shbank.core.upload.AX5File;
-import com.bgf.shbank.core.upload.FileUploadService;
-import com.bgf.shbank.domain.mng.equip.corner_manage.CornerManage;
-import com.bgf.shbank.domain.mng.equip.corner_manage.CornerManageService;
-import com.bgf.shbank.domain.mng.equip.corner_manage.CornerManageVO;
-import io.onsemiro.controller.BaseController;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.api.response.Responses;
-import io.onsemiro.core.parameter.RequestParams;
+import io.manasobi.controller.BaseController;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.api.response.Responses;
+import io.manasobi.core.domain.file.AX5File;
+import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.domain.core.upload.FileUploadService;
+import io.manasobi.domain.mng.equip.corner_manage.CornerManage;
+import io.manasobi.domain.mng.equip.corner_manage.CornerManageService;
+import io.manasobi.domain.mng.equip.corner_manage.CornerManageVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

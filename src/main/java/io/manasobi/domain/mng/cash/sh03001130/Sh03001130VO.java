@@ -1,7 +1,7 @@
 package io.manasobi.domain.mng.cash.sh03001130;
 
-import io.onsemiro.core.vo.BaseVO;
-import io.onsemiro.utils.ModelMapperUtils;
+import io.manasobi.core.vo.BaseVO;
+import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
