@@ -7,9 +7,9 @@ server:
 # base config
 appConfig:
   # App Name
-  app-name: shbank-atms-manager
+  app-name: manasobi-boot
   # System Name
-  system-name: onsemiro
+  system-name: manasobi-boot
   # DataSource
   data-source:
     driver-class-name: oracle.jdbc.driver.OracleDriver
@@ -34,8 +34,6 @@ appConfig:
     admin-url:
   #project base path
   project-base-path:
-
-
 
 # Active Profiles :: [local|dev|test|stage|prod]
 spring:
@@ -114,8 +112,7 @@ spring:
   thymeleaf.cache: false
   #devtools.livereload.enabled: true
 
-# ONSEMIRO
-onsemiro:
+appConfig:
   # DataSource
   data-source:
     url: jdbc:oracle:thin:@shinhan.cwozeqnjffgl.ap-northeast-2.rds.amazonaws.com:1521:shinhan
@@ -126,8 +123,6 @@ onsemiro:
     #url: jdbc:oracle:thin:@//10.200.2.16:1531/amsdb
     #username: ams
     #password: aamswc01
-
-
 
 # Logging
 logging.config: classpath:logback-local.xml

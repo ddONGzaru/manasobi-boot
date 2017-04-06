@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @Value("${onsemiro.app-name}")
+    @Value("${appConfig.app-name}")
     private String appName;
 
     private String commonCodeJson;
@@ -50,7 +50,7 @@ public class MainController {
         return "redirect:/" + appName;
     }
 
-    @GetMapping("/${onsemiro.app-name}")
+    @GetMapping("/${appConfig.app-name}")
     public String app(Model model) {
 
         SessionUser sessionUser = SessionUtils.getCurrentUser();

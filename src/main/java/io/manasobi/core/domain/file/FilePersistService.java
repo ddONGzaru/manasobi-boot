@@ -25,7 +25,7 @@ import static java.util.stream.Collectors.*;
 @Service
 public class FilePersistService  implements InitializingBean {
 
-    @Value("${onsemiro.upload.repository}")
+    @Value("${appConfig.upload.repository:'/upload/tmp/'}")
     private String path;
 
     public void persist(AX5File ax5File) throws IOException {

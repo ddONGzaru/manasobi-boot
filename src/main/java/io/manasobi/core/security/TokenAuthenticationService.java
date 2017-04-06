@@ -35,7 +35,7 @@ import java.util.List;
 @Service
 public class TokenAuthenticationService {
 
-    @Value("${onsemiro.app-name}")
+    @Value("${appConfig.app-name}")
     private String appName;
 
     private final JWTSessionHandler jwtSessionHandler;

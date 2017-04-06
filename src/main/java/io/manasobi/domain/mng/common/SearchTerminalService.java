@@ -1,4 +1,4 @@
-package io.manasobi.controller.api.mng.common;
+package io.manasobi.domain.mng.common;
 
 import io.manasobi.core.base.BaseService;
 import io.manasobi.core.parameter.RequestParams;

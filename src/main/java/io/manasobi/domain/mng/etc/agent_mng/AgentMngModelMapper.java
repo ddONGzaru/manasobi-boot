@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Component
 public class AgentMngModelMapper extends CustomMapper<AgentMng, AgentMngVO> {
 
-    @Value("${onsemiro.upload.repository}")
+    @Value("${appConfig.upload.repository}")
     private String filePath;
 
     @Override

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Component
 public class Sh05001140ModelMapper extends CustomMapper<Sh05001140, Sh05001140VO> {
 
-    @Value("${onsemiro.upload.repository}")
+    @Value("${appConfig.upload.repository}")
     private String filePath;
 
     @Override

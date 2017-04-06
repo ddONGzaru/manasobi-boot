@@ -9,6 +9,7 @@ import io.manasobi.core.model.extract.metadata.Table;
 import io.manasobi.utils.NamingUtils;
 import org.apache.commons.dbutils.DbUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.*;
 
+@Service
 public class JdbcMetadataService {
 
     @Inject

@@ -3,6 +3,8 @@ package io.manasobi.controller.api.mng.common;
 import io.manasobi.controller.BaseController;
 import io.manasobi.core.api.response.Responses;
 import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.domain.mng.common.SearchTerminalService;
+import io.manasobi.domain.mng.common.SearchTerminalVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;

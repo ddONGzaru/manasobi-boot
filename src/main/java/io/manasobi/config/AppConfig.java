@@ -12,8 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.*;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -25,6 +24,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -56,31 +56,12 @@ public class AppConfig implements ApplicationContextAware {
     }
 
     @Bean
+    public PropsConfig propsConfig() { return new PropsConfig(); }
+
+    @Bean
     @Primary
     public DataSource dataSource(@Named(value = "propsConfig") PropsConfig propsConfig) throws Exception {
         return DataSourceFactory.create(propsConfig.getDataSourceConfig());
-    }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    @Bean
-    public ModelMapper modelMapper() {
-
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setFieldMatchingEnabled(true);
-        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        //modelMapper.addConverter(ModelMapperConverter.toStringDate);
-
-        return modelMapper;
-    }
-
-    @Bean
-    public MapperFactory modelFactory() {
-        return new DefaultMapperFactory.Builder().build();
     }
 
     @Bean
@@ -98,27 +79,32 @@ public class AppConfig implements ApplicationContextAware {
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
-
-    @Bean
-    public SpringManagedTransactionFactory managedTransactionFactory() {
-        return new SpringManagedTransactionFactory();
-    }
-
-    @Bean
     public SqlSessionFactory sqlSessionFactory(SpringManagedTransactionFactory springManagedTransactionFactory, DataSource dataSource, PropsConfig propsConfig) throws Exception {
 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setTypeAliasesPackage(PackageManager.DOMAIN);
+        //sqlSessionFactoryBean.setTypeAliasesPackage(PackageManager.DOMAIN);
         sqlSessionFactoryBean.setTypeHandlers(propsConfig.getMyBatisTypeHandlers());
         sqlSessionFactoryBean.setTransactionFactory(springManagedTransactionFactory);
-        sqlSessionFactoryBean.setMapperLocations(context.getResources("classpath:mybatis/**/*.xml"));
+        //sqlSessionFactoryBean.setConfiguration(mybatisConfig());
+        sqlSessionFactoryBean.setMapperLocations(context.getResources("classpath:mybatis/mapper/**/*.xml"));
+        sqlSessionFactoryBean.setConfigLocation(context.getResource("classpath:mybatis/mybatis-config.xml"));
         sqlSessionFactoryBean.setDatabaseIdProvider(databaseIdProvider());
 
         return sqlSessionFactoryBean.getObject();
+    }
+
+    private org.apache.ibatis.session.Configuration mybatisConfig() {
+
+        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
+
+        config.setCacheEnabled(false);
+        config.setUseGeneratedKeys(true);
+        config.setDefaultExecutorType(ExecutorType.REUSE);
+        config.setAggressiveLazyLoading(false);
+        config.setMapUnderscoreToCamelCase(true);
+
+        return config;
     }
 
     private VendorDatabaseIdProvider databaseIdProvider() {
@@ -135,30 +121,15 @@ public class AppConfig implements ApplicationContextAware {
         return databaseIdProvider;
     }
 
-    private org.apache.ibatis.session.Configuration mybatisConfig() {
-
-        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
-
-        config.setCacheEnabled(false);
-        config.setUseGeneratedKeys(true);
-        config.setDefaultExecutorType(ExecutorType.REUSE);
-        config.setAggressiveLazyLoading(false);
-        config.setMapUnderscoreToCamelCase(true);
-
-        return config;
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    /*@Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() throws Exception {
-
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-
-        mapperScannerConfigurer.setBasePackage(Constants.DOMAIN_PACKAGE);
-        mapperScannerConfigurer.setMarkerInterface(MyBatisMapper.class);
-        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-
-        return mapperScannerConfigurer;
-    }*/
+    @Bean
+    public SpringManagedTransactionFactory managedTransactionFactory() {
+        return new SpringManagedTransactionFactory();
+    }
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) throws ClassNotFoundException {
@@ -170,19 +141,29 @@ public class AppConfig implements ApplicationContextAware {
     }
 
     @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setFieldMatchingEnabled(true);
+        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        return modelMapper;
+    }
+
+    @Bean
+    public MapperFactory modelFactory() {
+        return new DefaultMapperFactory.Builder().build();
+    }
+
+    @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder(11);
-    }
-
-    @Bean
-    public JdbcMetadataService jdbcMetadataService() {
-        return new JdbcMetadataService();
-    }
-
-    //@Bean(name = "baseConfig")
-    @Bean
-    public PropsConfig propsConfig() {
-        return new PropsConfig();
     }
 
     @Bean
@@ -212,6 +193,19 @@ public class AppConfig implements ApplicationContextAware {
 
 
 }
+
+    /*private org.apache.ibatis.session.Configuration mybatisConfig() {
+
+        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
+
+        config.setCacheEnabled(false);
+        config.setUseGeneratedKeys(true);
+        config.setDefaultExecutorType(ExecutorType.REUSE);
+        config.setAggressiveLazyLoading(false);
+        config.setMapUnderscoreToCamelCase(true);
+
+        return config;
+    }*/
 
 /*@Bean
     public String databaseId() {
