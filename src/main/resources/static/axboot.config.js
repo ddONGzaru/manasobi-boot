@@ -4,28 +4,26 @@
 
         axboot.def["DEFAULT_TAB_LIST"] = [
             {
-                menuId: "00-dashboard",
-                id: "dashboard",
-                progNm: '홈',
+                menuId: "error-monitoring",
+                id: "error-monitoring",
+                progNm: '장애 모니터링',
                 menuNm: '홈',
-                //progPh: '/jsp/dashboard.jsp',
-                //url: '/jsp/dashboard.jsp?progCd=dashboard',
-                progPh: '/system/system-config-program.html',
-                url: '/api/v1/program',
+                progPh: '/mng/error/error_status',
+                url: '/mng/error/error_status',
                 status: "on",
                 fixed: true
             }
         ];
 
         axboot.def["API"] = {
-            "users":          "/api/v1/user",
-            "commonCodes":    "/api/v1/common-code",
-            "programs":       "/api/v1/program",
-            "menu":           "/api/v1/menu",
-            "manual":         "/api/v1/manual",
-            "errorLogs":      "/api/v1/error-log",
-            "files":          "/api/v1/file",
-            "samples":        "/api/v1/sample",
+            "users": "/api/v1/user",
+            "commonCodes": "/api/v1/common-code",
+            "programs": "/api/v1/program",
+            "menu": "/api/v1/menu",
+            "manual": "/api/v1/manual",
+            "errorLogs": "/api/v1/error-log",
+            "files": "/api/v1/file",
+            "samples": "/api/v1/sample",
             "modelExtractor": "/api/v1/model-extractor",
             "pageGenerator": "/api/v1/page-gen",
         };
@@ -51,6 +49,26 @@
                     title: "Page & Model :: One Click Generator"
                 }
             },
+            "Sh03001110_M01": {
+                width: 580,
+                height: 300,
+                iframe: {
+                    url: "/mng/cash/sh03001110/m01"
+                },
+                header: {
+                    title: ":: 단건 시재조회 ::"
+                }
+            },
+            "CORNER_MANAGE_M01": {
+                width: 380,
+                height: 300,
+                iframe: {
+                    url: "/mng/equip/corner_manage/m01"
+                },
+                header: {
+                    title: ":: 스케쥴 등록 ::"
+                }
+            },
             "SAMPLE_MODAL": {
                 width: 500,
                 height: 500,
@@ -59,6 +77,36 @@
                 },
                 header: {
                     title: "우편번호 찾기"
+                }
+            },
+            "SEARCH_TERMINAL_MODAL": {
+                width: 575,
+                height: 500,
+                iframe: {
+                    url: "/mng/common/search-terminal-modal"
+                },
+                header: {
+                    title: "단말번호 검색"
+                }
+            },
+            "SEARCH_BRANCH_MODAL": {
+                width: 350,
+                height: 500,
+                iframe: {
+                    url: "/mng/common/search-branch-modal"
+                },
+                header: {
+                    title: "지점 검색"
+                }
+            },
+            "SEARCH_AGENT_MODAL": {
+                width: 700,
+                height: 500,
+                iframe: {
+                    url: "/mng/common/search-agent-modal"
+                },
+                header: {
+                    title: "요원정보 검색"
                 }
             },
             "COMMON_CODE_MODAL": {

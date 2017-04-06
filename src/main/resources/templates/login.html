@@ -18,6 +18,7 @@
 
         var fnObj = {
             login: function () {
+                alert('123');
                 axboot.ajax({
                     method: "POST",
                     url: "/api/login",
@@ -26,6 +27,7 @@
                         "userPs": $("#userPs").val()
                     }),
                     callback: function (res) {
+                        alert(res);
                         location.href = "/login";
                     },
                     options: {

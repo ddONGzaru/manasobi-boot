@@ -15,8 +15,12 @@
     </settings>
 
     <typeAliases>
+        <!-- cash -->
         <typeAlias alias="jisaSijeClose"    type="io.manasobi.domain.mng.cash.jisa_sije_close.JisaSijeClose" />
+        <!-- common -->
         <typeAlias alias="searchTerminalVO" type="io.manasobi.domain.mng.common.SearchTerminalVO" />
+        <!-- error -->
+        <typeAlias alias="errorStatus"      type="io.manasobi.domain.mng.error.error_status.ErrorStatus" />
     </typeAliases>
 
 </configuration>
