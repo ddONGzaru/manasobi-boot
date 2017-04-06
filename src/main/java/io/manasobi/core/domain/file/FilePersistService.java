@@ -1,7 +1,6 @@
-package io.manasobi.domain.core.upload;
+package io.manasobi.core.domain.file;
 
 import io.manasobi.core.code.Types;
-import io.manasobi.core.domain.file.AX5File;
 import io.manasobi.utils.JsonUtils;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;

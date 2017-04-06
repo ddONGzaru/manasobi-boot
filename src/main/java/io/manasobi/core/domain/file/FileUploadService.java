@@ -1,8 +1,7 @@
-package io.manasobi.domain.core.upload;
+package io.manasobi.core.domain.file;
 
 import eu.bitwalker.useragentutils.Browser;
 import io.manasobi.core.code.Types;
-import io.manasobi.core.domain.file.AX5File;
 import io.manasobi.utils.AgentUtils;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpHeaders;
