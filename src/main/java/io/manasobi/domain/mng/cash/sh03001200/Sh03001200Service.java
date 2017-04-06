@@ -1,12 +1,12 @@
 package io.manasobi.domain.mng.cash.sh03001200;
 
-import com.bgf.shbank.utils.ModelMapperUtils;
 import com.querydsl.core.BooleanBuilder;
-import io.onsemiro.core.api.ApiException;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.code.ApiStatus;
-import io.onsemiro.core.domain.BaseService;
-import io.onsemiro.core.parameter.RequestParams;
+import io.manasobi.core.api.ApiException;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.base.BaseService;
+import io.manasobi.core.code.ApiStatus;
+import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.utils.ModelMapperUtils;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,7 +101,7 @@ public class Sh03001200Service extends BaseService<Sh03001200, Sh03001200.Sh0300
             return new Sh03001200VO();
         } else {
             BoundMapperFacade<Sh03001200, Sh03001200VO> mapper =
-                    io.onsemiro.utils.ModelMapperUtils.getMapper("Sh03001200", this.getClass().getPackage().getName());
+                    ModelMapperUtils.getMapper("Sh03001200", this.getClass().getPackage().getName());
             return mapper.map(sh03001200);
         }
     }

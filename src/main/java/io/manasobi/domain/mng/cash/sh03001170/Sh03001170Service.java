@@ -1,8 +1,8 @@
 package io.manasobi.domain.mng.cash.sh03001170;
 
 import com.querydsl.core.BooleanBuilder;
-import io.onsemiro.core.domain.BaseService;
-import io.onsemiro.core.parameter.RequestParams;
+import io.manasobi.core.base.BaseService;
+import io.manasobi.core.parameter.RequestParams;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

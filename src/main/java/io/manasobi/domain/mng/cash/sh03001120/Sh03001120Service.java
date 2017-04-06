@@ -1,7 +1,5 @@
 package io.manasobi.domain.mng.cash.sh03001120;
 
-import com.bgf.shbank.utils.DateUtils;
-import com.bgf.shbank.utils.ModelMapperUtils;
 import com.querydsl.core.BooleanBuilder;
 import io.manasobi.core.api.ApiException;
 import io.manasobi.core.api.response.ApiResponse;
@@ -10,11 +8,6 @@ import io.manasobi.core.code.ApiStatus;
 import io.manasobi.core.parameter.RequestParams;
 import io.manasobi.utils.DateUtils;
 import io.manasobi.utils.ModelMapperUtils;
-import io.onsemiro.core.api.ApiException;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.code.ApiStatus;
-import io.onsemiro.core.domain.BaseService;
-import io.onsemiro.core.parameter.RequestParams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +27,7 @@ import java.util.List;
 public class Sh03001120Service extends BaseService<Sh03001120, Sh03001120.Sh03001120Id> {
 
     @Autowired
-    private Sh03001120Repository sh03001120Repo;
+    private Sh03001120Repo sh03001120Repo;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -53,8 +46,8 @@ public class Sh03001120Service extends BaseService<Sh03001120, Sh03001120.Sh0300
     }
 
     @Inject
-    public Sh03001120Service(Sh03001120Repository sh03001120Repository) {
-        super(sh03001120Repository);
+    public Sh03001120Service(Sh03001120Repo sh03001120Repo) {
+        super(sh03001120Repo);
     }
 
     public Page<Sh03001120> find(Pageable pageable, RequestParams<Sh03001120VO> requestParams) {

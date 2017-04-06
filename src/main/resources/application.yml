@@ -5,7 +5,7 @@ server:
   port: 8080
 
 # base config
-base-config:
+appConfig:
   # App Name
   app-name: shbank-atms-manager
   # System Name

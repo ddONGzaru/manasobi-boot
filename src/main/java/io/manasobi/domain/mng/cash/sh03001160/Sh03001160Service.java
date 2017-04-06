@@ -2,12 +2,12 @@ package io.manasobi.domain.mng.cash.sh03001160;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.OrderSpecifier;
-import io.onsemiro.core.api.ApiException;
-import io.onsemiro.core.api.response.ApiResponse;
-import io.onsemiro.core.code.ApiStatus;
-import io.onsemiro.core.domain.BaseService;
-import io.onsemiro.core.parameter.RequestParams;
-import io.onsemiro.utils.ModelMapperUtils;
+import io.manasobi.core.api.ApiException;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.base.BaseService;
+import io.manasobi.core.code.ApiStatus;
+import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.utils.ModelMapperUtils;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,8 @@ public class Sh03001160Service extends BaseService<Sh03001160, Sh03001160.Sh0300
     public Sh03001160Mapper sh03001160Mapper;
 
     @Inject
-    public Sh03001160Service(Sh03001160Repository sh03001160Repository) {
-        super(sh03001160Repository);
+    public Sh03001160Service(Sh03001160Repo sh03001160Repo) {
+        super(sh03001160Repo);
     }
 
     @Autowired
@@ -56,7 +56,7 @@ public class Sh03001160Service extends BaseService<Sh03001160, Sh03001160.Sh0300
         ResponseEntity<ApiResponse> apiResponseEntity;
 
         try {
-            Sh03001160VO sh03001160VO = com.bgf.shbank.utils.ModelMapperUtils.map(vo, Sh03001160VO.class);
+            Sh03001160VO sh03001160VO = ModelMapperUtils.map(vo, Sh03001160VO.class);
 
             apiResponseEntity = restTemplate.postForEntity(url, sh03001160VO, ApiResponse.class);
         } catch (RestClientException e) {

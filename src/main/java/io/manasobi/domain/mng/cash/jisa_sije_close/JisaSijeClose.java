@@ -1,9 +1,7 @@
 package io.manasobi.domain.mng.cash.jisa_sije_close;
 
-import io.onsemiro.core.annotations.Comment;
-import io.onsemiro.core.domain.SimpleJpaModel;
+import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
-import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -18,9 +16,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_JISA_SIJE_CLOSE")
-@Comment(value = "")
 @IdClass(JisaSijeClose.JisaSijeCloseId.class)
-@Alias("jisaSijeClose")
 public class JisaSijeClose extends SimpleJpaModel<JisaSijeClose.JisaSijeCloseId> {
 
 	@Column(name = "TX_ID", nullable = false)
@@ -61,23 +57,22 @@ public class JisaSijeClose extends SimpleJpaModel<JisaSijeClose.JisaSijeCloseId>
 	@Column(name = "USER_NM", length = 30)
 	private String userNm;
 
+	@Override
+	public JisaSijeCloseId getId() {
+	return JisaSijeCloseId.of(jisaCode, closeDate);
+	}
 
-@Override
-public JisaSijeCloseId getId() {
-return JisaSijeCloseId.of(jisaCode, closeDate);
-}
+	@Embeddable
+	@Data
+	@NoArgsConstructor
+	@RequiredArgsConstructor(staticName = "of")
+	public static class JisaSijeCloseId implements Serializable {
 
-@Embeddable
-@Data
-@NoArgsConstructor
-@RequiredArgsConstructor(staticName = "of")
-public static class JisaSijeCloseId implements Serializable {
+			@NonNull
+			private String jisaCode;
 
-		@NonNull
-		private String jisaCode;
+			@NonNull
+			private Timestamp closeDate;
 
-		@NonNull
-		private Timestamp closeDate;
-
-}
+	}
 }

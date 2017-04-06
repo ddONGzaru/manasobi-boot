@@ -1,8 +1,8 @@
 package io.manasobi.domain.mng.cash.sh03001220;
 
-import com.bgf.shbank.core.upload.AX5File;
-import io.onsemiro.core.vo.BaseVO;
-import io.onsemiro.utils.ModelMapperUtils;
+import io.manasobi.core.domain.file.AX5File;
+import io.manasobi.core.vo.BaseVO;
+import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;

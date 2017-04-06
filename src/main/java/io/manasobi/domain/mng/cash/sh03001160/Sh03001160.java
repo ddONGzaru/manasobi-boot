@@ -1,7 +1,7 @@
 package io.manasobi.domain.mng.cash.sh03001160;
 
-import io.onsemiro.core.annotations.Comment;
-import io.onsemiro.core.domain.SimpleJpaModel;
+import io.manasobi.core.annotations.Comment;
+import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;
@@ -65,28 +65,20 @@ public class Sh03001160 extends SimpleJpaModel<Sh03001160.Sh03001160Id> {
 	private String addCash50kSendingAmt;
 
 
-@Override
-public Sh03001160Id getId() {
-return Sh03001160Id.of(branchCode, terminalNo, addCashSendingSeqNo, cashSendingDate);
-}
+	@Override
+	public Sh03001160Id getId() {
+	return Sh03001160Id.of(branchCode, terminalNo, addCashSendingSeqNo, cashSendingDate);
+	}
 
-@Embeddable
-@Data
-@NoArgsConstructor
-@RequiredArgsConstructor(staticName = "of")
-public static class Sh03001160Id implements Serializable {
+	@Data
+	@Embeddable
+	@NoArgsConstructor
+	@RequiredArgsConstructor(staticName = "of")
+	public static class Sh03001160Id implements Serializable {
 
-		@NonNull
-		private String branchCode;
-
-		@NonNull
-		private String terminalNo;
-
-		@NonNull
-		private String addCashSendingSeqNo;
-
-		@NonNull
-		private Timestamp cashSendingDate;
-
-}
+		@NonNull private String branchCode;
+		@NonNull private String terminalNo;
+		@NonNull private String addCashSendingSeqNo;
+		@NonNull private Timestamp cashSendingDate;
+	}
 }

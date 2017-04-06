@@ -1,9 +1,7 @@
 package io.manasobi.domain.mng.cash.sh03001230;
 
-import io.onsemiro.core.annotations.Comment;
-import io.onsemiro.core.domain.SimpleJpaModel;
+import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
-import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -18,9 +16,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_03001230")
-@Comment(value = "")
 @IdClass(Sh03001230.Sh03001230Id.class)
-@Alias("sh03001230")
 public class Sh03001230 extends SimpleJpaModel<Sh03001230.Sh03001230Id> {
 
 	@Id

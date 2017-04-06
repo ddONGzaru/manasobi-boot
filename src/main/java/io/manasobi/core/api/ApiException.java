@@ -23,7 +23,6 @@ public class ApiException extends RuntimeException {
         this.code = status.getCode();
     }
 
-
     public ApiException(String message) {
         super(message);
         this.code = ApiStatus.SUCCESS.getCode();

@@ -1,6 +1,6 @@
 package io.manasobi.domain.mng.cash.sh03001200;
 
-import io.onsemiro.core.mybatis.MyBatisMapper;
+import io.manasobi.core.mybatis.MyBatisMapper;
 
 import java.util.List;
 

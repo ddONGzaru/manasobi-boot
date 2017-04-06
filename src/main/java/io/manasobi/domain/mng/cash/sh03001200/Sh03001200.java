@@ -1,9 +1,7 @@
 package io.manasobi.domain.mng.cash.sh03001200;
 
-import io.onsemiro.core.annotations.Comment;
-import io.onsemiro.core.domain.SimpleJpaModel;
+import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
-import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -18,9 +16,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_03001200")
-@Comment(value = "")
 @IdClass(Sh03001200.Sh03001200Id.class)
-@Alias("sh03001200")
 public class Sh03001200 extends SimpleJpaModel<Sh03001200.Sh03001200Id> {
 
 	@Id
@@ -53,23 +49,22 @@ public class Sh03001200 extends SimpleJpaModel<Sh03001200.Sh03001200Id> {
 	@Column(name = "FRI_CASH_SENDING_ENABLE", length = 1)
 	private String friCashSendingEnable;
 
+	@Override
+	public Sh03001200Id getId() {
+	return Sh03001200Id.of(branchCode, terminalNo);
+	}
 
-@Override
-public Sh03001200Id getId() {
-return Sh03001200Id.of(branchCode, terminalNo);
-}
+	@Embeddable
+	@Data
+	@NoArgsConstructor
+	@RequiredArgsConstructor(staticName = "of")
+	public static class Sh03001200Id implements Serializable {
 
-@Embeddable
-@Data
-@NoArgsConstructor
-@RequiredArgsConstructor(staticName = "of")
-public static class Sh03001200Id implements Serializable {
+			@NonNull
+			private String branchCode;
 
-		@NonNull
-		private String branchCode;
+			@NonNull
+			private String terminalNo;
 
-		@NonNull
-		private String terminalNo;
-
-}
+	}
 }

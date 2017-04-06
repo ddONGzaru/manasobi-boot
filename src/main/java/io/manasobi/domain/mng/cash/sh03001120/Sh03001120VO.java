@@ -1,6 +1,7 @@
 package io.manasobi.domain.mng.cash.sh03001120;
 
-import io.onsemiro.core.vo.BaseVO;
+import io.manasobi.core.vo.BaseVO;
+import io.manasobi.utils.ModelMapperUtils;
 import lombok.Getter;
 import lombok.Setter;
 import ma.glasnost.orika.BoundMapperFacade;
@@ -64,7 +65,7 @@ public class Sh03001120VO extends BaseVO {
 
 	public static Sh03001120VO of(Sh03001120 Sh03001120) {
 		BoundMapperFacade<Sh03001120, Sh03001120VO> mapper =
-				io.onsemiro.utils.ModelMapperUtils.getMapper("Sh03001120", Sh03001120VO.class.getPackage().getName());
+				ModelMapperUtils.getMapper("Sh03001120", Sh03001120VO.class.getPackage().getName());
 		return mapper.map(Sh03001120);
 	}
 

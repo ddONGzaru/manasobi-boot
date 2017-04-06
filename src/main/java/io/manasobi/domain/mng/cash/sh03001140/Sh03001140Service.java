@@ -2,6 +2,12 @@ package io.manasobi.domain.mng.cash.sh03001140;
 
 import com.bgf.shbank.utils.ModelMapperUtils;
 import com.querydsl.core.BooleanBuilder;
+import io.manasobi.core.api.ApiException;
+import io.manasobi.core.api.response.ApiResponse;
+import io.manasobi.core.base.BaseService;
+import io.manasobi.core.code.ApiStatus;
+import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.utils.ModelMapperUtils;
 import io.onsemiro.core.api.ApiException;
 import io.onsemiro.core.api.response.ApiResponse;
 import io.onsemiro.core.code.ApiStatus;
@@ -26,7 +32,7 @@ import java.util.List;
 public class Sh03001140Service extends BaseService<Sh03001140, Sh03001140.Sh03001140Id> {
 
     @Autowired
-    private Sh03001140Repository sh03001140Repo;
+    private Sh03001140Repo sh03001140Repo;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -45,8 +51,8 @@ public class Sh03001140Service extends BaseService<Sh03001140, Sh03001140.Sh0300
     }
     
     @Inject
-    public Sh03001140Service(Sh03001140Repository sh03001140Repository) {
-        super(sh03001140Repository);
+    public Sh03001140Service(Sh03001140Repo sh03001140Repo) {
+        super(sh03001140Repo);
     }
 
     public Page<Sh03001140> find(Pageable pageable, RequestParams<Sh03001140> requestParams) {
@@ -97,6 +103,7 @@ public class Sh03001140Service extends BaseService<Sh03001140, Sh03001140.Sh0300
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Sh03001140Service-sendAndReceive :: {}", e.getMessage());
+
             throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
         }
 
