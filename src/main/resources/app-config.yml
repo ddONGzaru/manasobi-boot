@@ -3,7 +3,7 @@ config:
   copyrights: "ONSEMIRO 1.0.0 - Web Application Framework © 2016-2017"
   logo:
     header: /assets/images/header-logo.png
-    login:  /assets/images/login-logo1.png
+    login:  /assets/images/login-logo.png
     logo:   logo.png
   background:
     login: /assets/images/login-bg.jpg
