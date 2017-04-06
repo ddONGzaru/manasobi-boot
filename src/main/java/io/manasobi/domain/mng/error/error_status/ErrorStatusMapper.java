@@ -13,9 +13,4 @@ public interface ErrorStatusMapper extends MyBatisMapper {
 
     ErrorStatus findOne(ErrorStatus errorStatus);
 
-    int update(ErrorStatus errorStatus);
-
-    int delete(ErrorStatus errorStatus);
-
-    int insert(ErrorStatus errorStatus);
 }
