@@ -3,6 +3,7 @@ package io.manasobi.domain.mng.etc.sh04001120;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.*;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Sh04001120VO extends BaseVO {
 
 	private Timestamp txId;

@@ -3,6 +3,7 @@ package io.manasobi.domain.mng.error.sh01001120;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.*;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Sh01001120VO extends BaseVO {
 
 	private String calleeReqDatetime;

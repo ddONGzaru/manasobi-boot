@@ -11,7 +11,7 @@ plugins {
 	id 'eclipse'
 	id 'org.springframework.boot'     version '1.5.2.RELEASE'
 	id "org.flywaydb.flyway"          version '4.0.3'
-	//id 'io.franzbecker.gradle-lombok' version '1.8'
+	id 'io.franzbecker.gradle-lombok' version '1.8'
 }
 
 /* _____ base config _____ */
@@ -66,7 +66,7 @@ task wrapper(type: Wrapper) {
 }
 
 task importExcelData(type:JavaExec) {
-	main = "com.bgf.shbank.db.ExcelDataImporter"
+	main = "io.manasobi.db.ExcelDataImporter"
 	classpath = sourceSets.test.runtimeClasspath
 	args localUser, "ATMS_01001110.xls","ATMS_01001120.xls","ATMS_01001130.xls","ATMS_01001140.xls","ATMS_01001150.xls","ATMS_01001160.xls","ATMS_01001170.xls","ATMS_01001180.xls","ATMS_01001230.xls",
 			"ATMS_02001100.xls","ATMS_02001110.xls","ATMS_02001120.xls","ATMS_02001130.xls","ATMS_02001140.xls","ATMS_02001150.xls","ATMS_02001160.xls","ATMS_02001170.xls","ATMS_02001180.xls","ATMS_02001190.xls","ATMS_02001200.xls","ATMS_02001210.xls","ATMS_02001230.xls","ATMS_02001270.xls","ATMS_02001280.xls","ATMS_02001290.xls",

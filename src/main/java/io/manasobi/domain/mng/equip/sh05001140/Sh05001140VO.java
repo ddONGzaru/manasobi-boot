@@ -4,6 +4,7 @@ import io.manasobi.core.domain.file.AX5File;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.*;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Sh05001140VO extends BaseVO {
 
 	private String jisaCode;

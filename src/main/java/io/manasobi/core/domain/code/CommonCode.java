@@ -19,7 +19,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "ATMS_COMMON_CODE")
 @IdClass(CommonCode.CommonCodeId.class)
-@EqualsAndHashCode
 public class CommonCode extends BaseJpaModel<CommonCode.CommonCodeId> {
 
     @Id

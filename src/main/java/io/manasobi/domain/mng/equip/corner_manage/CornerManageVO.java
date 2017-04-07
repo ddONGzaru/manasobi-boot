@@ -3,6 +3,7 @@ package io.manasobi.domain.mng.equip.corner_manage;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.*;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class CornerManageVO extends BaseVO {
 
 	private String jisaCode;

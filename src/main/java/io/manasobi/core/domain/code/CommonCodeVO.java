@@ -4,6 +4,7 @@ import io.manasobi.core.code.Types;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class CommonCodeVO extends BaseVO {
 
     private String groupCd;
