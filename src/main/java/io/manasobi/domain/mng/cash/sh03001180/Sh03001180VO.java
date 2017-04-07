@@ -43,9 +43,10 @@ public class Sh03001180VO extends BaseVO {
     private String friCashSendingEnable;
 
     public static Sh03001180VO of(Sh03001180 sh03001180) {
-        BoundMapperFacade<Sh03001180, Sh03001180VO> mapper =
+        /*BoundMapperFacade<Sh03001180, Sh03001180VO> mapper =
                 ModelMapperUtils.getMapper("Sh03001180", Sh03001180VO.class.getPackage().getName());
-        return mapper.map(sh03001180);
+        return mapper.map(sh03001180);*/
+        return ModelMapperUtils.map(sh03001180, Sh03001180VO.class);
     }
 
     public static List<Sh03001180VO> of(List<Sh03001180> sh03001180List) {

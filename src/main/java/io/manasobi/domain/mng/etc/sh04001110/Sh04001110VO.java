@@ -28,9 +28,10 @@ public class Sh04001110VO extends BaseVO {
 
 
     public static Sh04001110VO of(Sh04001110 sh04001110) {
-        BoundMapperFacade<Sh04001110, Sh04001110VO> mapper =
+        /*BoundMapperFacade<Sh04001110, Sh04001110VO> mapper =
                 ModelMapperUtils.getMapper("Sh04001110", Sh04001110VO.class.getPackage().getName());
-        return mapper.map(sh04001110);
+        return mapper.map(sh04001110);*/
+        return ModelMapperUtils.map(sh04001110, Sh04001110VO.class);
     }
 
     public static List<Sh04001110VO> of(List<Sh04001110> sh04001110List) {

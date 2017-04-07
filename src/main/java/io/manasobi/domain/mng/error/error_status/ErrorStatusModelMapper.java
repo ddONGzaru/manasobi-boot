@@ -12,10 +12,15 @@ import java.time.LocalDateTime;
  * Created by tw.jang on 2017-02-09.
  */
 @Component
-public class ErrorStatusModelMapper extends CustomMapper<ErrorStatus, ErrorStatusVO> {
+public class ErrorStatusModelMapper extends CustomMapper<ErrorStatusVO, ErrorStatus> {
 
     @Override
-    public void mapAtoB(ErrorStatus src, ErrorStatusVO dest, MappingContext context) {
+    public void mapAtoB(ErrorStatusVO errorStatusVO, ErrorStatus errorStatus, MappingContext context) {
+        errorStatus.setErrorDatetime(DateUtils.convertToTimestamp(errorStatusVO.getErrorDatetime(), "yyyy-MM-dd'T'HH:mm:ss"));
+    }
+
+    @Override
+    public void mapBtoA(ErrorStatus src, ErrorStatusVO dest, MappingContext context) {
 
         LocalDateTime errorDatetime = src.getErrorDatetime().toLocalDateTime();
         dest.setErrorDate(DateUtils.convertToString(errorDatetime, "yyyy-MM-dd"));
@@ -111,5 +116,6 @@ public class ErrorStatusModelMapper extends CustomMapper<ErrorStatus, ErrorStatu
 
         return errorStatusClass;
     }
+
 }
 

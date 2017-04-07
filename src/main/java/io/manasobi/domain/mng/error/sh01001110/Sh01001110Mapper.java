@@ -11,9 +11,4 @@ public interface Sh01001110Mapper extends MyBatisMapper {
 
     Sh01001110 findOne(Sh01001110 sh01001110);
 
-    int update(Sh01001110 sh01001110);
-
-    int delete(Sh01001110 sh01001110);
-
-    int insert(Sh01001110 sh01001110);
 }

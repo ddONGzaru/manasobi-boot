@@ -133,11 +133,12 @@ public class TerminalStatusVO extends BaseVO {
 	private String mngChannel;
 
     public static TerminalStatusVO of(TerminalStatus terminalStatus) {
-		BoundMapperFacade<TerminalStatus, TerminalStatusVO> mapper =
+		/*BoundMapperFacade<TerminalStatus, TerminalStatusVO> mapper =
 				ModelMapperUtils.getMapper("TerminalStatus", TerminalStatusVO.class.getPackage().getName());
 
 		TerminalStatusVO terminalStatusVO = mapper.map(terminalStatus);
-		return terminalStatusVO;
+		return terminalStatusVO;*/
+		return ModelMapperUtils.map(terminalStatus, TerminalStatusVO.class);
     }
 
     public static List<TerminalStatusVO> of(List<TerminalStatus> terminalStatusList) {

@@ -118,9 +118,10 @@ public class Sh03001160Service extends BaseService<Sh03001160, Sh03001160.Sh0300
         if (sh03001160 == null) {
             return new Sh03001160VO();
         } else {
-            BoundMapperFacade<Sh03001160, Sh03001160VO> mapper =
+            /*BoundMapperFacade<Sh03001160, Sh03001160VO> mapper =
                     ModelMapperUtils.getMapper("Sh03001160", this.getClass().getPackage().getName());
-            return mapper.map(sh03001160);
+            return mapper.map(sh03001160);*/
+            return ModelMapperUtils.map(sh03001160, Sh03001160VO.class);
         }
     }
 }

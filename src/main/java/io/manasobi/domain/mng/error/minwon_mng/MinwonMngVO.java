@@ -40,10 +40,11 @@ public class MinwonMngVO extends BaseVO {
 
 
     public static MinwonMngVO of(MinwonMng minwonMng) {
-        BoundMapperFacade<MinwonMng, MinwonMngVO> mapper =
+        /*BoundMapperFacade<MinwonMng, MinwonMngVO> mapper =
                 ModelMapperUtils.getMapper("MinwonMng", MinwonMngVO.class.getPackage().getName());
 
-        return mapper.map(minwonMng);
+        return mapper.map(minwonMng);*/
+        return ModelMapperUtils.map(minwonMng, MinwonMngVO.class);
     }
 
     public static List<MinwonMngVO> of(List<MinwonMng> minwonMngList) {

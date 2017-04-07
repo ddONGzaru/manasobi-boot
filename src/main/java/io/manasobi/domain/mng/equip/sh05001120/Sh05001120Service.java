@@ -52,9 +52,10 @@ public class Sh05001120Service extends BaseService<Sh05001120, Sh05001120.Sh0500
         if (sh05001120 == null) {
             return new Sh05001120VO();
         } else {
-            BoundMapperFacade<Sh05001120, Sh05001120VO> mapper =
+            /*BoundMapperFacade<Sh05001120, Sh05001120VO> mapper =
                     ModelMapperUtils.getMapper("Sh05001120", this.getClass().getPackage().getName());
-            return mapper.map(sh05001120);
+            return mapper.map(sh05001120);*/
+            return ModelMapperUtils.map(sh05001120, Sh05001120VO.class);
         }
     }
 }

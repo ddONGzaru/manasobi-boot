@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @DynamicUpdate
 @Entity
 @Table(name = "PARENT_SAMPLE")
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class ParentSample extends SimpleJpaModel<String> {
 
 	@Id

@@ -21,6 +21,7 @@
         <typeAlias alias="searchTerminalVO" type="io.manasobi.domain.mng.common.SearchTerminalVO" />
         <!-- error -->
         <typeAlias alias="errorStatus"      type="io.manasobi.domain.mng.error.error_status.ErrorStatus" />
+        <typeAlias alias="sh01001110"       type="io.manasobi.domain.mng.error.sh01001110.Sh01001110" />
     </typeAliases>
 
 </configuration>

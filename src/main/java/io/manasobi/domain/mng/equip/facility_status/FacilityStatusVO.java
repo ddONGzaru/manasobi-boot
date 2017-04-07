@@ -65,10 +65,11 @@ public class FacilityStatusVO extends BaseVO {
 	private String unitPrice;
 
     public static FacilityStatusVO of(FacilityStatus facilityStatus) {
-		BoundMapperFacade<FacilityStatus, FacilityStatusVO> mapper =
+		/*BoundMapperFacade<FacilityStatus, FacilityStatusVO> mapper =
 				ModelMapperUtils.getMapper("FacilityStatus", FacilityStatusVO.class.getPackage().getName());
 		FacilityStatusVO facilityStatusVO = mapper.map(facilityStatus);
-		return facilityStatusVO;
+		return facilityStatusVO;*/
+		return ModelMapperUtils.map(facilityStatus, FacilityStatusVO.class);
     }
 
     public static List<FacilityStatusVO> of(List<FacilityStatus> facilityStatusList) {

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -122,6 +123,46 @@ public class RequestParams<T> {
         }
 
         return Timestamp.valueOf(DateUtils.convertToDateTime(datetime));
+    }
+
+    public LocalDateTime getLocalDateTime(String key) {
+
+        String datetime = getString(key);
+
+        if (datetime == null) { return null; }
+
+        if (datetime.length() == 10) {
+
+            if (key.equals("startDate")) {
+                datetime += " 00:00:00";
+            }
+
+            if (key.equals("endDate")) {
+                datetime += " 23:59:59";
+            }
+        }
+
+        return DateUtils.convertToDateTime(datetime);
+    }
+
+    public LocalDateTime getDateTime(String key) {
+
+        String datetime = getString(key);
+
+        if (datetime == null) { return null; }
+
+        if (datetime.length() == 10) {
+
+            if (key.equals("startDate")) {
+                datetime += " 00:00:00";
+            }
+
+            if (key.equals("endDate")) {
+                datetime += " 23:59:59";
+            }
+        }
+
+        return DateUtils.convertToDateTime(datetime);
     }
 
     public boolean getBoolean(String key) {

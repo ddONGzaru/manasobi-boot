@@ -3,6 +3,7 @@ package io.manasobi.domain.mng.error.sh01001180;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.*;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Sh01001180VO extends BaseVO {
 
     private String errorDatetime;
@@ -68,9 +70,10 @@ public class Sh01001180VO extends BaseVO {
 
 
     public static Sh01001180VO of(Sh01001180 sh01001180) {
-        BoundMapperFacade<Sh01001180, Sh01001180VO> mapper =
+        /*BoundMapperFacade<Sh01001180, Sh01001180VO> mapper =
                 ModelMapperUtils.getMapper("Sh01001180", Sh01001180VO.class.getPackage().getName());
-        return mapper.map(sh01001180);
+        return mapper.map(sh01001180);*/
+        return ModelMapperUtils.map(sh01001180, Sh01001180VO.class);
     }
 
     public static List<Sh01001180VO> of(List<Sh01001180> sh01001180List) {

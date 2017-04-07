@@ -17,7 +17,8 @@ public class Sh01001110ModelMapper extends CustomMapper<Sh01001110, Sh01001110VO
     @Override
     public void mapAtoB(Sh01001110 src, Sh01001110VO dest, MappingContext context) {
 
-        LocalDateTime errorDatetime = src.getErrorDatetime().toLocalDateTime();
+        //LocalDateTime errorDatetime = src.getErrorDatetime().toLocalDateTime();
+        LocalDateTime errorDatetime = src.getErrorDatetime();
 
         dest.setErrorDatetime(DateUtils.convertToString(errorDatetime, "yyyy-MM-dd HH:mm:ss"));
         dest.setErrorDate(DateUtils.convertToString(errorDatetime, "yyyy-MM-dd"));

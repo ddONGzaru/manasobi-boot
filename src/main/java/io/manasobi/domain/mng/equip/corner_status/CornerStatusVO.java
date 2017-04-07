@@ -64,10 +64,11 @@ public class CornerStatusVO extends BaseVO {
 
 
     public static CornerStatusVO of(CornerStatus cornerStatus) {
-		BoundMapperFacade<CornerStatus, CornerStatusVO> mapper =
+		/*BoundMapperFacade<CornerStatus, CornerStatusVO> mapper =
 				ModelMapperUtils.getMapper("CornerStatus", CornerStatusVO.class.getPackage().getName());
 		CornerStatusVO cornerStatusVO = mapper.map(cornerStatus);
-		return cornerStatusVO;
+		return cornerStatusVO;*/
+		return ModelMapperUtils.map(cornerStatus, CornerStatusVO.class);
     }
 
     public static List<CornerStatusVO> of(List<CornerStatus> cornerStatusList) {

@@ -96,10 +96,11 @@ public class ErrorStatusVO extends BaseVO {
     private String totalClassifyCode;
 
     public static ErrorStatusVO of(ErrorStatus errorStatus) {
-        BoundMapperFacade<ErrorStatus, ErrorStatusVO> mapper =
+        /*BoundMapperFacade<ErrorStatus, ErrorStatusVO> mapper =
                 ModelMapperUtils.getMapper("ErrorStatus", ErrorStatusVO.class.getPackage().getName());
         ErrorStatusVO errorStatusVO = mapper.map(errorStatus);
-        return errorStatusVO;
+        return errorStatusVO;*/
+        return ModelMapperUtils.map(errorStatus, ErrorStatusVO.class);
     }
 
     public static List<ErrorStatusVO> of(List<ErrorStatus> errorStatusList) {

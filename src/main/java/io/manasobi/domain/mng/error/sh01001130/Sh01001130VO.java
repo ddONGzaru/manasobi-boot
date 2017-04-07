@@ -53,9 +53,10 @@ public class Sh01001130VO extends BaseVO {
 	private String securityCorpCode;
 
     public static Sh01001130VO of(Sh01001130 sh01001130) {
-		BoundMapperFacade<Sh01001130, Sh01001130VO> mapper =
+		/*BoundMapperFacade<Sh01001130, Sh01001130VO> mapper =
 				ModelMapperUtils.getMapper("Sh01001130", Sh01001130VO.class.getPackage().getName());
-		return mapper.map(sh01001130);
+		return mapper.map(sh01001130);*/
+		return ModelMapperUtils.map(sh01001130, Sh01001130VO.class);
     }
 
     public static List<Sh01001130VO> of(List<Sh01001130> sh01001130List) {

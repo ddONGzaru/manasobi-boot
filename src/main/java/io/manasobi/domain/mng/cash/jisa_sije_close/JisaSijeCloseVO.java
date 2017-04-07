@@ -44,9 +44,10 @@ public class JisaSijeCloseVO extends BaseVO {
 
 
     public static JisaSijeCloseVO of(JisaSijeClose jisaSijeClose) {
-		BoundMapperFacade<JisaSijeClose, JisaSijeCloseVO> mapper =
+		/*BoundMapperFacade<JisaSijeClose, JisaSijeCloseVO> mapper =
 				ModelMapperUtils.getMapper("JisaSijeClose", JisaSijeCloseVO.class.getPackage().getName());
-        return mapper.map(jisaSijeClose);
+        return mapper.map(jisaSijeClose);*/
+		return ModelMapperUtils.map(jisaSijeClose, JisaSijeCloseVO.class);
     }
 
     public static List<JisaSijeCloseVO> of(List<JisaSijeClose> jisaSijeCloseList) {

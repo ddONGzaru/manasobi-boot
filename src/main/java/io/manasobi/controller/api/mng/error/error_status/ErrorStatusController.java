@@ -28,8 +28,8 @@ public class ErrorStatusController extends BaseController {
     }
 
     @GetMapping(params = "details")
-    public ErrorStatusVO details(RequestParams<ErrorStatusVO> requestParams) {
-        return errorStatusService.findOne(requestParams);
+    public ErrorStatusVO details(ErrorStatusVO errorStatusVO) {
+        return errorStatusService.findOne(errorStatusVO);
     }
 
     @GetMapping("/history")

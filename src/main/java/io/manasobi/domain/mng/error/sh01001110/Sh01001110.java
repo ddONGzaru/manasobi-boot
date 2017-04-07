@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -23,7 +24,7 @@ public class Sh01001110 extends SimpleJpaModel<Sh01001110.Sh01001110Id> {
 
     @Id
     @Column(name = "ERROR_DATETIME", nullable = false)
-    private Timestamp errorDatetime;
+    private LocalDateTime errorDatetime;
 
     @Column(name = "JISA_CODE", length = 2, nullable = false)
     private String jisaCode;
@@ -253,7 +254,7 @@ public class Sh01001110 extends SimpleJpaModel<Sh01001110.Sh01001110Id> {
     public static class Sh01001110Id implements Serializable {
 
         @NonNull
-        private Timestamp errorDatetime;
+        private LocalDateTime errorDatetime;
 
         @NonNull
         private String branchCode;

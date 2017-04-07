@@ -111,14 +111,15 @@ public class Sh03001110Service extends BaseService<Sh03001110, Sh03001110.Sh0300
         return buildVO(sh03001110Mapper.findOne(sh03001110));
     }
 
-    private Sh03001110VO buildVO(Sh03001110 Sh03001110) {
+    private Sh03001110VO buildVO(Sh03001110 sh03001110) {
 
-        if (Sh03001110 == null) {
+        if (sh03001110 == null) {
             return new Sh03001110VO();
         } else {
-            BoundMapperFacade<Sh03001110, Sh03001110VO> mapper =
+            /*BoundMapperFacade<Sh03001110, Sh03001110VO> mapper =
                     ModelMapperUtils.getMapper("Sh03001110", this.getClass().getPackage().getName());
-            return mapper.map(Sh03001110);
+            return mapper.map(Sh03001110);*/
+            return ModelMapperUtils.map(sh03001110, Sh03001110VO.class);
         }
     }
 

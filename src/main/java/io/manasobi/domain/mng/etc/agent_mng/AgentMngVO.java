@@ -41,10 +41,11 @@ public class AgentMngVO extends BaseVO {
 
 
     public static AgentMngVO of(AgentMng agentMng) {
-        BoundMapperFacade<AgentMng, AgentMngVO> mapper =
+        /*BoundMapperFacade<AgentMng, AgentMngVO> mapper =
                 ModelMapperUtils.getMapper("AgentMng", AgentMngVO.class.getPackage().getName());
 
-        return mapper.map(agentMng);
+        return mapper.map(agentMng);*/
+        return ModelMapperUtils.map(agentMng, AgentMngVO.class);
     }
 
     public static List<AgentMngVO> of(List<AgentMng> agentMngList) {

@@ -21,11 +21,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -45,6 +47,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = PackageManager.BASE)
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @MapperScan(basePackages = PackageManager.DOMAIN, markerInterface = MyBatisMapper.class)
+@EntityScan(basePackageClasses = Jsr310JpaConverters.class)
 public class AppConfig implements ApplicationContextAware {
 
     private ApplicationContext context;
@@ -144,7 +147,7 @@ public class AppConfig implements ApplicationContextAware {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
-    @Bean
+    /*@Bean
     public ModelMapper modelMapper() {
 
         ModelMapper modelMapper = new ModelMapper();
@@ -153,7 +156,7 @@ public class AppConfig implements ApplicationContextAware {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         return modelMapper;
-    }
+    }*/
 
     @Bean
     public MapperFactory modelFactory() {

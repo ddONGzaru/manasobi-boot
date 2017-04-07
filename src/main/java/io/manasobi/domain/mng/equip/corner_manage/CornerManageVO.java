@@ -56,11 +56,12 @@ public class CornerManageVO extends BaseVO {
 
 
 	public static CornerManageVO of(CornerManage cornerManage) {
-		BoundMapperFacade<CornerManage, CornerManageVO> mapper =
+		/*BoundMapperFacade<CornerManage, CornerManageVO> mapper =
 				ModelMapperUtils.getMapper("CornerManage", CornerManageVO.class.getPackage().getName());
 
 		CornerManageVO cornerManageVO = mapper.map(cornerManage);
-		return cornerManageVO;
+		return cornerManageVO;*/
+		return ModelMapperUtils.map(cornerManage, CornerManageVO.class);
 	}
 
     public static List<CornerManageVO> of(List<CornerManage> cornerManageList) {

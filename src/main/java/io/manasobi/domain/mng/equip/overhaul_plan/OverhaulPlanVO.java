@@ -33,9 +33,10 @@ public class OverhaulPlanVO extends BaseVO {
 
 
     public static OverhaulPlanVO of(OverhaulPlan overhaulPlan) {
-        BoundMapperFacade<OverhaulPlan, OverhaulPlanVO> mapper =
+        /*BoundMapperFacade<OverhaulPlan, OverhaulPlanVO> mapper =
                 ModelMapperUtils.getMapper("OverhaulPlan", OverhaulPlanVO.class.getPackage().getName());
-        return mapper.map(overhaulPlan);
+        return mapper.map(overhaulPlan);*/
+        return ModelMapperUtils.map(overhaulPlan, OverhaulPlanVO.class);
     }
 
     public static List<OverhaulPlanVO> of(List<OverhaulPlan> overhaulPlanList) {
