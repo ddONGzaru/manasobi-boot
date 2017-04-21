@@ -23,8 +23,8 @@ dependencies {
     // jpa & jdbc :: querydsl, mariadb
     compile 'com.querydsl:querydsl-jpa:4.1.4'
     compile 'com.querydsl:querydsl-apt:4.1.4'
-    compile 'com.oracle:ojdbc6:11.2.0.3' // oracle
-    //compile 'org.mariadb.jdbc:mariadb-java-client:1.5.5' // maria-db
+    //compile 'com.oracle:ojdbc6:11.2.0.3' // oracle
+    compile 'org.mariadb.jdbc:mariadb-java-client:1.5.5' // maria-db
 
     // thymeleaf 3.x
     compile 'org.thymeleaf:thymeleaf:3.0.5.RELEASE'

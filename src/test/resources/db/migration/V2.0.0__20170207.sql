@@ -43,11 +43,11 @@ CREATE TABLE atms_02001100 (
   work_date                 TIMESTAMP,
   install_terminal_count    CHAR(2),
   install_fac_count         CHAR(2),
-  branch_name               VARCHAR2(40),
-  corner_name               VARCHAR2(40),
-  biz_manager_name          VARCHAR2(20),
-  manager_telno             VARCHAR2(20),
-  work_content              VARCHAR2(200),
+  branch_name               VARCHAR(40),
+  corner_name               VARCHAR(40),
+  biz_manager_name          VARCHAR(20),
+  manager_telno             VARCHAR(20),
+  work_content              VARCHAR(200),
   PRIMARY KEY (work_seq_no)
 );
 
@@ -58,9 +58,9 @@ CREATE TABLE atms_02001110 (
   stext_gubun          CHAR(1),
   jisa_code            CHAR(2) NOT NULL, -- 전문에는 없지만 추가된 컬럼
   branch_code          CHAR(4) NOT NULL,
-  branch_name          VARCHAR2(40),
+  branch_name          VARCHAR(40),
   corner_code          CHAR(2) NOT NULL,
-  corner_name          VARCHAR2(40),
+  corner_name          VARCHAR(40),
   place_gubun          CHAR(1),
   branch_gubun         CHAR(1),
   special_style_gubun  CHAR(1),
@@ -71,8 +71,8 @@ CREATE TABLE atms_02001110 (
   service_fee          CHAR(10),
   security_corp_code   CHAR(2),
   fac_hire_enable      CHAR(1),
-  addr                 VARCHAR2(60),
-  unusl                VARCHAR2(100),
+  addr                 VARCHAR(60),
+  unusl                VARCHAR(100),
   oper_day             CHAR(7),
   PRIMARY KEY (work_seq_no, branch_code, corner_code)
 );
@@ -84,7 +84,7 @@ CREATE TABLE atms_02001200 (
   jisa_code             CHAR(2) NOT NULL, -- 전문에는 없지만 추가된 컬럼
   branch_code           CHAR(4) NOT NULL,
   corner_code           CHAR(2) NOT NULL,
-  corner_name           VARCHAR2(40),
+  corner_name           VARCHAR(40),
   place_gubun           CHAR(1),
   branch_gubun          CHAR(1),
   oper_start_gubun      CHAR(1),
@@ -93,9 +93,9 @@ CREATE TABLE atms_02001200 (
   security_corp_code    CHAR(2),
   check_oper_enable     CHAR(1),
   oper_day              CHAR(7),
-  addr                  VARCHAR2(60),
-  install_place         VARCHAR2(60),
-  detail_fac_info       VARCHAR2(150),
+  addr                  VARCHAR(60),
+  install_place         VARCHAR(60),
+  detail_fac_info       VARCHAR(150),
   PRIMARY KEY (stext_notice_datetime)
 );
 
@@ -106,8 +106,8 @@ CREATE TABLE atms_02001120 (
   stext_gubun         CHAR(1),
   closing_branch_no   CHAR(4),
   closing_corner_code CHAR(2),
-  addr                VARCHAR2(60),
-  unusl               VARCHAR2(100),
+  addr                VARCHAR(60),
+  unusl               VARCHAR(100),
   PRIMARY KEY (work_seq_no)
 );
 
@@ -118,7 +118,7 @@ CREATE TABLE atms_02001270 (
   jisa_code          CHAR(2) NOT NULL, -- 전문에는 없지만 추가된 컬럼
   branch_code        CHAR(4) NOT NULL,
   corner_code        CHAR(2) NOT NULL,
-  corner_name        VARCHAR2(40),
+  corner_name        VARCHAR(40),
   stext_gubun        CHAR(1),
   closing_date       TIMESTAMP,
   restart_gubun      CHAR(1),
@@ -146,11 +146,11 @@ CREATE TABLE atms_02001130 (
   hire_terminal_enable     CHAR(1),
   install_terminal_gubun   CHAR(1),
   terminal_hire_fee        CHAR(10),
-  gateway_ip_addr          VARCHAR2(15),
-  terminal_ip_addr         VARCHAR2(15),
-  terminal_smask_addr      VARCHAR2(15),
+  gateway_ip_addr          VARCHAR(15),
+  terminal_ip_addr         VARCHAR(15),
+  terminal_smask_addr      VARCHAR(15),
   work_plan_datetime       TIMESTAMP ,
-  terminal_prod_no         VARCHAR2(15),
+  terminal_prod_no         VARCHAR(15),
   PRIMARY KEY (work_seq_no)
 );
 
@@ -177,10 +177,10 @@ CREATE TABLE atms_02001210 (
   new_hire_terminal_enable         CHAR(1),
   new_install_terminal_gubun       CHAR(1),
   new_terminal_hire_fee            CHAR(10),
-  new_gateway_ip_addr              VARCHAR2(15),
-  new_terminal_ip_addr             VARCHAR2(15),
-  new_terminal_smask_addr          VARCHAR2(15),
-  terminal_prod_no                 VARCHAR2(15),
+  new_gateway_ip_addr              VARCHAR(15),
+  new_terminal_ip_addr             VARCHAR(15),
+  new_terminal_smask_addr          VARCHAR(15),
+  terminal_prod_no                 VARCHAR(15),
   new_terminal_mng_gubun           CHAR(1),
   PRIMARY KEY (work_seq_no)
 );
@@ -214,10 +214,10 @@ CREATE TABLE atms_02001150 (
   terminal_no            CHAR(4) NOT NULL,
   terminal_corp_code     CHAR(1),
   model_code             CHAR(3),
-  terminal_prod_no       VARCHAR2(15),
+  terminal_prod_no       VARCHAR(15),
   work_complete_enable   CHAR(1),
   work_complete_date     TIMESTAMP,
-  unusl                  VARCHAR2(200),
+  unusl                  VARCHAR(200),
   PRIMARY KEY (work_seq_no)
 );
 
@@ -234,12 +234,12 @@ CREATE TABLE atms_02001160 (
   fac_code                 CHAR(4) NOT NULL,
   hire_fac_enable          CHAR(1),
   install_article_gubun    CHAR(1),
-  asset_seq_no             VARCHAR2(12),
-  fac_ip_addr              VARCHAR2(15),
-  fac_gw_addr              VARCHAR2(15),
-  fac_smask_addr           VARCHAR2(15),
+  asset_seq_no             VARCHAR(12),
+  fac_ip_addr              VARCHAR(15),
+  fac_gw_addr              VARCHAR(15),
+  fac_smask_addr           VARCHAR(15),
   hire_fee                 CHAR(10),
-  detail_fac_info          VARCHAR2(200),
+  detail_fac_info          VARCHAR(200),
   PRIMARY KEY (work_seq_no)
 );
 
@@ -251,8 +251,8 @@ CREATE TABLE atms_02001190 (
   change_before_fac_code            CHAR(4),
   change_after_fac_gubun_code       CHAR(2),
   change_after_fac_code             CHAR(4),
-  change_after_fac_name             VARCHAR2(50),
-  change_after_corp_name            VARCHAR2(20),
+  change_after_fac_name             VARCHAR(50),
+  change_after_corp_name            VARCHAR(20),
   change_after_hire_fee             CHAR(10),
   PRIMARY KEY (tx_id)
 );
@@ -270,7 +270,7 @@ CREATE TABLE atms_02001170 (
   fac_code             CHAR(4) NOT NULL,
   hire_fac_enable      CHAR(1),
   nouse_gubun          CHAR(1),
-  asset_seq_no         VARCHAR2(12),
+  asset_seq_no         VARCHAR(12),
   PRIMARY KEY (work_seq_no)
 );
 
@@ -283,20 +283,20 @@ CREATE TABLE atms_02001180 (
   branch_code           CHAR(4) NOT NULL,
   corner_code           CHAR(2) NOT NULL,
   fac_code              CHAR(4) NOT NULL,
-  fac_name              VARCHAR2(50),
-  asset_seq_no          VARCHAR2(12),
+  fac_name              VARCHAR(50),
+  asset_seq_no          VARCHAR(12),
   adopt_date            TIMESTAMP,
   work_complete_enable  CHAR(1),
   work_complete_date    TIMESTAMP,
-  unusl                 VARCHAR2(200),
+  unusl                 VARCHAR(200),
   PRIMARY KEY (work_seq_no)
 );
 
 /*___ atms_02001230 ___*/
 CREATE TABLE atms_02001230 (
   tx_id                      TIMESTAMP NOT NULL, -- 전문에는 없지만 추가된 컬럼
-  change_before_asset_seq_no VARCHAR2(12),
-  change_after_asset_seq_no  VARCHAR2(12),
+  change_before_asset_seq_no VARCHAR(12),
+  change_after_asset_seq_no  VARCHAR(12),
   jisa_code                  CHAR(2) NOT NULL, -- 전문에는 없지만 추가된 컬럼
   branch_code                CHAR(4) NOT NULL,
   corner_code                CHAR(2) NOT NULL,
@@ -311,9 +311,9 @@ CREATE TABLE atms_02001280 (
   jisa_code    CHAR(2) NOT NULL, -- 전문에는 없지만 추가된 컬럼
   branch_code  CHAR(4) NOT NULL,
   corner_code  CHAR(2) NOT NULL,
-  corner_name  VARCHAR2(40),
+  corner_name  VARCHAR(40),
   work_date    TIMESTAMP,
-  work_content VARCHAR2(300),
+  work_content VARCHAR(300),
   PRIMARY KEY (work_seq_no)
 );
 
@@ -331,8 +331,8 @@ CREATE TABLE atms_02001290 (
   branch_code       CHAR(4) NOT NULL,
   corner_code       CHAR(2) NOT NULL,
   terminal_no       CHAR(4) NOT NULL,
-  corner_name       VARCHAR2(40),
-  detail_content    VARCHAR2(200),
+  corner_name       VARCHAR(40),
+  detail_content    VARCHAR(200),
   PRIMARY KEY (tx_id)
 );
 
@@ -340,9 +340,9 @@ CREATE TABLE atms_02001290 (
 CREATE TABLE atms_corner_status (
   jisa_code            CHAR(2) NOT NULL,
   branch_code          CHAR(4) NOT NULL,
-  branch_name          VARCHAR2(40),
+  branch_name          VARCHAR(40),
   corner_code          CHAR(2) NOT NULL,
-  corner_name          VARCHAR2(40),
+  corner_name          VARCHAR(40),
   place_gubun          CHAR(1),
   branch_gubun         CHAR(1),
   special_style_gubun  CHAR(1),
@@ -353,8 +353,8 @@ CREATE TABLE atms_corner_status (
   sevice_fee           CHAR(10),
   security_corp_code   CHAR(2),
   fac_hire_enable      CHAR(1),
-  addr                 VARCHAR2(100),
-  unusl                VARCHAR2(100),
+  addr                 VARCHAR(100),
+  unusl                VARCHAR(100),
   oper_day             CHAR(7),
   PRIMARY KEY (jisa_code, branch_code, corner_code )
 );
@@ -363,9 +363,9 @@ CREATE TABLE atms_corner_status (
 CREATE TABLE atms_terminal_status (
   jisa_code                  CHAR(2) NOT NULL,
   branch_code                CHAR(4) NOT NULL,
-  branch_name                VARCHAR2(40),
+  branch_name                VARCHAR(40),
   corner_code                CHAR(2) NOT NULL,
-  corner_name                VARCHAR2(40),
+  corner_name                VARCHAR(40),
   terminal_no                CHAR(4) NOT NULL,
   oper_enable                CHAR(1),  -- 운영여부
   model_code                 CHAR(3),
@@ -382,7 +382,7 @@ CREATE TABLE atms_terminal_status (
   work_date                  TIMESTAMP, -- 업무적용일 -> 작업일정통보가 오면 insert
   security_corp              CHAR(2),
   install_place_gubun        CHAR(3),   -- 전문에서 안보임
-  addr                       VARCHAR2(150) ,
+  addr                       VARCHAR(150) ,
   photo_enable               CHAR(1), -- 촬영여부
   booth_corp                 CHAR(1), -- 부스업체
   booth_type                 CHAR(2), -- 부스종류
@@ -398,16 +398,16 @@ CREATE TABLE atms_terminal_status (
   hire_terminal_enable       CHAR(1),
   install_terminal_gubun     CHAR(1),
   terminal_hire_fee          CHAR(10),
-  gateway_ip_addr            VARCHAR2(15),
-  terminal_ip_addr           VARCHAR2(15),
-  terminal_smask_addr        VARCHAR2(15),
-  terminal_prod_no           VARCHAR2(15),
-  intercom_no                VARCHAR2(20), -- 인터폰번호
-  terminal_location          VARCHAR2(50), -- 기기위치
-  comm_office                VARCHAR2(10), -- 통신실
-  internet_classify          VARCHAR2(10), -- 인터넷종류 -> 코드화필요?
-  security_corp_contract_no  VARCHAR2(20), -- 경비사 계약번호
-  mng_channel                VARCHAR2(10), -- 관리채널 -> 코드화필요?
+  gateway_ip_addr            VARCHAR(15),
+  terminal_ip_addr           VARCHAR(15),
+  terminal_smask_addr        VARCHAR(15),
+  terminal_prod_no           VARCHAR(15),
+  intercom_no                VARCHAR(20), -- 인터폰번호
+  terminal_location          VARCHAR(50), -- 기기위치
+  comm_office                VARCHAR(10), -- 통신실
+  internet_classify          VARCHAR(10), -- 인터넷종류 -> 코드화필요?
+  security_corp_contract_no  VARCHAR(20), -- 경비사 계약번호
+  mng_channel                VARCHAR(10), -- 관리채널 -> 코드화필요?
   PRIMARY KEY (jisa_code, branch_code, corner_code, terminal_no )
 );
 
@@ -415,24 +415,24 @@ CREATE TABLE atms_terminal_status (
 CREATE TABLE atms_facility_status (
   jisa_code                CHAR(2) NOT NULL,
   branch_code              CHAR(4) NOT NULL,
-  branch_name              VARCHAR2(40),
+  branch_name              VARCHAR(40),
   corner_code              CHAR(2) NOT NULL,
-  corner_name              VARCHAR2(40),
+  corner_name              VARCHAR(40),
   fac_gubun_code           CHAR(2),
   fac_code                 CHAR(4) NOT NULL,
   oper_enable              CHAR(1),  -- 운영여부
   hire_fac_enable          CHAR(1),
   install_article_gubun    CHAR(1),
-  asset_seq_no             VARCHAR2(12),
-  fac_ip_addr              VARCHAR2(15),
-  fac_gw_addr              VARCHAR2(15),
-  fac_smask_addr           VARCHAR2(15),
+  asset_seq_no             VARCHAR(12),
+  fac_ip_addr              VARCHAR(15),
+  fac_gw_addr              VARCHAR(15),
+  fac_smask_addr           VARCHAR(15),
   hire_fee                 CHAR(10),
-  detail_fac_info          VARCHAR2(200),
+  detail_fac_info          VARCHAR(200),
   adopt_date               TIMESTAMP, -- 도입일
   install_date             TIMESTAMP, -- 설치완료일
-  unit_price               VARCHAR2(15),    -- 단가
-  remarks                  VARCHAR2(200),    -- 비고
+  unit_price               VARCHAR(15),    -- 단가
+  remarks                  VARCHAR(200),    -- 비고
   PRIMARY KEY (jisa_code, branch_code, corner_code, fac_code)
 );
 
@@ -447,7 +447,7 @@ CREATE TABLE atms_02001220 (
   nouse_corner_code         CHAR(2),
   nouse_fac_gubun_code      CHAR(2),
   nouse_fac_code            CHAR(4),
-  nouse_asset_seq_no        VARCHAR2(12),
+  nouse_asset_seq_no        VARCHAR(12),
   nouse_gubun               CHAR(1),
   new_branch_code           CHAR(4),
   new_corner_code           CHAR(2),
@@ -455,10 +455,10 @@ CREATE TABLE atms_02001220 (
   new_fac_code              CHAR(4),
   new_hire_fac_enable       CHAR(1),
   new_install_article_gubun CHAR(1),
-  new_asset_seq_no          VARCHAR2(12),
-  fac_ip_addr               VARCHAR2(15),
-  fac_gw_addr               VARCHAR2(15),
-  fac_smask_addr            VARCHAR2(15),
+  new_asset_seq_no          VARCHAR(12),
+  fac_ip_addr               VARCHAR(15),
+  fac_gw_addr               VARCHAR(15),
+  fac_smask_addr            VARCHAR(15),
   new_hire_fee              CHAR(10),
   PRIMARY KEY (work_seq_no)
 );

@@ -12,7 +12,8 @@ appConfig:
   system-name: manasobi-boot
   # DataSource
   data-source:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    #driver-class-name: oracle.jdbc.driver.OracleDriver
+    driver-class-name: org.mariadb.jdbc.Driver
     initial-size: 5
     max-idle: -1
     max-total: 10
