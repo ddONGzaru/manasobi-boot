@@ -1,12 +1,12 @@
 package io.manasobi.controller.api.mng.error.error_status;
 
-import io.manasobi.domain.mng.error.error_status.ErrorStatus;
-import io.manasobi.domain.mng.error.error_status.ErrorStatusService;
-import io.manasobi.domain.mng.error.error_status.ErrorStatusVO;
 import io.manasobi.controller.BaseController;
 import io.manasobi.core.api.response.ApiResponse;
 import io.manasobi.core.api.response.Responses;
 import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.domain.mng.error.error_status.ErrorStatus;
+import io.manasobi.domain.mng.error.error_status.ErrorStatusService;
+import io.manasobi.domain.mng.error.error_status.ErrorStatusVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +28,8 @@ public class ErrorStatusController extends BaseController {
     }
 
     @GetMapping(params = "details")
-    public ErrorStatusVO details(ErrorStatusVO errorStatusVO) {
-        return errorStatusService.findOne(errorStatusVO);
+    public ErrorStatusVO details(RequestParams<ErrorStatusVO> requestParams) {
+        return errorStatusService.findOne(requestParams);
     }
 
     @GetMapping("/history")

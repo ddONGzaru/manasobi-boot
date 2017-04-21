@@ -23,7 +23,7 @@ public class Sh03001120ModelMapper extends CustomMapper<Sh03001120, Sh03001120VO
 
         if(src.getDealTime()!=null) {
             LocalDateTime dealTime = src.getDealTime().toLocalDateTime();
-            dest.setDealTime(DateUtils.convertToString(dealTime, "yyyy-MM-dd HH:mm"));
+            dest.setDealTime(DateUtils.convertToString(dealTime, "yyyy-MM-dd HH:mm:ss"));
         }
     }
 }

@@ -19,6 +19,7 @@ import io.manasobi.domain.mng.error.sh01001110.Sh01001110Repository;
 import io.manasobi.utils.DateUtils;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.extern.slf4j.Slf4j;
+import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -147,10 +148,9 @@ public class Sh01001120Service extends BaseService<Sh01001120, Sh01001120.Sh0100
         if (sh01001120 == null) {
             return new Sh01001120VO();
         } else {
-            /*BoundMapperFacade<Sh01001120, Sh01001120VO> mapper =
+            BoundMapperFacade<Sh01001120, Sh01001120VO> mapper =
                     ModelMapperUtils.getMapper("Sh01001120", this.getClass().getPackage().getName());
-            return mapper.map(sh01001120);*/
-            return ModelMapperUtils.map(sh01001120, Sh01001120VO.class);
+            return mapper.map(sh01001120);
         }
     }
 
@@ -159,18 +159,18 @@ public class Sh01001120Service extends BaseService<Sh01001120, Sh01001120.Sh0100
         LocalDateTime now = LocalDateTime.now();
         Timestamp errorDatetime = Timestamp.valueOf(DateUtils.convertToString(now, DateUtils.DATE_TIME_PATTERN));
 
-
         // 기기정보조회
         TerminalStatus terminalStatusParams = new TerminalStatus();
         terminalStatusParams.setJisaCode(vo.getJisaCode());
         terminalStatusParams.setBranchCode(vo.getBranchCode());
+        terminalStatusParams.setCornerCode(vo.getCornerCode());
         terminalStatusParams.setTerminalNo(vo.getTerminalNo());
 
         TerminalStatus terminalStatus = terminalStatusService.findOne(terminalStatusParams);
 
         // 장애통보발생 및 저장
         Sh01001110 sh01001110 = new Sh01001110();
-        sh01001110.setErrorDatetime(now);
+        sh01001110.setErrorDatetime(errorDatetime);
         sh01001110.setJisaCode(vo.getJisaCode());
         sh01001110.setBranchCode(vo.getBranchCode());
         sh01001110.setBranchName(vo.getBranchName());
@@ -209,7 +209,6 @@ public class Sh01001120Service extends BaseService<Sh01001120, Sh01001120.Sh0100
         errorStatus.setCornerCode(vo.getCornerCode());
         errorStatus.setTerminalNo(vo.getTerminalNo());
         errorStatus.setErrorDatetime(errorDatetime);
-        //errorStatus.setErrorDatetime(LocalDateTime.now());
         errorStatus.setErrorType("2");
         errorStatus.setCalleeGubun("2");
         errorStatus.setErrorProcessStatus(ErrorProcessStatus.장애통보.getCode());

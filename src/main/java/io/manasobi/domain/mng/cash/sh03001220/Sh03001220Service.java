@@ -1,6 +1,5 @@
 package io.manasobi.domain.mng.cash.sh03001220;
 
-import com.querydsl.core.BooleanBuilder;
 import io.manasobi.core.api.ApiException;
 import io.manasobi.core.api.response.ApiResponse;
 import io.manasobi.core.base.BaseService;
@@ -18,12 +17,14 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Slf4j
 @Service
 public class Sh03001220Service extends BaseService<Sh03001220, Sh03001220.Sh03001220Id> {
+
+    @Inject
+    public Sh03001220Mapper sh03001220Mapper;
 
     @Autowired
     private Sh03001220Repository sh003001220Repo;
@@ -53,42 +54,13 @@ public class Sh03001220Service extends BaseService<Sh03001220, Sh03001220.Sh0300
 
         String filter = requestParams.getString("filter");
 
-        String jisaCode = requestParams.getString("jisaCode");
-        String branchCode = requestParams.getString("branchCode");
-        String cornerCode = requestParams.getString("cornerCode");
-        String terminalNo = requestParams.getString("terminalNo");
-        String reqGubun = requestParams.getString("reqGubun");
-        Timestamp reqDate = requestParams.getTimestamp("reqDate");
+        Sh03001220 sh03001220 = new Sh03001220();
 
-        QSh03001220 qSh03001220 = QSh03001220.sh03001220;
+        sh03001220.setJisaCode(requestParams.getString("jisaCode"));
+        sh03001220.setReqGubun(requestParams.getString("reqGubun"));
+        sh03001220.setReqDate(requestParams.getTimestamp("reqDate"));
 
-        BooleanBuilder builder = new BooleanBuilder();
-
-        if (isNotEmpty(jisaCode)) {
-            builder.and(qSh03001220.jisaCode.eq(jisaCode));
-        }
-
-        if (isNotEmpty(branchCode)) {
-            builder.and(qSh03001220.branchCode.eq(branchCode));
-        }
-
-        if (isNotEmpty(cornerCode)) {
-            builder.and(qSh03001220.cornerCode.eq(cornerCode));
-        }
-
-        if (isNotEmpty(terminalNo)) {
-            builder.and(qSh03001220.terminalNo.eq(terminalNo));
-        }
-
-        if (isNotEmpty(reqGubun)) {
-            builder.and(qSh03001220.reqGubun.eq(reqGubun));
-        }
-
-        if (reqDate != null) {
-            builder.and(qSh03001220.reqDate.eq(reqDate));
-        }
-
-        List<Sh03001220> resultList = select().from(qSh03001220).where(builder).fetch();
+        List<Sh03001220> resultList = sh03001220Mapper.findAll(sh03001220);
 
         return filter(resultList, pageable, filter, Sh03001220.class);
     }
@@ -107,7 +79,7 @@ public class Sh03001220Service extends BaseService<Sh03001220, Sh03001220.Sh0300
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Sh03001220Service-sendAndReceive :: {}", e.getMessage());
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            throw new ApiException(ApiStatus.SYSTEM_ERROR, "운영자금인수정보 전문응답코드가 99입니다.");
         }
 
         Sh03001220 sh03001220 = findResult(vo);

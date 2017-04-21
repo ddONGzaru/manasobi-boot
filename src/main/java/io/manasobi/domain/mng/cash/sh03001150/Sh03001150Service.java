@@ -49,8 +49,8 @@ public class Sh03001150Service extends BaseService<Sh03001150, Sh03001150.Sh0300
     }
 
     @Inject
-    public Sh03001150Service(Sh03001150Repo sh03001150Repo) {
-        super(sh03001150Repo);
+    public Sh03001150Service(Sh03001150Repo sh03001150Repository) {
+        super(sh03001150Repository);
     }
 
     public Page<Sh03001150> find(Pageable pageable, RequestParams<Sh03001150> requestParams) {
@@ -103,15 +103,14 @@ public class Sh03001150Service extends BaseService<Sh03001150, Sh03001150.Sh0300
         return buildVO(sh03001150Mapper.nextSeqNo(sh03001150));
     }
 
-    private Sh03001150VO buildVO(Sh03001150 sh03001150) {
+    private Sh03001150VO buildVO(Sh03001150 Sh03001150) {
 
-        if (sh03001150 == null) {
+        if (Sh03001150 == null) {
             return new Sh03001150VO();
         } else {
-            /*BoundMapperFacade<Sh03001150, Sh03001150VO> mapper =
+            BoundMapperFacade<Sh03001150, Sh03001150VO> mapper =
                     ModelMapperUtils.getMapper("Sh03001150", this.getClass().getPackage().getName());
-            return mapper.map(Sh03001150);*/
-            return ModelMapperUtils.map(sh03001150, Sh03001150VO.class);
+            return mapper.map(Sh03001150);
         }
     }
 
@@ -129,7 +128,7 @@ public class Sh03001150Service extends BaseService<Sh03001150, Sh03001150.Sh0300
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Sh01001120Service-sendAndReceive :: {}", e);
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            throw new ApiException(ApiStatus.SYSTEM_ERROR, "미처리금액보고서 전문응답코드가 99입니다.");
         }
 
         Sh03001150 sh03001150 = findResult(vo);

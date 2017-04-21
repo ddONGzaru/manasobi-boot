@@ -57,7 +57,7 @@ public class Sh03001180Service extends BaseService<Sh03001180, Sh03001180.Sh0300
             apiResponseEntity = restTemplate.postForEntity(url, sh03001180VO, ApiResponse.class);
         } catch (RestClientException e) {
             log.error("sh03001180Service-sendAndReceive :: {}", e.getMessage());
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            throw new ApiException(ApiStatus.SYSTEM_ERROR, "현송계획 전문응답코드가 99입니다.");
         }
 
         return apiResponseEntity.getBody();
@@ -81,5 +81,57 @@ public class Sh03001180Service extends BaseService<Sh03001180, Sh03001180.Sh0300
         List<Sh03001180> resultList = sh03001180Mapper.findAll(sh03001180);
 
         return filter(resultList, pageable, filter, Sh03001180.class);
+    }
+
+    public List<Sh03001180ExcelVO> findExcel(RequestParams<Sh03001180ExcelVO> requestParams) {
+
+        Sh03001180 sh03001180 = new Sh03001180();
+        sh03001180.setJisaCode(requestParams.getString("jisaCode"));
+        sh03001180.setCashSendingDate(requestParams.getTimestamp("startDate"));
+
+        List<Sh03001180ExcelVO> resultList = sh03001180Mapper.findExcel(sh03001180);
+
+        Long sumCashAmt = 0l;
+        Long sumCash50kGiveAmt = 0l;
+        Long sumPredictionCashSendingAmt = 0l;
+        Long sumPredictionCash50kSendingAmt = 0l;
+        Long sumCashSendingAmt = 0l;
+        Long sumCash50kSendingAmt = 0l;
+        Long sumAddCashSendingAmt = 0l;
+        Long sumAddCash50kSendingAmt = 0l;
+        Long sumRtrvlAmt = 0l;
+
+        for (int j = 0 ; j < resultList.size(); j++) {
+            sumCashAmt += resultList.get(j).getCashAmt();
+            sumCash50kGiveAmt += resultList.get(j).getCash50kGiveAmt()==null?0l:resultList.get(j).getCash50kGiveAmt();
+            sumPredictionCashSendingAmt += resultList.get(j).getPredictionCashSendingAmt();
+            sumPredictionCash50kSendingAmt += resultList.get(j).getPredictionCash50kSendingAmt();
+            sumCashSendingAmt += resultList.get(j).getCashSendingAmt();
+            sumCash50kSendingAmt += resultList.get(j).getCash50kSendingAmt();
+            sumAddCashSendingAmt += resultList.get(j).getAddCashSendingAmt();
+            sumAddCash50kSendingAmt += resultList.get(j).getAddCash50kSendingAmt();
+            sumRtrvlAmt += resultList.get(j).getRtrvlAmt();
+        }
+
+        Sh03001180ExcelVO sh03001180ExcelVO = new Sh03001180ExcelVO();
+        sh03001180ExcelVO.setCashAmt(sumCashAmt);
+        sh03001180ExcelVO.setCash50kGiveAmt(sumCash50kGiveAmt);
+        sh03001180ExcelVO.setPredictionCashSendingAmt(sumPredictionCashSendingAmt);
+        sh03001180ExcelVO.setPredictionCash50kSendingAmt(sumPredictionCash50kSendingAmt);
+        sh03001180ExcelVO.setCashSendingAmt(sumCashSendingAmt);
+        sh03001180ExcelVO.setCash50kSendingAmt(sumCash50kSendingAmt);
+        sh03001180ExcelVO.setAddCashSendingAmt(sumAddCashSendingAmt);
+        sh03001180ExcelVO.setAddCash50kSendingAmt(sumAddCash50kSendingAmt);
+        sh03001180ExcelVO.setRtrvlAmt(sumRtrvlAmt);
+
+        if(resultList.size() < 64) {
+            for (int j = resultList.size() ; j < 64; j++) {
+                resultList.add(new Sh03001180ExcelVO());
+            }
+        }
+
+        resultList.add(sh03001180ExcelVO);
+
+        return resultList;
     }
 }

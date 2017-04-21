@@ -3,19 +3,18 @@ package io.manasobi.domain.mng.equip.corner_manage;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
 
+import java.sql.Timestamp;
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class CornerManageVO extends BaseVO {
 
 	private String jisaCode;
@@ -56,12 +55,11 @@ public class CornerManageVO extends BaseVO {
 
 
 	public static CornerManageVO of(CornerManage cornerManage) {
-		/*BoundMapperFacade<CornerManage, CornerManageVO> mapper =
+		BoundMapperFacade<CornerManage, CornerManageVO> mapper =
 				ModelMapperUtils.getMapper("CornerManage", CornerManageVO.class.getPackage().getName());
 
 		CornerManageVO cornerManageVO = mapper.map(cornerManage);
-		return cornerManageVO;*/
-		return ModelMapperUtils.map(cornerManage, CornerManageVO.class);
+		return cornerManageVO;
 	}
 
     public static List<CornerManageVO> of(List<CornerManage> cornerManageList) {

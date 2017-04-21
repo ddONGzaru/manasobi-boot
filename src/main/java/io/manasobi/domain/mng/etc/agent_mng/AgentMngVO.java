@@ -1,7 +1,7 @@
 package io.manasobi.domain.mng.etc.agent_mng;
 
-import io.manasobi.core.domain.file.AX5File;
 import io.manasobi.core.vo.BaseVO;
+import io.manasobi.domain.core.upload.AX5File;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,11 +41,10 @@ public class AgentMngVO extends BaseVO {
 
 
     public static AgentMngVO of(AgentMng agentMng) {
-        /*BoundMapperFacade<AgentMng, AgentMngVO> mapper =
+        BoundMapperFacade<AgentMng, AgentMngVO> mapper =
                 ModelMapperUtils.getMapper("AgentMng", AgentMngVO.class.getPackage().getName());
 
-        return mapper.map(agentMng);*/
-        return ModelMapperUtils.map(agentMng, AgentMngVO.class);
+        return mapper.map(agentMng);
     }
 
     public static List<AgentMngVO> of(List<AgentMng> agentMngList) {

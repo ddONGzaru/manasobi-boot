@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
@@ -30,6 +30,8 @@ public class MinwonMngVO extends BaseVO {
 
     private String minwonStatus;
 
+    private String handleDept;
+
     private String minwonContent;
 
     private String handleContent;
@@ -40,11 +42,10 @@ public class MinwonMngVO extends BaseVO {
 
 
     public static MinwonMngVO of(MinwonMng minwonMng) {
-        /*BoundMapperFacade<MinwonMng, MinwonMngVO> mapper =
+        BoundMapperFacade<MinwonMng, MinwonMngVO> mapper =
                 ModelMapperUtils.getMapper("MinwonMng", MinwonMngVO.class.getPackage().getName());
 
-        return mapper.map(minwonMng);*/
-        return ModelMapperUtils.map(minwonMng, MinwonMngVO.class);
+        return mapper.map(minwonMng);
     }
 
     public static List<MinwonMngVO> of(List<MinwonMng> minwonMngList) {

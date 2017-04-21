@@ -1,5 +1,6 @@
 package io.manasobi.domain.mng.equip.overhaul_plan;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_OVERHAUL_PLAN")
+@Comment(value = "")
 @IdClass(OverhaulPlan.OverhaulPlanId.class)
 @Alias("overhaulPlan")
 public class OverhaulPlan extends SimpleJpaModel<OverhaulPlan.OverhaulPlanId> {

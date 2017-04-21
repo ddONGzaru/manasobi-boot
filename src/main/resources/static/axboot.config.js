@@ -2,18 +2,33 @@
 
     if (axboot && axboot.def) {
 
-        axboot.def["DEFAULT_TAB_LIST"] = [
-            {
-                menuId: "error-monitoring",
-                id: "error-monitoring",
-                progNm: '장애 모니터링',
-                menuNm: '홈',
-                progPh: '/mng/error/error_status',
-                url: '/mng/error/error_status',
-                status: "on",
-                fixed: true
-            }
-        ];
+        if (sessionJson.menuGrpCd == 'SHINHAN_USER') {
+            axboot.def["DEFAULT_TAB_LIST"] = [
+                {
+                    menuId: "corner_manage",
+                    id: "error-monitoring",
+                    progNm: '환경/시설물 관리',
+                    menuNm: '홈',
+                    progPh: '/mng/equip/corner_manage',
+                    url: '/mng/equip/corner_manage',
+                    status: "on",
+                    fixed: true
+                }
+            ];
+        } else {
+            axboot.def["DEFAULT_TAB_LIST"] = [
+                {
+                    menuId: "error-monitoring",
+                    id: "error-monitoring",
+                    progNm: '장애 모니터링',
+                    menuNm: '홈',
+                    progPh: '/mng/error/error_status',
+                    url: '/mng/error/error_status',
+                    status: "on",
+                    fixed: true
+                }
+            ];
+        }
 
         axboot.def["API"] = {
             "users": "/api/v1/user",
@@ -97,6 +112,16 @@
                 },
                 header: {
                     title: "지점 검색"
+                }
+            },
+            "SEARCH_CORNER_MODAL": {
+                width: 500,
+                    height: 500,
+                    iframe: {
+                    url: "/mng/common/search-corner-modal"
+                },
+                header: {
+                    title: "코너 검색"
                 }
             },
             "SEARCH_AGENT_MODAL": {

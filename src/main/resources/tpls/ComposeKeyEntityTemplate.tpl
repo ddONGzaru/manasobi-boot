@@ -1,8 +1,8 @@
 package ${domainPackageName}.${targetPackageName};
 
-import io.onsemiro.core.annotations.ColumnPosition;
-import io.onsemiro.core.domain.SimpleJpaModel;
-import io.onsemiro.core.annotations.Comment;
+import io.manasobi.core.annotations.ColumnPosition;
+import io.manasobi.core.domain.SimpleJpaModel;
+import io.manasobi.core.annotations.Comment;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;

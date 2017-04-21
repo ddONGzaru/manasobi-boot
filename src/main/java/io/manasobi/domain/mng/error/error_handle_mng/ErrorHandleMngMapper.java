@@ -4,6 +4,7 @@ import io.manasobi.core.mybatis.MyBatisMapper;
 
 import java.util.List;
 
+
 public interface ErrorHandleMngMapper extends MyBatisMapper {
 
     List<ErrorHandleMng> findAll();

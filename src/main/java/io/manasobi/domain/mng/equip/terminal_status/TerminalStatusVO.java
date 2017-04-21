@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
@@ -133,12 +133,11 @@ public class TerminalStatusVO extends BaseVO {
 	private String mngChannel;
 
     public static TerminalStatusVO of(TerminalStatus terminalStatus) {
-		/*BoundMapperFacade<TerminalStatus, TerminalStatusVO> mapper =
+		BoundMapperFacade<TerminalStatus, TerminalStatusVO> mapper =
 				ModelMapperUtils.getMapper("TerminalStatus", TerminalStatusVO.class.getPackage().getName());
 
 		TerminalStatusVO terminalStatusVO = mapper.map(terminalStatus);
-		return terminalStatusVO;*/
-		return ModelMapperUtils.map(terminalStatus, TerminalStatusVO.class);
+		return terminalStatusVO;
     }
 
     public static List<TerminalStatusVO> of(List<TerminalStatus> terminalStatusList) {

@@ -357,6 +357,7 @@ CREATE TABLE atms_minwon_mng (
   reg_datetime              TIMESTAMP NOT NULL, -- 작성일시
   minwon_type               CHAR(2),
   minwon_status             CHAR(1),
+  handle_dept               CHAR(1),
   minwon_content            VARCHAR2(300),
   handle_content            VARCHAR2(300),
   update_datetime           TIMESTAMP, -- 변경일시

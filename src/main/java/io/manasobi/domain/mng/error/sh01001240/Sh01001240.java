@@ -1,5 +1,6 @@
 package io.manasobi.domain.mng.error.sh01001240;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_01001240")
+@Comment(value = "")
 @IdClass(Sh01001240.Sh01001240Id.class)
 @Alias("sh01001240")
 public class Sh01001240 extends SimpleJpaModel<Sh01001240.Sh01001240Id> {

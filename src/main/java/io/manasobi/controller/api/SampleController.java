@@ -41,8 +41,8 @@ public class SampleController extends BaseController {
     @PutMapping("/parent")
     @PostMapping("/parent")
     public ApiResponse parentSave(@RequestBody List<ParentSampleVO> list) {
-        List<ParentSample> parentSampleList = ModelMapperUtils.mapList(list, ParentSample.class);
-        parentService.save(parentSampleList);
+        /*List<ParentSample> parentSampleList = ModelMapperUtils.mapList(list, ParentSample.class);
+        parentService.save(parentSampleList);*/
         return ok();
     }
 
@@ -78,8 +78,8 @@ public class SampleController extends BaseController {
     @PutMapping("/child")
     @PostMapping("/child")
     public ApiResponse childSave(@RequestBody List<ChildSampleVO> list) {
-        List<ChildSample> childSampleList = ModelMapperUtils.mapList(list, ChildSample.class);
-        childService.save(childSampleList);
+        /*List<ChildSample> childSampleList = ModelMapperUtils.mapList(list, ChildSample.class);
+        childService.save(childSampleList);*/
         return ok();
     }
 

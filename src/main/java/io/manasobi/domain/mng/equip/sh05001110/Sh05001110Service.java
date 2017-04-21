@@ -1,9 +1,9 @@
 package io.manasobi.domain.mng.equip.sh05001110;
 
-import io.manasobi.utils.DateUtils;
 import com.querydsl.core.BooleanBuilder;
 import io.manasobi.core.base.BaseService;
 import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.utils.DateUtils;
 import io.manasobi.utils.ModelMapperUtils;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +52,9 @@ public class Sh05001110Service extends BaseService<Sh05001110, Sh05001110.Sh0500
         if (sh05001110 == null) {
             return new Sh05001110VO();
         } else {
-            /*BoundMapperFacade<Sh05001110, Sh05001110VO> mapper =
+            BoundMapperFacade<Sh05001110, Sh05001110VO> mapper =
                     ModelMapperUtils.getMapper("Sh05001110", this.getClass().getPackage().getName());
-            return mapper.map(sh05001110);*/
-            return ModelMapperUtils.map(sh05001110, Sh05001110VO.class);
+            return mapper.map(sh05001110);
         }
     }
 

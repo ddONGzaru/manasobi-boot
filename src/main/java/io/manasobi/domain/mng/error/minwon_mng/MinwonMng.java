@@ -1,5 +1,6 @@
 package io.manasobi.domain.mng.error.minwon_mng;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_MINWON_MNG")
+@Comment(value = "")
 @IdClass(MinwonMng.MinwonMngId.class)
 @Alias("minwonMng")
 public class MinwonMng extends SimpleJpaModel<MinwonMng.MinwonMngId> {
@@ -44,6 +46,9 @@ public class MinwonMng extends SimpleJpaModel<MinwonMng.MinwonMngId> {
 	private String minwonType;
 
 	@Column(name = "MINWON_STATUS", length = 1)
+	private String handleDept;
+
+	@Column(name = "HANDLE_DEPT", length = 1)
 	private String minwonStatus;
 
 	@Column(name = "MINWON_CONTENT", length = 300)

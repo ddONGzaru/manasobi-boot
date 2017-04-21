@@ -453,7 +453,7 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
 fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     page: {
         pageNumber: 0,
-        pageSize: 20
+        pageSize: 150
     },
     initView: function () {
         var _this = this;
@@ -502,7 +502,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_DEL);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+                _this.excel("시설물관리-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -521,6 +521,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -644,7 +647,7 @@ fnObj.gridView02 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_ADD);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD2);
+                _this.excel("시설물신규등록통보이력-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -663,6 +666,9 @@ fnObj.gridView02 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -710,7 +716,7 @@ fnObj.gridView03 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_ADD);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD3);
+                _this.excel("시설물변경통보이력-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -729,6 +735,9 @@ fnObj.gridView03 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -775,7 +784,7 @@ fnObj.gridView04 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_ADD);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD4);
+                _this.excel("시설물철수통보이력-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -794,6 +803,9 @@ fnObj.gridView04 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -842,7 +854,7 @@ fnObj.gridView05 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_ADD);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD5);
+                _this.excel("시설물설치/철수결과전송이력-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -861,6 +873,9 @@ fnObj.gridView05 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -906,7 +921,7 @@ fnObj.gridView06 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_ADD);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD6);
+                _this.excel("시설물일련번호변경 전송이력-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -925,6 +940,9 @@ fnObj.gridView06 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -1139,4 +1157,22 @@ var buildParams = function (json) {
 
     return params;
 
+}
+
+function getFormattedDate(date, isStart) {
+    var day;
+    var tempDate;
+    if(isStart){
+        date.setDate(date.getDate() - 7);
+        tempDate = date.getDate();
+    }else{
+        tempDate = date.getDate();
+    }
+    day = tempDate.toString();
+
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    day = day.length > 1 ? day : '0' + day;
+    return year + '-' + month + '-' + day;
 }

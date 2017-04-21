@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Sh03001120Mapper extends MyBatisMapper {
 
-    List<Sh03001120> findAll();
+    List<Sh03001120> findAll(Sh03001120 sh03001120);
 
     Sh03001120 findOne(Sh03001120 sh03001120);
 

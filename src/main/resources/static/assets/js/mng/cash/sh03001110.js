@@ -262,7 +262,17 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                             return '-';
                         }
                     }
-                }
+                },
+                // {key: 'stextGubun', label: '전문구분', width: 100, align: 'center', formatter: function formatter() {
+                //     return parent.COMMON_CODE["ERROR_STEXT_GUBUN"].map[this.value];
+                // }},
+                {key: 'errorType', label: '장애구분', width: 100, align: 'center', formatter: function formatter() {
+                    return parent.COMMON_CODE["ERROR_TYPE"].map[this.value];
+                }},
+                {key: 'totalClassifyCode', label: '장애메세지', width: 150, align: 'left', formatter: function formatter() {
+                    return parent.COMMON_CODE["TOTAL_CLASSIFY_CODE"].map[this.value];
+                }},
+                {key: 'openDatetime', label: '개국일시', width: 130, align: 'center'}
             ],
             footSum: [
                 [

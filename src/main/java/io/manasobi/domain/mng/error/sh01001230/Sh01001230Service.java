@@ -1,6 +1,5 @@
 package io.manasobi.domain.mng.error.sh01001230;
 
-import io.manasobi.domain.mng.error.sh01001240.Sh01001240VO;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.OrderSpecifier;
 import io.manasobi.core.api.ApiException;
@@ -8,6 +7,7 @@ import io.manasobi.core.api.response.ApiResponse;
 import io.manasobi.core.base.BaseService;
 import io.manasobi.core.code.ApiStatus;
 import io.manasobi.core.parameter.RequestParams;
+import io.manasobi.domain.mng.error.sh01001240.Sh01001240VO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

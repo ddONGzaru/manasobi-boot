@@ -44,7 +44,6 @@ public class TerminalStatusModelMapper extends CustomMapper<TerminalStatus, Term
         dest.setInstallPlaceGubun(StringUtils.trim(src.getInstallPlaceGubun()));
         dest.setBoothType(StringUtils.trim(src.getBoothType()));
 
-
         //dest.setJisaCodeName(CommonCodeUtils.getName("JISA_CODE", src.getJisaCode()));
         //dest.setJisaCodeName(src.getJisaCode());
 

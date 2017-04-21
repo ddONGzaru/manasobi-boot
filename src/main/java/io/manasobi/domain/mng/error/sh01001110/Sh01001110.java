@@ -1,5 +1,6 @@
 package io.manasobi.domain.mng.error.sh01001110;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
@@ -9,7 +10,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -18,13 +18,14 @@ import java.time.LocalDateTime;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_01001110")
+@Comment(value = "")
 @IdClass(Sh01001110.Sh01001110Id.class)
 @Alias("sh01001110")
 public class Sh01001110 extends SimpleJpaModel<Sh01001110.Sh01001110Id> {
 
     @Id
     @Column(name = "ERROR_DATETIME", nullable = false)
-    private LocalDateTime errorDatetime;
+    private Timestamp errorDatetime;
 
     @Column(name = "JISA_CODE", length = 2, nullable = false)
     private String jisaCode;
@@ -242,6 +243,15 @@ public class Sh01001110 extends SimpleJpaModel<Sh01001110.Sh01001110Id> {
     @Transient
     private String handleContent;
 
+    @Transient
+    private String customerWaitEnable;
+
+    @Transient
+    private String calleeReqSeqNo;
+
+    @Transient
+    private String txId;
+
     @Override
     public Sh01001110Id getId() {
         return Sh01001110Id.of(errorDatetime, branchCode, cornerCode, terminalNo);
@@ -254,7 +264,7 @@ public class Sh01001110 extends SimpleJpaModel<Sh01001110.Sh01001110Id> {
     public static class Sh01001110Id implements Serializable {
 
         @NonNull
-        private LocalDateTime errorDatetime;
+        private Timestamp errorDatetime;
 
         @NonNull
         private String branchCode;

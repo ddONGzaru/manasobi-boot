@@ -1,6 +1,6 @@
 package io.manasobi.domain.mng.etc.agent_mng;
 
-import io.manasobi.core.domain.file.AX5File;
+import io.manasobi.domain.core.upload.AX5File;
 import io.manasobi.utils.DateUtils;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Component
 public class AgentMngModelMapper extends CustomMapper<AgentMng, AgentMngVO> {
 
-    @Value("${appConfig.upload.repository}")
+    @Value("${onsemiro.upload.repository.img}")
     private String filePath;
 
     @Override

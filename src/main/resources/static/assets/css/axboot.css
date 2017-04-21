@@ -24019,6 +24019,12 @@ ul.zTreeDragUL[data-z-tree] {
     color: #D43F3A;
 }
 
+.error-status-more-danger {
+    border: 1px solid #D43F3A;
+    color: #D43F3A;
+    background-color: #EEA236;
+}
+
 .error-status-fail {
     border: 1px solid #3b609e;
     color: #3b609e;

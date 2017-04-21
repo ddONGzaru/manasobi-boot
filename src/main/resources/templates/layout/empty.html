@@ -11,26 +11,10 @@
 
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/favicon.ico/}"/>
     <link rel="icon"          type="image/x-icon" th:href="@{/assets/favicon.ico/}"/>
-
-    <!--
-    <link rel="stylesheet"    type="text/css"     th:src="@{/assets/css/ax5grid.css}"/>
-    <link rel="stylesheet"    type="text/css"     th:src="@{/assets/css/ax5mask.css}"/>
-    <link rel="stylesheet"    type="text/css"     th:src="@{/assets/css/ax5modal.css}"/>
-    -->
     <link rel="stylesheet"    type="text/css"     th:href="@{${@environment.getProperty('config.extendedCss')}}"/>
-
-    <!--
-    <script type="text/javascript" th:src="@{/assets/js/jquery-1.12.4.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/ax5core.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/ax5grid.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/ax5formatter.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/ax5mask.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/ax5modal.min.js}"></script>
-    -->
 
     <script type="text/javascript" th:src="@{/assets/js/plugins.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/axboot.js}"></script>
-    <script type="text/javascript" th:src="@{/axboot.config.js}"></script>
     <script type="text/javascript">
         var sessionJson    = convertJsonObj('[[${scriptSession}]]');
 
@@ -41,6 +25,7 @@
             return jsonStr == null || jsonStr == '' ? null : JSON.parse(jsonStr.replace(/&quot;/gi, '"'));
         }
     </script>
+    <script type="text/javascript" th:src="@{/axboot.config.js}"></script>
 </head>
 
 <body layout:fragment="body"/>

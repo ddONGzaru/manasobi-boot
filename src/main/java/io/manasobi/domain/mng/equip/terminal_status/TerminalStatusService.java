@@ -120,6 +120,7 @@ public class TerminalStatusService extends BaseService<TerminalStatus, TerminalS
 
         String jisaCode = terminalStatus.getJisaCode();
         String branchCode = terminalStatus.getBranchCode();
+        String cornerCode = terminalStatus.getCornerCode();
         String terminalNo = terminalStatus.getTerminalNo();
 
         QTerminalStatus qTerminalStatus = QTerminalStatus.terminalStatus;
@@ -132,6 +133,10 @@ public class TerminalStatusService extends BaseService<TerminalStatus, TerminalS
 
         if (isNotEmpty(branchCode)) {
             builder.and(qTerminalStatus.branchCode.eq(branchCode));
+        }
+
+        if (isNotEmpty(cornerCode)) {
+            builder.and(qTerminalStatus.cornerCode.eq(cornerCode));
         }
 
         if (isNotEmpty(terminalNo)) {

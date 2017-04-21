@@ -3,19 +3,17 @@ package io.manasobi.domain.mng.equip.facility_status;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class FacilityStatusVO extends BaseVO {
 
 	private String jisaCode;
@@ -65,11 +63,10 @@ public class FacilityStatusVO extends BaseVO {
 	private String unitPrice;
 
     public static FacilityStatusVO of(FacilityStatus facilityStatus) {
-		/*BoundMapperFacade<FacilityStatus, FacilityStatusVO> mapper =
+		BoundMapperFacade<FacilityStatus, FacilityStatusVO> mapper =
 				ModelMapperUtils.getMapper("FacilityStatus", FacilityStatusVO.class.getPackage().getName());
 		FacilityStatusVO facilityStatusVO = mapper.map(facilityStatus);
-		return facilityStatusVO;*/
-		return ModelMapperUtils.map(facilityStatus, FacilityStatusVO.class);
+		return facilityStatusVO;
     }
 
     public static List<FacilityStatusVO> of(List<FacilityStatus> facilityStatusList) {

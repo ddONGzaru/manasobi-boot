@@ -1,6 +1,6 @@
 package ${controllerPackageName};
 
-import io.onsemiro.controller.BaseController;
+import io.manasobi.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

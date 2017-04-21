@@ -1,5 +1,4 @@
 var fnObj = {};
-var imgRootPath = '/data2/atms_apps/upload_img/';
 var ACTIONS = axboot.actionExtend(fnObj, {
 
 PAGE_SEARCH: function (caller, act, data) {
@@ -56,8 +55,8 @@ FORM_SAVE: function (caller, act, data) {
         var parentData = caller.formView01.getData();
         parentData.cornerCode = '99';
         parentData.terminalNo = '9999';
-        parentData.chargeEmpPhotoUrl = UPLOAD.uploadedFiles.length > 0 ? imgRootPath + UPLOAD.uploadedFiles[0].filePath.substring(0,4) + '/' + UPLOAD.uploadedFiles[0].filePath.substring(5,7) + '/' + UPLOAD.uploadedFiles[0].filePath.substring(8,10) + '/' + UPLOAD.uploadedFiles[0].saveName : "";
-        parentData.digitalSignUrl = UPLOAD2.uploadedFiles.length > 0 ? imgRootPath + UPLOAD2.uploadedFiles[0].filePath.substring(0,4) + '/' + UPLOAD2.uploadedFiles[0].filePath.substring(5,7) + '/' + UPLOAD2.uploadedFiles[0].filePath.substring(8,10) + '/' + UPLOAD2.uploadedFiles[0].saveName : "";
+        parentData.chargeEmpPhotoUrl = UPLOAD.uploadedFiles.length > 0 ? UPLOAD.uploadedFiles[0].filePath.substring(0,4) + '/' + UPLOAD.uploadedFiles[0].filePath.substring(5,7) + '/' + UPLOAD.uploadedFiles[0].filePath.substring(8,10) + '/' + UPLOAD.uploadedFiles[0].saveName : "";
+        parentData.digitalSignUrl = UPLOAD2.uploadedFiles.length > 0 ? UPLOAD2.uploadedFiles[0].filePath.substring(0,4) + '/' + UPLOAD2.uploadedFiles[0].filePath.substring(5,7) + '/' + UPLOAD2.uploadedFiles[0].filePath.substring(8,10) + '/' + UPLOAD2.uploadedFiles[0].saveName : "";
 
         parentData.cashTypeCode1 = parentData.cashTypeCode1 || "";
         parentData.cashTypeCode2 = parentData.cashTypeCode2 || "";
@@ -208,21 +207,7 @@ fnObj.pageStart = function () {
                             msg: "인수책임자 사진파일을 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/cash/sh03001220/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -309,21 +294,7 @@ fnObj.pageStart = function () {
                             msg: "인수책임자 전자인감을 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/cash/sh03001220/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD2.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD2.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -443,7 +414,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
             frozenColumnIndex: 0,
             target: $('[data-ax5grid="grid-view-01"]'),
             columns: [
-                {key: 'reqDate', label: '신청일자', width: 100, align: 'center'},
+                {key: 'reqDate', label: '인수일자', width: 100, align: 'center'},
                 {key: 'reqGubun', label: '신청구분', width: 130, align: 'center',
                     formatter: function formatter() {
                         return parent.COMMON_CODE["REQ_GUBUN"].map[this.value];

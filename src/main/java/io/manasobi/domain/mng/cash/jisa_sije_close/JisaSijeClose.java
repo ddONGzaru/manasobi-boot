@@ -2,6 +2,7 @@ package io.manasobi.domain.mng.cash.jisa_sije_close;
 
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
+import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_JISA_SIJE_CLOSE")
 @IdClass(JisaSijeClose.JisaSijeCloseId.class)
+@Alias("jisaSijeClose")
 public class JisaSijeClose extends SimpleJpaModel<JisaSijeClose.JisaSijeCloseId> {
 
 	@Column(name = "TX_ID", nullable = false)
@@ -36,8 +38,14 @@ public class JisaSijeClose extends SimpleJpaModel<JisaSijeClose.JisaSijeCloseId>
 	@Column(name = "THIS_DAY_CASH_DEPOSIT_AMT", length = 15)
 	private String thisDayCashDepositAmt;
 
+	@Column(name = "JISA_TO_SHINHAN_SEND_AMT", length = 15)
+	private String jisaToShinhanSendAmt;
+
 	@Column(name = "CLOSE_AMT", length = 15)
 	private String closeAmt;
+
+	@Column(name = "UN_CHECK_AMT", length = 15)
+	private String unCheckAmt;
 
 	@Column(name = "SIJE_MISTAKE_AMT", length = 15)
 	private String sijeMistakeAmt;
@@ -57,22 +65,26 @@ public class JisaSijeClose extends SimpleJpaModel<JisaSijeClose.JisaSijeCloseId>
 	@Column(name = "USER_NM", length = 30)
 	private String userNm;
 
-	@Override
-	public JisaSijeCloseId getId() {
-	return JisaSijeCloseId.of(jisaCode, closeDate);
-	}
+	@Transient
+	private Timestamp prevCloseDate;
 
-	@Embeddable
-	@Data
-	@NoArgsConstructor
-	@RequiredArgsConstructor(staticName = "of")
-	public static class JisaSijeCloseId implements Serializable {
 
-			@NonNull
-			private String jisaCode;
+@Override
+public JisaSijeCloseId getId() {
+return JisaSijeCloseId.of(jisaCode, closeDate);
+}
 
-			@NonNull
-			private Timestamp closeDate;
+@Embeddable
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor(staticName = "of")
+public static class JisaSijeCloseId implements Serializable {
 
-	}
+		@NonNull
+		private String jisaCode;
+
+		@NonNull
+		private Timestamp closeDate;
+
+}
 }

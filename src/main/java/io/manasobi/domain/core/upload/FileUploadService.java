@@ -1,4 +1,4 @@
-package io.manasobi.core.domain.file;
+package io.manasobi.domain.core.upload;
 
 import eu.bitwalker.useragentutils.Browser;
 import io.manasobi.core.code.Types;

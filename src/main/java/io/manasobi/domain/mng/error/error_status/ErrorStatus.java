@@ -110,6 +110,9 @@ public class ErrorStatus extends SimpleJpaModel<ErrorStatus.ErrorStatusId> {
     @Transient
     private String totalClassifyCode;
 
+    @Transient
+    private String customerWaitEnable;
+
     @Override
     public ErrorStatusId getId() {
         return ErrorStatusId.of(branchCode, cornerCode, terminalNo, errorDatetime);

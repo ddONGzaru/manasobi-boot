@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
@@ -49,10 +49,9 @@ public class Sh01001190VO extends BaseVO {
 
 
 	public static Sh01001190VO of(Sh01001190 sh01001190) {
-		/*BoundMapperFacade<Sh01001190, Sh01001190VO> mapper =
+		BoundMapperFacade<Sh01001190, Sh01001190VO> mapper =
 				ModelMapperUtils.getMapper("Sh01001190", Sh01001190VO.class.getPackage().getName());
-		return mapper.map(sh01001190);*/
-		return ModelMapperUtils.map(sh01001190, Sh01001190VO.class);
+		return mapper.map(sh01001190);
 	}
     public static List<Sh01001190VO> of(List<Sh01001190> sh01001190List) {
         return sh01001190List.stream().map(sh01001190 -> of(sh01001190)).collect(toList());

@@ -22,7 +22,9 @@ appConfig:
       hbm2ddlAuto: none
       databaseType: oracle
   # File Upload
-  upload.repository: /Workspace/tempDir
+  upload.repository:
+    img: /ams_NAS/shinhan_file/img_upload
+    sla: /ams_NAS/shinhan_file/sla
   # Log
   log:
     level: ERROR

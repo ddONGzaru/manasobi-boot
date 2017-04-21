@@ -4,6 +4,7 @@ import io.manasobi.core.mybatis.MyBatisMapper;
 
 import java.util.List;
 
+
 public interface Sh02001150Mapper extends MyBatisMapper {
 
     List<Sh02001150> findAll();

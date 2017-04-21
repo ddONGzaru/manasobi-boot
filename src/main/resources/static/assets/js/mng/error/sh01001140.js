@@ -163,7 +163,8 @@ fnObj.pageButtonView = axboot.viewExtend({
                 ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+                fnObj.gridView01.excel("도착통보 이력-"+getFormattedDate(new Date())+".xls");
+                // ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
             },
             "search-view-clear": function () {
                 $("#filter").val("");
@@ -244,14 +245,14 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
 fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     page: {
         pageNumber: 0,
-        pageSize: 20
+        pageSize: 150
     },
     initView: function () {
         var _this = this;
 
         this.target = axboot.gridBuilder({
             showRowSelector: true,
-            frozenColumnIndex: 7,
+            frozenColumnIndex: 0,
             target: $('[data-ax5grid="grid-view-01"]'),
             columns: [
                 /* {key: 'calleeReqDatetime', label: '출동요청일시', width: 130, align: 'center', editor: 'text'},*/
@@ -313,6 +314,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 

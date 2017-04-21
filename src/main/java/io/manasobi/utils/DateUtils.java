@@ -15,6 +15,7 @@
  */
 package io.manasobi.utils;
 
+import io.manasobi.domain.core.message.CommonInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
@@ -324,6 +325,23 @@ public final class DateUtils {
 		return zdt.toInstant().toEpochMilli();
 	}
 
+	public static void setCurrentDateTime(CommonInfo commonInfo) {
+
+		LocalDateTime now = LocalDateTime.now();
+
+		commonInfo.setCreateDate(DateUtils.convertToString(now, "yyyyMMdd"));
+		commonInfo.setCreateTime(DateUtils.convertToString(now, "HHmmss"));
+	}
+
+/*	public static void main(String[] args) {
+		System.out.println(convertToStrKorDateTime("2016-09-04 12:22:22"));
+		System.out.println(convertToStrKorDateTime(LocalDateTime.now()));
+		System.out.println(convertToStrKorDate(LocalDateTime.now()));
+		System.out.println(convertToStrKorDate("2016-09-04 12:22:22", "yyyy-MM-dd HH:mm:ss"));
+		System.out.println(convertToDateTime(System.currentTimeMillis()));
+		System.out.println(convertToDateTime(convertToTimeMillis(LocalDateTime.now())));
+	}*/
+
 	public static String dateFormatFromLocale(Locale locale) {
 		if (locale.equals(Locale.US)) {
 			return "mm/dd/yyyy";
@@ -339,22 +357,5 @@ public final class DateUtils {
 	public static String dateTimeFormatFromLocale(Locale locale) {
 		return dateFormatFromLocale(locale) + " " + timeFormatFromLocale(locale);
 	}
-
-	/*public static void setCurrentDateTime(CommonInfo commonInfo) {
-
-		LocalDateTime now = LocalDateTime.now();
-
-		commonInfo.setCreateDate(DateUtils.convertToString(now, "yyyyMMdd"));
-		commonInfo.setCreateTime(DateUtils.convertToString(now, "HHmmss"));
-	}*/
-
-/*	public static void main(String[] args) {
-		System.out.println(convertToStrKorDateTime("2016-09-04 12:22:22"));
-		System.out.println(convertToStrKorDateTime(LocalDateTime.now()));
-		System.out.println(convertToStrKorDate(LocalDateTime.now()));
-		System.out.println(convertToStrKorDate("2016-09-04 12:22:22", "yyyy-MM-dd HH:mm:ss"));
-		System.out.println(convertToDateTime(System.currentTimeMillis()));
-		System.out.println(convertToDateTime(convertToTimeMillis(LocalDateTime.now())));
-	}*/
 
 }

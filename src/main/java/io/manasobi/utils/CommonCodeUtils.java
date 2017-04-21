@@ -34,18 +34,18 @@ public class CommonCodeUtils {
         List<CommonCode> commonCodes = get(groupCd);
 
         CommonCode commonCode = commonCodes.stream()
-                                           .filter(e -> e.getName().equals(name))
-                                           .findFirst().get();
+                .filter(e -> e.getName().equals(name))
+                .findFirst().get();
 
         if (StringUtils.isEmpty(commonCode.getCode())) {
             commonCodes = get(groupCd);
 
             commonCode = commonCodes.stream()
-                                    .filter(e -> e.getName().equals(name))
-                                    .findFirst().get();
+                    .filter(e -> e.getName().equals(name))
+                    .findFirst().get();
         }
 
-        return commonCode.getCode();
+        return StringUtils.isEmpty(commonCode.getCode())?"미등록코드":commonCode.getCode();
     }
 
     public static String getName(String groupCd, String code) {
@@ -53,18 +53,18 @@ public class CommonCodeUtils {
         List<CommonCode> commonCodes = get(groupCd);
 
         CommonCode commonCode = commonCodes.stream()
-                                           .filter(e -> e.getCode().equals(code.trim()))
-                                           .findFirst().get();
+                .filter(e -> e.getCode().equals(code.trim()))
+                .findFirst().get();
 
         if (StringUtils.isEmpty(commonCode.getName())) {
             commonCodes = get(groupCd);
 
             commonCode = commonCodes.stream()
-                                    .filter(e -> e.getCode().equals(code.trim()))
-                                    .findFirst().get();
+                    .filter(e -> e.getCode().equals(code.trim()))
+                    .findFirst().get();
         }
 
-        return commonCode.getName();
+        return StringUtils.isEmpty(commonCode.getName())?"미등록코드명":commonCode.getName();
     }
 
     public static Map<String, List<CommonCode>> getAllByMap() {

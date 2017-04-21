@@ -56,7 +56,7 @@ public class Sh03001200Service extends BaseService<Sh03001200, Sh03001200.Sh0300
             apiResponseEntity = restTemplate.postForEntity(url, sh03001200VO, ApiResponse.class);
         } catch (RestClientException e) {
             log.error("sh03001200Service-sendAndReceive :: {}", e.getMessage());
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            throw new ApiException(ApiStatus.SYSTEM_ERROR, "현송주기 전문응답코드가 99입니다.");
         }
 
         return apiResponseEntity.getBody();
@@ -100,10 +100,9 @@ public class Sh03001200Service extends BaseService<Sh03001200, Sh03001200.Sh0300
         if (sh03001200 == null) {
             return new Sh03001200VO();
         } else {
-            /*BoundMapperFacade<Sh03001200, Sh03001200VO> mapper =
+            BoundMapperFacade<Sh03001200, Sh03001200VO> mapper =
                     ModelMapperUtils.getMapper("Sh03001200", this.getClass().getPackage().getName());
-            return mapper.map(sh03001200);*/
-            return ModelMapperUtils.map(sh03001200, Sh03001200VO.class);
+            return mapper.map(sh03001200);
         }
     }
 }

@@ -278,6 +278,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
             frozenColumnIndex: 0,
             target: $('[data-ax5grid="grid-view-01"]'),
             columns: [
+                {key: 'txId', label: '처리일시', width: 130, align: 'center'},
                 {key: 'reqDate', label: '요청일자', width: 100, align: 'center'},
                 {key: 'jisaCode', label: '지사명', width: 70, align: 'center',
                     formatter: function formatter() {
@@ -301,20 +302,20 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                         {key: 'fundExpenseTerm', label: '소요기간', width: 80, align: 'center'}
                     ]
                 },
-                {key: 'nextDayCashSendingAmt', label: '익일현송금액', width: 130, align: 'right', formatter: "money"},
-                {key: 'nowDayAddCashSendingAmt', label: '당일 추가현송액', width: 130, align: 'right', formatter: "money"},
-                {key: 'nowDayRtrvlAmt', label: '당일 회수금액', width: 130, align: 'right', formatter: "money"},
-                {key: 'nowDayLackAmt', label: '당일 과여금액', width: 130, align: 'right', formatter: "money"},
-                {key: 'thisDayRtrvlExcpectAmt', label: '금일 회수예상액', width: 130, align: 'right', formatter: "money"},
-                {key: 'nextDayRtrvlExcpectAmt', label: '익일 회수예상액', width: 130, align: 'right', formatter: "money"},
+                {key: 'nextDayCashSendingAmt', label: '익일 영업일 정규현송금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'nowDayAddCashSendingAmt', label: '금일 추가현송금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'nowDayRtrvlAmt', label: '금일 회수금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'nowDayLackAmt', label: '금일 과여금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'thisDayRtrvlExcpectAmt', label: '금일 회수예상금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'nextDayRtrvlExcpectAmt', label: '익일 회수예상금액', width: 130, align: 'right', formatter: "money"},
 
-                {key: 'nextDayBillingAmt', label: '익일 청구액', width: 130, align: 'right', formatter: "money"},
-                {key: 'totalStockAmt', label: '총재고액', width: 130, align: 'right', formatter: "money"},
+                {key: 'nextDayBillingAmt', label: '익일 청구금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'totalStockAmt', label: '금일 재고금액', width: 130, align: 'right', formatter: "money"},
 
-                {key: 'beforeBdateStockAmt', label: '전영업일 재고금액', width: 130, align: 'right', formatter: "money"},
-                {key: 'beforeBdateRecvAmt', label: '전영업일 현수금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'beforeBdateStockAmt', label: '전일 재고금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'beforeBdateRecvAmt', label: '금일 현수금액', width: 130, align: 'right', formatter: "money"},
 
-                {key: 'beforeBdateCashSendingAmt', label: '전영업일 정규현송금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'beforeBdateCashSendingAmt', label: '금일 정규현송금액', width: 130, align: 'right', formatter: "money"},
                 {key: 'beforeBdateGiveAmt', label: '전영업일 지급금액', width: 130, align: 'right', formatter: "money"},
 
                 {key: 'beforeBdateDepositAmt', label: '전영업일 입금금액', width: 130, align: 'right', formatter: "money"},
@@ -526,7 +527,6 @@ var pageSearchAndviewError = function (err) {
     ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
     viewError(err);
 }
-
 
 function getFormattedDate(date, isStart) {
     var day;

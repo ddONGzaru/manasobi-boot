@@ -1,7 +1,7 @@
 package io.manasobi.domain.mng.cash.sh03001120;
 
 import com.querydsl.core.BooleanBuilder;
-import io.manasobi.core.api.ApiException;
+import com.querydsl.core.types.OrderSpecifier;
 import io.manasobi.core.api.response.ApiResponse;
 import io.manasobi.core.base.BaseService;
 import io.manasobi.core.code.ApiStatus;
@@ -46,8 +46,8 @@ public class Sh03001120Service extends BaseService<Sh03001120, Sh03001120.Sh0300
     }
 
     @Inject
-    public Sh03001120Service(Sh03001120Repo sh03001120Repo) {
-        super(sh03001120Repo);
+    public Sh03001120Service(Sh03001120Repo sh03001120Repository) {
+        super(sh03001120Repository);
     }
 
     public Page<Sh03001120> find(Pageable pageable, RequestParams<Sh03001120VO> requestParams) {
@@ -90,12 +90,16 @@ public class Sh03001120Service extends BaseService<Sh03001120, Sh03001120.Sh0300
             builder.and(qSh03001120.dealTime.between(dealStartTime, dealEndTime));
         }
 
-        List<Sh03001120> resultList = select().from(qSh03001120).where(builder).fetch();
+        OrderSpecifier<Timestamp> sortOrder = qSh03001120.dealTime.desc();
+
+        List<Sh03001120> resultList = select().from(qSh03001120).where(builder).orderBy(sortOrder).fetch();
 
         return filter(resultList, pageable, filter, Sh03001120.class);
     }
 
-    public Sh03001120VO findOne(Sh03001120VO vo) {
+    public ApiResponse findOne(Sh03001120VO vo) {
+
+        boolean error = false;
 
         try {
 
@@ -109,12 +113,14 @@ public class Sh03001120Service extends BaseService<Sh03001120, Sh03001120.Sh0300
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Sh03001120Service-sendAndReceive :: {}", e.getMessage());
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            error = true;
         }
 
-        Sh03001120 Sh03001120 = findResult(vo);
-
-        return Sh03001120VO.of(Sh03001120);
+        if(error){
+            return ApiResponse.of(ApiStatus.SYSTEM_ERROR, "거래내역조회 전문응답코드가 99입니다.");
+        } else {
+            return ApiResponse.of(ApiStatus.SUCCESS, "SUCCESS");
+        }
     }
 
     private Sh03001120 findResult(Sh03001120VO vo) {
@@ -124,4 +130,48 @@ public class Sh03001120Service extends BaseService<Sh03001120, Sh03001120.Sh0300
         return Sh03001120;
     }
 
+    public List<Sh03001120> findExcel(RequestParams<Sh03001120VO> requestParams) {
+
+        String filter = requestParams.getString("filter");
+        String jisaCode = requestParams.getString("jisaCode");
+        String branchCode = requestParams.getString("branchCode");
+        String terminalNo = requestParams.getString("terminalNo");
+        Timestamp referDate = requestParams.getTimestamp("referDate");
+
+        String referStatementNo = requestParams.getString("referStatementNo");
+        Timestamp dealStartTime = DateUtils.convertToTimestamp(requestParams.getString("referDate") + ' ' + requestParams.getString("referStartTime"), "yyyy-MM-dd HH:mm");
+        Timestamp dealEndTime = DateUtils.convertToTimestamp(requestParams.getString("referDate") + ' ' + requestParams.getString("referEndTime"), "yyyy-MM-dd HH:mm");
+
+        QSh03001120 qSh03001120 = QSh03001120.sh03001120;
+
+        BooleanBuilder builder = new BooleanBuilder();
+
+        if (isNotEmpty(jisaCode)) {
+            builder.and(qSh03001120.jisaCode.eq(jisaCode));
+        }
+
+        if (isNotEmpty(branchCode)) {
+            builder.and(qSh03001120.branchCode.eq(branchCode));
+        }
+
+        if (isNotEmpty(terminalNo)) {
+            builder.and(qSh03001120.terminalNo.eq(terminalNo));
+        }
+
+        if (isNotEmpty(referStatementNo)) {
+            builder.and(qSh03001120.referStatementNo.eq(referStatementNo));
+        }
+
+        if (referDate != null) {
+            builder.and(qSh03001120.referDate.eq(referDate));
+        }
+
+        if (dealStartTime != null && dealEndTime != null) {
+            builder.and(qSh03001120.dealTime.between(dealStartTime, dealEndTime));
+        }
+
+        List<Sh03001120> resultList = select().from(qSh03001120).where(builder).fetch();
+
+        return filter(resultList, filter);
+    }
 }

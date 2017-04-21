@@ -3,19 +3,17 @@ package io.manasobi.domain.mng.error.sh01001120;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class Sh01001120VO extends BaseVO {
 
 	private String calleeReqDatetime;
@@ -72,10 +70,9 @@ public class Sh01001120VO extends BaseVO {
 
 
 	public static Sh01001120VO of(Sh01001120 sh01001120) {
-		/*BoundMapperFacade<Sh01001120, Sh01001120VO> mapper =
+		BoundMapperFacade<Sh01001120, Sh01001120VO> mapper =
 				ModelMapperUtils.getMapper("Sh01001120", Sh01001120VO.class.getPackage().getName());
-		return mapper.map(sh01001120);*/
-		return ModelMapperUtils.map(sh01001120, Sh01001120VO.class);
+		return mapper.map(sh01001120);
 	}
 
 	public static List<Sh01001120VO> of(List<Sh01001120> sh01001120List) {

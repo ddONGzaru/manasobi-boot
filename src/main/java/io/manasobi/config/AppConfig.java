@@ -6,6 +6,7 @@ import io.manasobi.core.db.dbcp.DataSourceFactory;
 import io.manasobi.core.db.monitor.SqlMonitoringService;
 import io.manasobi.core.domain.log.BaseErrorLogService;
 import io.manasobi.core.logging.LogbackAppender;
+import io.manasobi.core.model.ModelMapperConverter;
 import io.manasobi.core.mybatis.MyBatisMapper;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFactory;
@@ -147,6 +148,23 @@ public class AppConfig implements ApplicationContextAware {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
+    @Bean
+    public ModelMapper modelMapper() {
+
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setFieldMatchingEnabled(true);
+        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        modelMapper.addConverter(ModelMapperConverter.toStringDate);
+
+        return modelMapper;
+    }
+
+    @Bean
+    public MapperFactory modelFactory() {
+        return new DefaultMapperFactory.Builder().build();
+    }
+
     /*@Bean
     public ModelMapper modelMapper() {
 
@@ -157,11 +175,6 @@ public class AppConfig implements ApplicationContextAware {
 
         return modelMapper;
     }*/
-
-    @Bean
-    public MapperFactory modelFactory() {
-        return new DefaultMapperFactory.Builder().build();
-    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

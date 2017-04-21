@@ -1,7 +1,9 @@
 package io.manasobi.domain.mng.cash.sh03001170;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
+import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -16,7 +18,9 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_03001170")
+@Comment(value = "")
 @IdClass(Sh03001170.Sh03001170Id.class)
+@Alias("sh03001170")
 public class Sh03001170 extends SimpleJpaModel<Sh03001170.Sh03001170Id> {
 
 	@Id
@@ -53,30 +57,41 @@ public class Sh03001170 extends SimpleJpaModel<Sh03001170.Sh03001170Id> {
 	@Transient
 	private Timestamp endDate;
 
-	@Override
-	public Sh03001170Id getId() {
-	return Sh03001170Id.of(txId,  jisaCode, branchCode, terminalNo, cashSendingDate);
-	}
+	@Transient
+	private String jisaName;
 
-	@Embeddable
-	@Data
-	@NoArgsConstructor
-	@RequiredArgsConstructor(staticName = "of")
-	public static class Sh03001170Id implements Serializable {
+	@Transient
+	private String branchName;
 
-			@NonNull
-			private Timestamp txId;
+	@Transient
+	private String cornerName;
 
-			@NonNull
-			private String jisaCode;
 
-			@NonNull
-			private String branchCode;
+@Override
+public Sh03001170Id getId() {
+return Sh03001170Id.of(txId,  jisaCode, branchCode, terminalNo, cashSendingDate);
+}
 
-			@NonNull
-			private String terminalNo;
+@Embeddable
+@Data
+@NoArgsConstructor
+@RequiredArgsConstructor(staticName = "of")
+public static class Sh03001170Id implements Serializable {
 
-			@NonNull
-			private Timestamp cashSendingDate;
-	}
+		@NonNull
+		private Timestamp txId;
+
+		@NonNull
+		private String jisaCode;
+
+		@NonNull
+		private String branchCode;
+
+		@NonNull
+		private String terminalNo;
+
+		@NonNull
+		private Timestamp cashSendingDate;
+
+}
 }

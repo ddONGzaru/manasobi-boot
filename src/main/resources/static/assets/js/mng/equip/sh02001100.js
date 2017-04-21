@@ -219,7 +219,7 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
 fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     page: {
         pageNumber: 0,
-        pageSize: 20
+        pageSize: 150
     },
     initView: function () {
         var _this = this;
@@ -264,7 +264,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_DEL);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+                _this.excel("작업일정통보조회-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -283,6 +283,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 

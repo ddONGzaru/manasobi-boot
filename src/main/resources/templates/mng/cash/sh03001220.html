@@ -19,7 +19,7 @@
     <th:block layout:insert="~{/fragments/page-buttons :: buttons}"/>
     <th:block layout:insert="~{/fragments/page-header  :: search-bar(id='searchView0')}">
         <div layout:fragment="table">
-            <th:block layout:insert="~{/fragments/table :: tr-td4( text1='지사명', style1='width: 200px', lstyle1='width: 100px', text2='신청구분', style2='width: 250px', lstyle2='width: 100px', text3='신청일자', style3='width: 250px', lstyle3='width: 100px', text4='검색', style4='width: 300px', lstyle4='display:none',)}">
+            <th:block layout:insert="~{/fragments/table :: tr-td4( text1='지사명', style1='width: 200px', lstyle1='width: 100px', text2='신청구분', style2='width: 250px', lstyle2='width: 100px', text3='인수일자', style3='width: 250px', lstyle3='width: 100px', text4='검색', style4='width: 300px', lstyle4='display:none',)}">
                 <div layout:fragment="wrap-1">
                     <select th:class="form-control" th:classappend="${class}" name="jisaCode" id="jisaCode">
                         <option value="">전체</option>
@@ -90,7 +90,7 @@
             </div>
             <form name="formView01" id="formView01" method="post" onsubmit="return false">
                 <div data-ax-tbl class="ax-search-tbl" minWidth="700px">
-                    <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='신청구분',text2='신청일자', style1='width: 130px', style2='width: 250px', style='width: 380px')}">
+                    <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='신청구분',text2='인수일자', style1='width: 130px', style2='width: 250px', style='width: 380px')}">
                         <div layout:fragment="wrap-1">
                             <select th:class="form-control" th:classappend="${class}" data-ax-path="reqGubun" data-ax-validate="required" title="신청구분"
                                     name="reqGubun" id="reqGubunForm" style="width: 150px">

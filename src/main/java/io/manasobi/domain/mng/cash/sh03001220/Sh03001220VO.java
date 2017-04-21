@@ -1,12 +1,11 @@
 package io.manasobi.domain.mng.cash.sh03001220;
 
-import io.manasobi.core.domain.file.AX5File;
 import io.manasobi.core.vo.BaseVO;
+import io.manasobi.domain.core.upload.AX5File;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
-import org.codehaus.janino.Mod;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -82,10 +81,9 @@ public class Sh03001220VO extends BaseVO {
 
 
     public static Sh03001220VO of(Sh03001220 sh03001220) {
-		/*BoundMapperFacade<Sh03001220, Sh03001220VO> mapper =
+		BoundMapperFacade<Sh03001220, Sh03001220VO> mapper =
 				ModelMapperUtils.getMapper("Sh03001220", Sh03001220VO.class.getPackage().getName());
-		return mapper.map(sh03001220);*/
-		return ModelMapperUtils.map(sh03001220, Sh03001220VO.class);
+		return mapper.map(sh03001220);
     }
 
     public static List<Sh03001220VO> of(List<Sh03001220> sh03001220List) {

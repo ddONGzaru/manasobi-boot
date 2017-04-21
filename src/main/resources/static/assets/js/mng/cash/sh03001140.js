@@ -74,7 +74,51 @@ var ACTIONS = axboot.actionExtend(fnObj, {
                 $("#branchCodeForm").val(data.branchCode);
                 $("#cornerNameForm").val(data.cornerName);
                 $("#terminalNoForm").val(data.terminalNo);
+
+                ACTIONS.dispatch(ACTIONS.FORM_PAGE_SEARCH);
+
                 this.close();
+            }
+        });
+    },
+    FORM_PAGE_SEARCH: function (caller, act, data) {
+        var parentData = fnObj.formView01.getData();
+        parentData.closeGubun = '1';
+        parentData.reqDate = parentData.closeDate;
+        axboot.ajax({
+            type: "GET",
+            url: "/api/v1//mng/cash/sh03001130",
+            data: $.extend({findCloseAmt: true}, parentData, null),
+            callback: function (res) {
+                if(res.rtrvlAmt == undefined) {
+                    fnObj.formView01.setSingleData("prevDayCashSendingAmt", "");
+                    fnObj.formView01.setSingleData("depositAmt", "");
+                    fnObj.formView01.setSingleData("giveAmt", "");
+                    fnObj.formView01.setSingleData("closeAmt", "");
+                    formError('\n' + '조회하신 일자의 마감조회 정보가 없습니다.');
+                }else {
+                    var resData = res;
+                    resData.prevDayCashSendingAmt = res.prevDayPutAmt;
+                    resData.depositAmt = res.cashDepositAmt;
+                    resData.giveAmt = res.cashGiveAmt;
+                    resData.closeAmt = res.rtrvlAmt;
+                    resData.closeDate = res.reqDate;
+
+                    // $('#prevDayCashSendingAmt').val(resData.prevDayCashSendingAmt);
+                    // $('#depositAmt').val(resData.depositAmt);
+                    // $('#giveAmt').val(resData.giveAmt);
+
+                    fnObj.formView01.setData(resData);
+                    fnObj.formView01.setSingleData("branchName", parent.COMMON_CODE["BRANCH_CODE"].map[resData.branchCode]);
+                    fnObj.formView01.setSingleData("cornerName", parent.COMMON_CODE["CORNER_TERMINAL_CODE"].map[resData.terminalNo]);
+                    // fnObj.formView01.setSingleData("prevDayCashSendingAmt", res.prevDayPutAmt);
+                    // fnObj.formView01.setSingleData("depositAmt", res.cashDepositAmt);
+                    // fnObj.formView01.setSingleData("giveAmt", res.cashGiveAmt);
+                    // fnObj.formView01.setSingleData("closeAmt", res.rtrvlAmt);
+                }
+            },
+            options: {
+                onError: viewError
             }
         });
     },
@@ -268,14 +312,28 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                 {key: 'closeAmt', label: '마감금액', width: 130, align: 'right', formatter: "money"},
                 {key: 'noneProcessAmt', label: '미처리금액', width: 130, align: 'right', formatter: "money"},
                 {key: 'rtrvlFund', label: '회수자금', width: 130, align: 'right', formatter: "money"},
+                {key: 'adjustLackAmt', label: '과여금조정금액', width: 130, align: 'right', formatter: "money"},
+                {key: 'adjustLackAmtCount', label: '과여금조정건수', width: 100, align: 'center', formatter: "money"},
                 {key: 'noneProcessAt', label: '미처리건 유무', width: 90, align: 'center',
                     formatter: function formatter() {
                         return parent.COMMON_CODE["NONE_PROCESS_AT"].map[this.value];
                     }
                 },
-                {key: 'mngOffice', label: '관리사무소', width: 150, align: 'center'},
-                {key: 'adjustLackAmtCount', label: '과여금조정건수', width: 100, align: 'center', formatter: "money"},
-                {key: 'adjustLackAmt', label: '과여금조정금액', width: 130, align: 'right', formatter: "money"}
+                {key: 'mngOffice', label: '관리사무소', width: 150, align: 'center'}
+            ],
+            footSum: [
+                [
+                    {label: "", colspan: 3, align: "center"},
+                    {label: "합계", colspan: 2, align: "center"},
+                    {key: "prevDayCashSendingAmt", collector: "sum", formatter: "money", align: "right"},
+                    {key: "depositAmt", collector: "sum", formatter: "money", align: "right"},
+                    {key: "giveAmt", collector: "sum", formatter: "money", align: "right"},
+                    {key: "closeAmt", collector: "sum", formatter: "money", align: "right"},
+                    {key: "noneProcessAmt", collector: "sum", formatter: "money", align: "right"},
+                    {key: "rtrvlFund", collector: "sum", formatter: "money", align: "right"},
+                    {key: "adjustLackAmt", collector: "sum", formatter: "money", align: "right"},
+                    {label: "", colspan: 3, align: "center"}
+                ]
             ],
             body: {
                 onClick: function () {
@@ -336,10 +394,24 @@ fnObj.formView01 = axboot.viewExtend(axboot.formView, {
             direction: "auto",
             content: {
                 type: 'date'
+            },
+            onStateChanged: function (type) {
+                if(type.state == 'changeValue') {
+                    if($("#branchCodeForm").val()=="" && $("#terminalNoForm").val()=="") {
+                        // var message = '\n' + '지점,단발번호는 필수 입력조건입니다.';
+                        // formError(message);
+                        fnObj.formView01.setSingleData("prevDayCashSendingAmt", "");
+                        fnObj.formView01.setSingleData("depositAmt", "");
+                        fnObj.formView01.setSingleData("giveAmt", "");
+                        fnObj.formView01.setSingleData("closeAmt", "");
+                    } else {
+                        ACTIONS.dispatch(ACTIONS.FORM_PAGE_SEARCH);
+                    }
+                }
             }
         });
         this.target.find('[data-ax5picker="date"]').ax5picker("setValue",0, getFormattedDate(new Date()));
-        
+
         axboot.buttonClick(this, "data-form-view-01-btn", {
             "form-clear": function () {
                 ACTIONS.dispatch(ACTIONS.FORM_CLEAR);
@@ -356,6 +428,25 @@ fnObj.formView01 = axboot.viewExtend(axboot.formView, {
                 $("#cornerNameForm").val("");
                 $("#terminalNoForm").val("");
             });
+
+        $('#prevDayCashSendingAmt').change(
+            function(){
+                var closeAmt = Number($('#prevDayCashSendingAmt').val().replace(/,/g, "")) + Number($('#depositAmt').val().replace(/,/g, "")) - Number($('#giveAmt').val().replace(/,/g, ""))
+                fnObj.formView01.setSingleData("closeAmt", closeAmt.toLocaleString());
+            });
+
+        $('#depositAmt').change(
+            function(){
+                var closeAmt = Number($('#prevDayCashSendingAmt').val().replace(/,/g, "")) + Number($('#depositAmt').val().replace(/,/g, "")) - Number($('#giveAmt').val().replace(/,/g, ""))
+                fnObj.formView01.setSingleData("closeAmt", closeAmt.toLocaleString());
+            });
+
+        $('#giveAmt').change(
+            function(){
+                var closeAmt = Number($('#prevDayCashSendingAmt').val().replace(/,/g, "")) + Number($('#depositAmt').val().replace(/,/g, "")) - Number($('#giveAmt').val().replace(/,/g, ""))
+                fnObj.formView01.setSingleData("closeAmt", closeAmt.toLocaleString());
+            });
+
     },
     initEvent: function () {
         var _this = this;

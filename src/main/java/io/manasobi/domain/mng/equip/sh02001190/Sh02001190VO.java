@@ -3,19 +3,17 @@ package io.manasobi.domain.mng.equip.sh02001190;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class Sh02001190VO extends BaseVO {
 
 	private String txId;
@@ -42,10 +40,9 @@ public class Sh02001190VO extends BaseVO {
 
     public static Sh02001190VO of(Sh02001190 sh02001190) {
 
-        /*BoundMapperFacade<Sh02001190, Sh02001190VO> mapper =
+        BoundMapperFacade<Sh02001190, Sh02001190VO> mapper =
                 ModelMapperUtils.getMapper("Sh02001190", Sh02001190VO.class.getPackage().getName());
-        return mapper.map(sh02001190);*/
-        return ModelMapperUtils.map(sh02001190, Sh02001190VO.class);
+        return mapper.map(sh02001190);
     }
 
     public static List<Sh02001190VO> of(List<Sh02001190> sh02001190List) {

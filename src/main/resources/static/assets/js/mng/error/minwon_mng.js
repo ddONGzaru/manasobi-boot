@@ -132,6 +132,10 @@ fnObj.pageButtonView = axboot.viewExtend({
             "save": function () {
                 ACTIONS.dispatch(ACTIONS.PAGE_SAVE);
             },
+            "excel": function () {
+                fnObj.gridView01.excel("민원관리 목록-"+getFormattedDate(new Date())+".xls");
+                // ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+            },
             "delete": function () {
                 ACTIONS.dispatch(ACTIONS.PAGE_DELETE);
             },
@@ -142,6 +146,9 @@ fnObj.pageButtonView = axboot.viewExtend({
                 $("#branchCode").val("");
                 $("#cornerName").val("");
                 $("#terminalNo").val("");
+                $("#minwonType").val(""),
+                $("#handleDept").val(""),
+                $("#minwonStatus").val("")
                 $("#startDate").val(getFormattedDate(new Date(),true));
                 $("#endDate").val(getFormattedDate(new Date()));
                 ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
@@ -162,6 +169,9 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
         this.jisaCode = $("#jisaCode");
         this.branchCode = $("#branchCode");
         this.terminalNo = $("#terminalNo");
+        this.minwonType = $("#minwonType");
+        this.handleDept = $("#handleDept");
+        this.minwonStatus = $("#minwonStatus");
         this.target.find('[data-ax5picker="date"]').ax5picker({
             direction: "auto",
             content: {
@@ -203,7 +213,10 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
             branchCode: $("#branchCode").val(),
             terminalNo: $("#terminalNo").val(),
             startDate: $("#startDate").val(),
-            endDate: $("#endDate").val()
+            endDate: $("#endDate").val(),
+            minwonType: $("#minwonType").val(),
+            handleDept: $("#handleDept").val(),
+            minwonStatus: $("#minwonStatus").val()
         }
     }
 });
@@ -221,7 +234,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
 
         this.target = axboot.gridBuilder({
             showRowSelector: true,
-            frozenColumnIndex: 4,
+            frozenColumnIndex: 0,
             target: $('[data-ax5grid="grid-view-01"]'),
             columns: [
                 {key: 'jisaCode', label: '지사명', width: 80, align: 'center', formatter: function formatter() {
@@ -237,7 +250,10 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                 {key: 'minwonType', label: '민원유형', width: 80, align: 'center', formatter: function formatter() {
                     return parent.COMMON_CODE["MINWON_TYPE"].map[this.value];
                 }},
-                {key: 'minwonStatus', label: '조치상태', width: 80, align: 'center', formatter: function formatter() {
+                {key: 'handleDept', label: '조치부서', width: 100, align: 'center', formatter: function formatter() {
+                    return parent.COMMON_CODE["HANDLE_DEPT"].map[this.value];
+                }},
+                {key: 'minwonStatus', label: '조치상태', width: 100, align: 'center', formatter: function formatter() {
                     return parent.COMMON_CODE["MINWON_STATUS"].map[this.value];
                 }},
                 {key: 'minwonContent', label: '민원내용', width: 200, align: 'left'},
@@ -282,6 +298,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -351,23 +370,28 @@ fnObj.formView01 = axboot.viewExtend(axboot.formView, {
             $("#terminalNoForm").focus();
             formError(message);
             return false;
-        } else if($("#minwonType").val()=="") {
+        } else if($("#minwonTypeForm").val()=="") {
             message = '\n' + '민원유형은 필수 입력조건입니다.\n' + '민원유형을 선택하세요.';
-            $("#minwonType").focus();
+            $("#minwonTypeForm").focus();
             formError(message);
             return false;
-        } else if($("#minwonStatus").val()=="") {
+        } else if($("#minwonStatusForm").val()=="") {
             message = '\n' + '조치상태는 필수 입력조건입니다.\n' + '조치상태를 선택하세요.';
-            $("#minwonStatus").focus();
+            $("#minwonStatusForm").focus();
+            formError(message);
+            return false;
+        } else if($("#handleDeptForm").val()=="") {
+            message = '\n' + '조치부서는 필수 입력조건입니다.\n' + '조치부서를 선택하세요.';
+            $("#handleDeptForm").focus();
             formError(message);
             return false;
         }else if($("#minwonContent").val()=="") {
-            message = '\n' + '조치상태는 필수 입력조건입니다.\n' + '조치상태를 선택하세요.';
+            message = '\n' + '민원내용는 필수 입력조건입니다.\n' + '민원내용를 선택하세요.';
             $("#minwonContent").focus();
             formError(message);
             return false;
         }else if($("#handleContent").val()=="") {
-            message = '\n' + '조치상태는 필수 입력조건입니다.\n' + '조치상태를 선택하세요.';
+            message = '\n' + '조치결과는 필수 입력조건입니다.\n' + '조치결과를 선택하세요.';
             $("#handleContent").focus();
             formError(message);
             return false;

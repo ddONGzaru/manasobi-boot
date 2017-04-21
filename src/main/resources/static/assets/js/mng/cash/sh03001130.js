@@ -43,8 +43,25 @@ var ACTIONS = axboot.actionExtend(fnObj, {
                     url: "/api/v1//mng/cash/sh03001130",
                     data: $.extend({findOne: true}, this.searchView.getData()),
                     callback: function () {
+                        $("#jisaCode").val("");
+                        $("#branchName").val("");
+                        $("#branchCode").val("");
+                        $("#cornerName").val("");
+                        $("#terminalNo").val("");
+                        $("#closeGubun").val("");
+                        var parentData = fnObj.searchView.getData();
                         axToast.push("단건조회가 완료되었습니다.");
-                        ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
+                            axboot.ajax({
+                            type: "GET",
+                            url: "/api/v1//mng/cash/sh03001130",
+                            data: $.extend({findPage: true}, parentData, fnObj.gridView01.getPageData()),
+                            callback: function (res) {
+                                caller.gridView01.setData(res);
+                            },
+                            options: {
+                                onError: viewError
+                            }
+                        });
                     },
                     options: {
                         onError: viewError
@@ -75,7 +92,7 @@ var ACTIONS = axboot.actionExtend(fnObj, {
         $("#branchCode").val(data.branchCode);
         $("#cornerName").val(parent.COMMON_CODE["CORNER_TERMINAL_CODE"].map[data.terminalNo]);
         $("#terminalNo").val(data.terminalNo);
-        $("#closeGubun").val(data.closeGubun);
+        // $("#closeGubun").val(data.closeGubun);
     },
     EXCEL_DOWNLOAD: function (caller, act, data) {
         var params = buildParams($.extend({}, this.searchView.getData()));

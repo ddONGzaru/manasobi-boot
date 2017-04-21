@@ -28,6 +28,28 @@ var ACTIONS = axboot.actionExtend(fnObj, {
         caller.formView03.setSingleData("cashSendingStndDate", data.cashSendingDate);
         caller.formView03.setSingleData("billingExpectDate", data.cashSendingDate);
 
+        if(data.addCashSendingAmt == undefined) {
+            caller.formView03.setSingleData("addCashSendingAmt", 0);
+        }
+
+        if(data.addCash50kSendingAmt == undefined) {
+            caller.formView03.setSingleData("addCash50kSendingAmt", 0);
+        }
+
+        if(data.acceptEnable==1) {
+            $("#formView01 input").attr('disabled',true);
+            $("#formView01 #jisaCodeForm").attr('disabled',true);
+            $("#formView01 textarea").attr('disabled',true);
+            $("#formView01 span").css("pointer-events", "none");
+            $("#formView01 .cqc-calendar").bind('click', false);
+        } else {
+            $("#formView01 input").attr('disabled',false);
+            $("#formView01 #jisaCodeForm").attr('disabled',false);
+            $("#formView01 textarea").attr('disabled',false);
+            $("#formView01 span").css("pointer-events", "auto");
+            $("#formView01 .cqc-calendar").unbind('click', false);
+        }
+
         ACTIONS.dispatch(ACTIONS.FORM_PAGE_SEARCH_3);
     },
     MODAL_OPEN: function (caller, act, data) {
@@ -85,8 +107,14 @@ var ACTIONS = axboot.actionExtend(fnObj, {
                             url: "/api/v1//mng/cash/sh03001180",
                             data: JSON.stringify(parentData),
                             callback: function (res) {
-                                ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
-                                axToast.push("현송계획이 전송되었습니다.");
+                                if(res.status == 99) {
+                                    ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
+                                    var message = '\n' + '현송계획 전문응답코드가 99입니다.';
+                                    formError(message);
+                                } else {
+                                    ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
+                                    axToast.push("현송계획이 전송되었습니다.");
+                                }
                                 if(weekSendChange) {
                                     ACTIONS.dispatch(ACTIONS.FORM_VIEW_02_SAVE);
                                 }
@@ -106,6 +134,14 @@ var ACTIONS = axboot.actionExtend(fnObj, {
                 axDialog.close();
                 caller.formView01.clear();
                 caller.formView01.setSingleData("cashSendingDate", getFormattedDate(new Date()));
+
+                $("#formView01 input").attr('disabled',false);
+                $("#formView01 #jisaCodeForm").attr('disabled',false);
+                $("#formView01 textarea").attr('disabled',false);
+                $("#formView01 span").css("pointer-events", "auto");
+                $("#formView01 .cqc-calendar").unbind('click', false);
+
+
                 ACTIONS.dispatch(ACTIONS.FORM_VIEW_02_CLEAR);
             }
         });
@@ -261,15 +297,11 @@ var ACTIONS = axboot.actionExtend(fnObj, {
         });
     },
     EXCEL_01_DOWNLOAD: function (caller, act, data) {
-        var params = buildParams($.extend({}, this.searchView.getData()));
+        var parentData = this.searchView.getData();
+        parentData.userName = sessionJson.userNm;
+        var params = buildParams($.extend({}, parentData));
         console.log(params);
         window.location = CONTEXT_PATH + "/api/v1//mng/cash/sh03001180/download?" + params;
-        return false;
-    },
-    EXCEL_02_DOWNLOAD: function (caller, act, data) {
-        var params = buildParams($.extend({}, this.searchView.getData()));
-        console.log(params);
-        window.location = CONTEXT_PATH + "/api/v1//mng/cash/sh03001160/download?" + params;
         return false;
     },
     dispatch: function (caller, act, data) {
@@ -311,9 +343,16 @@ fnObj.pageButtonView = axboot.viewExtend({
             "search": function () {
                 ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
             },
+            "send-plan-excel": function () {
+                if($("#jisaCode").val()==""){
+                    message = '\n' + '지사는 필수 입력조건입니다.\n' + '지사를 선택하세요.';
+                    formError(message);
+                }else{
+                    ACTIONS.dispatch(ACTIONS.EXCEL_01_DOWNLOAD);
+                }
+            },
             "excel": function () {
                 fnObj.gridView01.excel("현송계획-"+getFormattedDate(new Date())+".xls");
-                // ACTIONS.dispatch(ACTIONS.EXCEL_01_DOWNLOAD);
             },
             "excel2": function () {
                 fnObj.gridView02.excel("추가현송계획-"+getFormattedDate(new Date())+".xls");
@@ -440,9 +479,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                 },
                 {key: undefined, label: '현송금액', align: 'center',
                     columns: [
-                        {key: 'cashSendingAmt',    label: '만원권', width: 130, align: 'right',  formatter: "money", editor: 'number'},
-                        {key: 'cash50kSendingAmt', label: '5만원권', width: 130, align: 'right',  formatter: "money", editor: 'number'},
-                        {key: 'cashSendingSumAmt', label: '합계', width: 130, align: 'right',  formatter: "money", editor: 'number'}
+                        {key: 'cashSendingAmt',    label: '만원권', width: 130, align: 'right',  formatter: "money"},
+                        {key: 'cash50kSendingAmt', label: '5만원권', width: 130, align: 'right',  formatter: "money"},
+                        {key: 'cashSendingSumAmt', label: '합계', width: 130, align: 'right',  formatter: "money"}
                     ]
                 },
                 {key: undefined, label: '현송주기', align: 'center',
@@ -640,6 +679,10 @@ fnObj.formView01 = axboot.viewExtend(axboot.formView, {
             rs.error[0].jquery.focus();
             formError(message);
             return false;
+        } else if($("#acceptEnable").val()=="1") {
+            message = '\n' + '수용된 현송계획은 통보할수 없습니다.';
+            formError(message);
+            return false;
         }
 
         return true;
@@ -766,12 +809,24 @@ fnObj.formView03 = axboot.viewExtend(axboot.formView, {
             direction: "auto",
             content: {
                 type: 'date'
+            },
+            onStateChanged: function (type) {
+                if(type.state == 'changeValue') {
+                    if($("#branchCodeForm3").val()=="" && $("#terminalNoForm3").val()=="") {
+                        var message = '\n' + '지점,단발번호는 필수 입력조건입니다.';
+                        formError(message);
+                    } else {
+                        ACTIONS.dispatch(ACTIONS.FORM_PAGE_SEARCH_3);
+                    }
+                }
             }
         });
 
         this.setSingleData("cashSendingDate", getFormattedDate(new Date()));
         this.setSingleData("cashSendingStndDate", getFormattedDate(new Date()));
         this.setSingleData("billingExpectDate", getFormattedDate(new Date()));
+        this.setSingleData("addCashSendingAmt", 0);
+        this.setSingleData("addCash50kSendingAmt", 0);
 
         $('#jisaCodeForm3').change(
             function(){
@@ -779,10 +834,13 @@ fnObj.formView03 = axboot.viewExtend(axboot.formView, {
                 $("#branchCodeForm3").val("");
                 $("#cornerNameForm3").val("");
                 $("#terminalNoForm3").val("");
-                $("#addCashSendingAmt").val("");
-                $("#addCash50kSendingAmt").val("");
+                $("#addCashSendingAmt").val("0");
+                $("#addCash50kSendingAmt").val("0");
                 $("#mngOffice").val("");
                 $("#closeGubun").val("");
+
+                this.setSingleData("addCashSendingAmt", 0);
+                this.setSingleData("addCash50kSendingAmt", 0);
 
                 $('[data-ax5grid="grid-view-01"]').setData(null);
             });
@@ -859,6 +917,8 @@ fnObj.formView03 = axboot.viewExtend(axboot.formView, {
     clear: function () {
         this.model.setModel(this.getDefaultData());
         this.target.find('[data-ax-path="key"]').removeAttr("readonly");
+        this.setSingleData("addCashSendingAmt", 0);
+        this.setSingleData("addCash50kSendingAmt", 0);
     }
 });
 
@@ -983,6 +1043,20 @@ function getFormattedDate(date) {
     var day = date.getDate().toString();
     day = day.length > 1 ? day : '0' + day;
     return year + '-' + month + '-' + day;
+}
+
+var buildParams = function (json) {
+
+    var params = JSON.stringify(json);
+
+    params=params.replace(/{/g, "");
+    params=params.replace(/}/g, "");
+    params=params.replace(/:/g, "=")
+    params=params.replace(/,/g, "&");
+    params=params.replace(/"/g, "");
+
+    return params;
+
 }
 
 var weekSendChange;

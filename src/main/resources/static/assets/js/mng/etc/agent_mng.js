@@ -173,24 +173,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/etc/agent_mng/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -274,24 +260,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/etc/agent_mng/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD2.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD2.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -347,7 +319,7 @@ fnObj.pageButtonView = axboot.viewExtend({
                 ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+                fnObj.gridView01.excel("요원정보관리-"+getFormattedDate(new Date())+".xls");
             },
             "search-view-clear": function () {
                 $("#filter").val("");
@@ -434,9 +406,6 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
             },
             "delete": function () {
                 ACTIONS.dispatch(ACTIONS.ITEM_DEL);
-            },
-            "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
             }
         });
     },
@@ -455,6 +424,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -615,6 +587,26 @@ var removeAllUploadFiles = function (upload) {
         }
     });
 }
+
+
+function getFormattedDate(date, isStart) {
+    var day;
+    var tempDate;
+    if(isStart){
+        date.setDate(date.getDate() - 7);
+        tempDate = date.getDate();
+    }else{
+        tempDate = date.getDate();
+    }
+    day = tempDate.toString();
+
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    day = day.length > 1 ? day : '0' + day;
+    return year + '-' + month + '-' + day;
+}
+
 
 var UPLOAD;
 var UPLOAD2;

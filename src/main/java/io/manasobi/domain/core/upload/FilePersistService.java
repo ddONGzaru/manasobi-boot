@@ -1,4 +1,4 @@
-package io.manasobi.core.domain.file;
+package io.manasobi.domain.core.upload;
 
 import io.manasobi.core.code.Types;
 import io.manasobi.utils.JsonUtils;
@@ -25,7 +25,7 @@ import static java.util.stream.Collectors.*;
 @Service
 public class FilePersistService  implements InitializingBean {
 
-    @Value("${appConfig.upload.repository:'/upload/tmp/'}")
+    @Value("${appConfig.upload.repository.img}")
     private String path;
 
     public void persist(AX5File ax5File) throws IOException {

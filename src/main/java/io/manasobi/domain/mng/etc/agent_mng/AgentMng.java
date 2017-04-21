@@ -1,5 +1,6 @@
 package io.manasobi.domain.mng.etc.agent_mng;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
@@ -18,6 +19,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_AGENT_MNG")
+@Comment("")
 @Alias("agentMng")
 public class AgentMng extends SimpleJpaModel<AgentMng.AgentMngId> {
 

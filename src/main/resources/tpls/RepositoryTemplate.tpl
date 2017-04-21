@@ -1,6 +1,6 @@
 package ${domainPackageName}.${targetPackageName};
 
-import io.onsemiro.core.domain.base.AXBootJPAQueryDSLRepository;
+import io.manasobi.core.domain.base.AXBootJPAQueryDSLRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

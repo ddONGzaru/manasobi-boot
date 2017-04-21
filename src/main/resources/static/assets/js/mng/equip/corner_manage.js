@@ -364,7 +364,7 @@ var ACTIONS = axboot.actionExtend(fnObj, {
     },
     MODAL_OPEN: function (caller, act, data) {
         axboot.modal.open({
-            modalType: "SEARCH_TERMINAL_MODAL",
+            modalType: "SEARCH_CORNER_MODAL",
             param: "",
             sendData: function () {
                 return {
@@ -376,7 +376,6 @@ var ACTIONS = axboot.actionExtend(fnObj, {
                 $("#branchName").val(data.branchName);
                 $("#branchCode").val(data.branchCode);
                 $("#cornerName").val(data.cornerName);
-                $("#terminalNo").val(data.terminalNo);
                 $("#jisaCode").val(data.jisaCode);
                 this.close();
             }
@@ -435,9 +434,13 @@ fnObj.pageStart = function () {
                 overhaulDate : event.start.format()
             }
 
+            _this.formView01.clear();
             _this.formView01.setData(data);
+            _this.formView02.clear();
             _this.formView02.setData(data);
+            _this.formView03.clear();
             _this.formView03.setData(data);
+            _this.formView04.clear();
             _this.formView04.setData(data);
 
             loadEventData(_this, data);
@@ -542,24 +545,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -643,24 +632,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                     contentType: "application/json",
-                                     method: "post",
-                                     url: "/api/v1//mng/equip/corner_manage/delete",
-                                     data: JSON.stringify([{
-                                     id: file.id
-                                     }]),
-                                     success: function (res) {
-                                         if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                         }
-                                         UPLOAD2.removeFile(fileIndex);
-                                     }
-                                 });
+                                UPLOAD2.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -745,24 +720,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD3.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD3.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -846,24 +807,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD4.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD4.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -947,24 +894,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD5.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD5.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1048,24 +981,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD6.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD6.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1149,24 +1068,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD7.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD7.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1250,24 +1155,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD8.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD8.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1351,24 +1242,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD9.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD9.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1452,24 +1329,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD10.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD10.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1553,24 +1416,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD11.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD11.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1654,24 +1503,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD12.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD12.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1755,24 +1590,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD13.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD13.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1856,24 +1677,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD14.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD14.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -1957,24 +1764,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD15.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD15.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2058,24 +1851,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD16.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD16.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2159,24 +1938,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD17.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD17.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2260,24 +2025,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD18.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD18.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2361,24 +2112,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD19.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD19.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2462,24 +2199,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD20.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD20.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2563,24 +2286,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD21.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD21.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2664,24 +2373,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD22.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD22.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2765,24 +2460,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD23.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD23.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2866,24 +2547,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD24.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD24.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -2967,24 +2634,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD25.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD25.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -3068,24 +2721,10 @@ fnObj.pageStart = function () {
                     case "delete":
                         axDialog.confirm({
                             title: "AX5UI",
-                            msg: "Are you sure you want to delete it?"
+                            msg: "선택된 이미지를 삭제하시겠습니까?"
                         }, function () {
                             if (this.key == "ok") {
-                                $.ajax({
-                                    contentType: "application/json",
-                                    method: "post",
-                                    url: "/api/v1//mng/equip/corner_manage/delete",
-                                    data: JSON.stringify([{
-                                        id: file.id
-                                    }]),
-                                    success: function (res) {
-                                        if (res.error) {
-                                            alert(res.error.message);
-                                            return;
-                                        }
-                                        UPLOAD26.removeFile(fileIndex);
-                                    }
-                                });
+                                UPLOAD26.removeFile(fileIndex);
                             }
                         });
                         break;
@@ -3143,6 +2782,15 @@ fnObj.pageButtonView = axboot.viewExtend({
             },
             "delete": function () {
                 ACTIONS.dispatch(ACTIONS.PAGE_DELETE);
+            },
+            "search-view-clear": function () {
+                $("#filter").val("");
+                $("#jisaCode").val("");
+                $("#branchName").val("");
+                $("#branchCode").val("");
+                $("#cornerName").val("");
+                $("#terminalNo").val("");
+                ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
             }
         });
     }
@@ -3159,7 +2807,6 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
         this.filter = $("#filter");
         this.jisaCode = $("#jisaCode");
         this.branchCode = $("#branchCode");
-        this.terminalNo = $("#terminalNo");
 
         axboot.buttonClick(this, "data-searchview-btn", {
             "modal": function () {
@@ -3172,7 +2819,6 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
                 $("#branchName").val("");
                 $("#branchCode").val("");
                 $("#cornerName").val("");
-                $("#terminalNo").val("");
             });
 
         $('#branchCode').change(
@@ -3202,7 +2848,7 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
 fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     page: {
         pageNumber: 0,
-        pageSize: 20
+        pageSize: 150
     },
     initView: function () {
         var _this = this;
@@ -3272,7 +2918,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_ADD);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+                _this.excel("코너목록-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -3291,6 +2937,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -3468,13 +3117,21 @@ fnObj.formView02 = axboot.viewExtend(axboot.formView, {
         this.target.find('[data-ax-path="key"]').removeAttr("readonly");
 
         UPLOAD.clear();
+        UPLOAD.refreshImage();
         UPLOAD2.clear();
+        UPLOAD2.refreshImage();
         UPLOAD3.clear();
+        UPLOAD3.refreshImage();
         UPLOAD4.clear();
+        UPLOAD4.refreshImage();
         UPLOAD5.clear();
+        UPLOAD5.refreshImage();
         UPLOAD6.clear();
+        UPLOAD6.refreshImage();
         UPLOAD7.clear();
+        UPLOAD7.refreshImage();
         UPLOAD8.clear();
+        UPLOAD8.refreshImage();
     }
 });
 
@@ -3690,23 +3347,41 @@ fnObj.formView04 = axboot.viewExtend(axboot.formView, {
         this.model.setModel(this.getDefaultData());
         this.target.find('[data-ax-path="key"]').removeAttr("readonly");
         UPLOAD9.clear();
+        UPLOAD9.refreshImage();
         UPLOAD10.clear();
+        UPLOAD10.refreshImage();
         UPLOAD11.clear();
+        UPLOAD11.refreshImage();
         UPLOAD12.clear();
+        UPLOAD12.refreshImage();
         UPLOAD13.clear();
+        UPLOAD13.refreshImage();
         UPLOAD14.clear();
+        UPLOAD14.refreshImage();
         UPLOAD15.clear();
+        UPLOAD15.refreshImage();
         UPLOAD16.clear();
+        UPLOAD16.refreshImage();
         UPLOAD17.clear();
+        UPLOAD17.refreshImage();
         UPLOAD18.clear();
+        UPLOAD18.refreshImage();
         UPLOAD19.clear();
+        UPLOAD19.refreshImage();
         UPLOAD20.clear();
+        UPLOAD20.refreshImage();
         UPLOAD21.clear();
+        UPLOAD21.refreshImage();
         UPLOAD22.clear();
+        UPLOAD22.refreshImage();
         UPLOAD23.clear();
+        UPLOAD23.refreshImage();
         UPLOAD24.clear();
+        UPLOAD24.refreshImage();
         UPLOAD25.clear();
+        UPLOAD25.refreshImage();
         UPLOAD26.clear();
+        UPLOAD26.refreshImage();
     }
 });
 
@@ -3991,6 +3666,24 @@ var buildParams = function (json) {
 
     return params;
 
+}
+
+function getFormattedDate(date, isStart) {
+    var day;
+    var tempDate;
+    if(isStart){
+        date.setDate(date.getDate() - 7);
+        tempDate = date.getDate();
+    }else{
+        tempDate = date.getDate();
+    }
+    day = tempDate.toString();
+
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    day = day.length > 1 ? day : '0' + day;
+    return year + '-' + month + '-' + day;
 }
 
 var UPLOAD;

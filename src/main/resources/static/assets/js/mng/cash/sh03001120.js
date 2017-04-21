@@ -44,6 +44,8 @@ var ACTIONS = axboot.actionExtend(fnObj, {
     PAGE_SAVE: function (caller, act, data) {
         if( fnObj.searchView.validate() ){
             var parentData = this.searchView.getData();
+            parentData.referStartTime = "000000";
+            parentData.referEndTime = "235959";
             axboot.ajax({
                 type: "GET",
                 url: "/api/v1//mng/cash/sh03001120",
@@ -63,10 +65,13 @@ var ACTIONS = axboot.actionExtend(fnObj, {
     },
     PAGE_SEARCH: function (caller, act, data) {
         if( fnObj.searchView.validate() ){
+            var parentData = this.searchView.getData();
+            parentData.referStartTime = "00:00";
+            parentData.referEndTime = "23:59";
             axboot.ajax({
                 type: "GET",
                 url: "/api/v1//mng/cash/sh03001120",
-                data: $.extend({}, this.searchView.getData(), this.gridView02.getPageData(), initPage),
+                data: $.extend({}, parentData, this.gridView02.getPageData(), initPage),
                 callback: function (res) {
                     caller.gridView02.setData(res);
                 },
@@ -132,9 +137,9 @@ fnObj.pageButtonView = axboot.viewExtend({
                 $("#terminalNo").val("");
                 $("#referDate").val(getFormattedDate(new Date()));
                 $("#filter").val("");
-                $("#referStatementNo").val("9999");
-                $("#referStartTime").val("00:00");
-                $("#referEndTime").val("23:59");
+                $("#referStatementNo").val("");
+                // $("#referStartTime").val("00:00");
+                // $("#referEndTime").val("23:59");
                 ACTIONS.dispatch(ACTIONS.TERMINAL_SEARCH);
                 fnObj.gridView01.initView();
             }
@@ -222,23 +227,12 @@ fnObj.searchView = axboot.viewExtend(axboot.searchView, {
             $("#terminalNo").focus();
             formError(message);
             return false;
-        } else if($("#referDate").val()=="") {
-            message = '\n' + '조회일자는 필수 입력조건입니다.\n' + '조회일자를 입력하세요.';
-            $("#referDate").focus();
-            formError(message);
-            return false;
-        } else if($("#referStartTime").val()=="") {
-            message = '\n' + '거래시간은 필수 입력조건입니다.\n' + '거래시간을 입력하세요.';
-            $("#referStartTime").focus();
-            formError(message);
-            return false;
-        } else if($("#referEndTime").val()=="") {
-            message = '\n' + '거래시간은 필수 입력조건입니다.\n' + '거래시간을 입력하세요.';
-            $("#referEndTime").focus();
+        } else if($("#referStatementNo").val()=="") {
+            message = '\n' + '전표번호는 필수 입력조건입니다.\n' + '전표번호를 입력하세요.';
+            $("#referStatementNo").focus();
             formError(message);
             return false;
         }
-
 
         return true;
     }

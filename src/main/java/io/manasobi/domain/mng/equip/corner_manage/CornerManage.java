@@ -1,5 +1,6 @@
 package io.manasobi.domain.mng.equip.corner_manage;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_CORNER_STATUS")
+@Comment(value = "")
 @IdClass(CornerManage.CornerManageId.class)
 @Alias("cornerManage")
 public class CornerManage extends SimpleJpaModel<CornerManage.CornerManageId> {

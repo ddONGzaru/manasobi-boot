@@ -97,7 +97,7 @@ public class Sh03001230Service extends BaseService<Sh03001230, Sh03001230.Sh0300
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Sh03001230Service-sendAndReceive :: {}", e);
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            throw new ApiException(ApiStatus.SYSTEM_ERROR, "출납과잉반환내역서 전문응답코드가 99입니다.");
         }
 
         Sh03001230 sh03001230 = findResult(vo);

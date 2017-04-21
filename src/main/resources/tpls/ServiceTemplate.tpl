@@ -1,7 +1,7 @@
 package ${domainPackageName}.${targetPackageName};
 
 import org.springframework.stereotype.Service;
-import io.onsemiro.core.domain.BaseService;
+import io.manasobi.core.domain.BaseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import javax.inject.Inject;

@@ -45,8 +45,8 @@ public class Sh03001140Service extends BaseService<Sh03001140, Sh03001140.Sh0300
     }
     
     @Inject
-    public Sh03001140Service(Sh03001140Repo sh03001140Repo) {
-        super(sh03001140Repo);
+    public Sh03001140Service(Sh03001140Repo sh03001140Repository) {
+        super(sh03001140Repository);
     }
 
     public Page<Sh03001140> find(Pageable pageable, RequestParams<Sh03001140> requestParams) {
@@ -97,8 +97,7 @@ public class Sh03001140Service extends BaseService<Sh03001140, Sh03001140.Sh0300
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Sh03001140Service-sendAndReceive :: {}", e.getMessage());
-
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            throw new ApiException(ApiStatus.SYSTEM_ERROR, "회수자금결과 전문응답코드가 99입니다.");
         }
 
         Sh03001140 sh03001140 = findResult(vo);

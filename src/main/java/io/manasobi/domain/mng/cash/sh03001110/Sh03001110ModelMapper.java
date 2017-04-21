@@ -21,6 +21,11 @@ public class Sh03001110ModelMapper extends CustomMapper<Sh03001110, Sh03001110VO
             dest.setTxId(DateUtils.convertToString(txId, "yyyy-MM-dd HH:mm:ss"));
         }
 
+        if(src.getOpenDatetime()!=null) {
+            LocalDateTime openDateTime = src.getOpenDatetime().toLocalDateTime();
+            dest.setOpenDatetime(DateUtils.convertToString(openDateTime, "yyyy-MM-dd HH:mm:ss"));
+        }
+
         if(src.getReferDate()!=null) {
             LocalDateTime referDate = src.getReferDate().toLocalDateTime();
             dest.setReferDate(DateUtils.convertToString(referDate, "yyyy-MM-dd"));
@@ -31,9 +36,13 @@ public class Sh03001110ModelMapper extends CustomMapper<Sh03001110, Sh03001110VO
             dest.setCheckAmt(String.valueOf(checkAmt));
         }
 
-        if(src.getCashAmt()!=null && src.getCash50kGiveEnableCount()!=null) {
+        if(src.getCashAmt()!=null) {
             int cash10kCount = (Integer.parseInt(src.getCashAmt().trim()) - ( Integer.parseInt(src.getCash50kGiveEnableCount().trim()) * 50000)) / 10000;
-            dest.setCash10kGiveEnableCount(String.valueOf(cash10kCount));
+            if(cash10kCount < 0) {
+                dest.setCash10kGiveEnableCount("0");
+             } else {
+                dest.setCash10kGiveEnableCount(String.valueOf(cash10kCount));
+            }
         }
     }
 }

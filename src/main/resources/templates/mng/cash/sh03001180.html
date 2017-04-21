@@ -75,6 +75,9 @@
                     <h2><i class="cqc-list"></i> 현송계획 목록</h2>
                 </div>
                 <div class="right">
+                    <button type="button" class="btn btn-default" data-page-btn="send-plan-excel">
+                        <i class="cqc-download"></i> 현금수송계획표
+                    </button>
                     <button type="button" class="btn btn-default" data-page-btn="excel">
                         <i class="cqc-download"></i> 엑셀
                     </button>
@@ -210,8 +213,11 @@
                 <th:block layout:insert="~{/fragments/tab :: panel(label='추가현송계획 통보', scroll='scroll')}">
                     <div layout:fragment="wrap">
                         <div class="ax-button-group">
-                            <div class="left">
+                            <div class="left" style="width: 150px">
                                 <h3><i class="cqc-news"></i> 추가현송계획</h3>
+                            </div>
+                            <div class="left">
+                                <h6>(*)항목 변경시 추가현송계획목록 조회됩니다.</h6>
                             </div>
                             <div class="right">
                                 <button type="button" class="btn btn-default" data-form-view-03-btn="form-clear">
@@ -224,7 +230,7 @@
                         </div>
                         <form name="formView03" id="formView03" method="post" onsubmit="return false">
                             <div data-ax-tbl class="ax-search-tbl" minWidth="700px">
-                                <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='지사명', text2='지점명/코드', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
+                                <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='지사명', text2='지점명/코드(*)', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
                                     <div layout:fragment="wrap-1">
                                         <select th:class="form-control" th:classappend="${class}" data-ax-path="jisaCode" name="jisaCode" id="jisaCodeForm3" style="width: 150px">
                                             <option value="">선택</option>
@@ -240,7 +246,7 @@
                                         </div>
                                     </div>
                                 </th:block>
-                                <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='코너명/단말번호', text2='현송일자', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
+                                <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='코너명/단말번호(*)', text2='현송기준일자(*)', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
                                     <div layout:fragment="wrap-1">
                                         <div class="form-inline">
                                             <input type="text" id="cornerNameForm3" data-ax-path="cornerName" class="form-control W150" value=""
@@ -251,13 +257,13 @@
                                     </div>
                                     <div layout:fragment="wrap-2">
                                         <div class="input-group" data-ax5picker="date" style="width: 150px">
-                                            <input type="text"  data-ax-validate="required" data-ax-path="cashSendingDate" id="cashSendingDateForm3"
+                                            <input type="text"  data-ax-validate="required" data-ax-path="cashSendingStndDate" id="cashSendingStndDate"
                                                    class="form-control" placeholder="yyyy-MM-dd" style="text-align: center">
                                             <span class="input-group-addon"><i class="cqc-calendar"></i></span>
                                         </div>
                                     </div>
                                 </th:block>
-                                <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='청구예상일자', text2='현송기준일자', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
+                                <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='청구예상일자', text2='현송일자', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
                                     <div layout:fragment="wrap-1">
                                         <div class="input-group" data-ax5picker="date" style="width: 150px">
                                             <input type="text"  data-ax-validate="required" data-ax-path="billingExpectDate" id="billingExpectDate"
@@ -267,7 +273,7 @@
                                     </div>
                                     <div layout:fragment="wrap-2">
                                         <div class="input-group" data-ax5picker="date" style="width: 150px">
-                                            <input type="text"  data-ax-validate="required" data-ax-path="cashSendingStndDate" id="cashSendingStndDate"
+                                            <input type="text"  data-ax-validate="required" data-ax-path="cashSendingDate" id="cashSendingDateForm3"
                                                    class="form-control" placeholder="yyyy-MM-dd" style="text-align: center">
                                             <span class="input-group-addon"><i class="cqc-calendar"></i></span>
                                         </div>

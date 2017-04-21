@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
@@ -94,13 +94,14 @@ public class ErrorStatusVO extends BaseVO {
     private String lastModifyEmpName;
     private String stextGubun;
     private String totalClassifyCode;
+    private String customerWaitEnable;
+    private String pushString;
 
     public static ErrorStatusVO of(ErrorStatus errorStatus) {
-        /*BoundMapperFacade<ErrorStatus, ErrorStatusVO> mapper =
+        BoundMapperFacade<ErrorStatus, ErrorStatusVO> mapper =
                 ModelMapperUtils.getMapper("ErrorStatus", ErrorStatusVO.class.getPackage().getName());
         ErrorStatusVO errorStatusVO = mapper.map(errorStatus);
-        return errorStatusVO;*/
-        return ModelMapperUtils.map(errorStatus, ErrorStatusVO.class);
+        return errorStatusVO;
     }
 
     public static List<ErrorStatusVO> of(List<ErrorStatus> errorStatusList) {

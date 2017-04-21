@@ -45,7 +45,7 @@
 
 <!-- ===== [ base-title ] ===== -->
 <div layout:fragment="base-title" class="ax-base-title" role="page-title">
-    <h1 class="title"><i class="cqc-browser"></i> <span th:text="${pageName}"/></h1>
+    <h1 class="title"><i class="cqc-browser"></i> <span th:text="환경시설물관리"/></h1>
     <p class="desc" th:text="${pageRemark}"/>
 </div>
 <!-- ===== [ base-title ] _END_ ===== -->
@@ -53,7 +53,7 @@
 <!-- ===== [ base-content ] ===== -->
 <div layout:fragment="base-content">
     <th:block layout:insert="~{/fragments/page-buttons :: buttons}"/>
-    <th:block layout:insert="~{/fragments/page-header  :: search-s-m2(id='searchView0', label1='지사명', label2='지점명/코드', label3='코너명/단말번호')}"/>
+    <th:block layout:insert="~{/fragments/page-header  :: search-s-m2-no-terminal(id='searchView0', label1='지사명', label2='지점명/코드', label3='코너명')}"/>
     <th:block layout:insert="~{/fragments/page-content :: content-panels3}" th:with="orientation='vertical',
         attr1='{width: \'500\'}', style1='padding-right: 10px;',
         attr2='{width: \'650\'}', style2='padding-right: 10px; padding-left: 10px;',

@@ -24,5 +24,18 @@ public class Sh03001160ModelMapper  extends CustomMapper<Sh03001160, Sh03001160V
 
         LocalDateTime cashSendingStndDate = src.getCashSendingStndDate().toLocalDateTime();
         dest.setCashSendingStndDate(DateUtils.convertToString(cashSendingStndDate, "yyyy-MM-dd"));
+
+        Long addCashSendingAmt = Long.valueOf(0);
+        if(src.getAddCashSendingAmt()!=null){
+            addCashSendingAmt = Long.parseLong(src.getAddCashSendingAmt().trim());
+        }
+
+        Long addCash50kSendingAmt = Long.valueOf(0);
+        if(src.getAddCash50kSendingAmt()!=null){
+            addCash50kSendingAmt = Long.parseLong(src.getAddCash50kSendingAmt().trim());
+        }
+
+        Long sumAmt = addCashSendingAmt + addCash50kSendingAmt;
+        dest.setAddCashSendingSumAmt(String.valueOf(sumAmt));
     }
 }

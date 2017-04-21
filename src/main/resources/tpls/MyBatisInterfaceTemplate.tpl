@@ -1,6 +1,6 @@
 package ${domainPackageName}.${targetPackageName};
 
-import io.onsemiro.core.mybatis.MyBatisMapper;
+import io.manasobi.core.mybatis.MyBatisMapper;
 import java.util.List;
 
 

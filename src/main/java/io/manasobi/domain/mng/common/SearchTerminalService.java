@@ -23,6 +23,10 @@ public class SearchTerminalService extends BaseService {
         return searchTerminalMapper.findAllBranch(searchTerminalVO);
     }
 
+    public List<SearchTerminalVO> findAllCorner(SearchTerminalVO searchTerminalVO) {
+        return searchTerminalMapper.findAllCorner(searchTerminalVO);
+    }
+
     public Page<SearchTerminalVO> findAllTerminal(Pageable pageable, RequestParams<SearchTerminalVO> requestParams) {
         String filter = requestParams.getString("filter");
 
@@ -39,5 +43,14 @@ public class SearchTerminalService extends BaseService {
         searchTerminalVO.setJisaCode(requestParams.getString("jisa"));
 
         return filter(findAllBranch(searchTerminalVO), pageable, filter, SearchTerminalVO.class);
+    }
+
+    public Page<SearchTerminalVO> findAllCorner(Pageable pageable, RequestParams<SearchTerminalVO> requestParams) {
+        String filter = requestParams.getString("filter");
+
+        SearchTerminalVO searchTerminalVO = new SearchTerminalVO();
+        searchTerminalVO.setJisaCode(requestParams.getString("jisa"));
+
+        return filter(findAllCorner(searchTerminalVO), pageable, filter, SearchTerminalVO.class);
     }
 }

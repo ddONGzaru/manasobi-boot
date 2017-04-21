@@ -39,16 +39,15 @@ public class ErrorStatusService extends BaseService<ErrorStatus, ErrorStatus.Err
         return filter(errorStatusMapper.findHistory(errorStatus), pageable, filter, ErrorStatus.class);
     }
 
-    public ErrorStatusVO findOne(ErrorStatusVO errorStatusVO) {
+    public ErrorStatusVO findOne(RequestParams<ErrorStatusVO> requestParams) {
 
-        ErrorStatus errorStatus = ModelMapperUtils.map(errorStatusVO, ErrorStatus.class, "errorStatus");
+        ErrorStatus errorStatus = new ErrorStatus();
 
-        /*ErrorStatus errorStatus = new ErrorStatus();
-
-        errorStatus.setErrorDatetime(requestParams.getDateTime("errorDatetime"));
+        errorStatus.setErrorDatetime(requestParams.getTimestamp("errorDatetime"));
         errorStatus.setBranchCode(requestParams.getString("branchCode"));
         errorStatus.setCornerCode(requestParams.getString("cornerCode"));
-        errorStatus.setTerminalNo(requestParams.getString("terminalNo"));*/
+        errorStatus.setTerminalNo(requestParams.getString("terminalNo"));
+        errorStatus.setCalleeReqSeqNo(requestParams.getString("calleeReqSeqNo"));
 
         return buildVO(errorStatusMapper.findOne(errorStatus));
     }
@@ -58,10 +57,9 @@ public class ErrorStatusService extends BaseService<ErrorStatus, ErrorStatus.Err
         if (errorStatus == null) {
             return new ErrorStatusVO();
         } else {
-            /*BoundMapperFacade<ErrorStatus, ErrorStatusVO> mapper =
+            BoundMapperFacade<ErrorStatus, ErrorStatusVO> mapper =
                     ModelMapperUtils.getMapper("ErrorStatus", this.getClass().getPackage().getName());
-            return mapper.map(errorStatus);*/
-            return ModelMapperUtils.map(errorStatus, ErrorStatusVO.class);
+            return mapper.map(errorStatus);
         }
     }
 }

@@ -26,7 +26,7 @@ public class Sh04001200ModelMapper extends CustomMapper<Sh04001200, Sh04001200VO
         dest.setJisaCodeName(CommonCodeUtils.getName("JISA_CODE", src.getJisaCode()));
         dest.setBranchCodeName(CommonCodeUtils.getName("BRANCH_CODE", src.getBranchCode()));
 
-        dest.setCorpCodeName(CommonCodeUtils.getName("TERMINAL_CORP_CODE", src.getCorpCode()));
+        dest.setCorpCodeName(CommonCodeUtils.getName("SECURITY_CORP_CODE", src.getCorpCode()));
         dest.setInoutGubunName(CommonCodeUtils.getName("INOUT_GUBUN", src.getInoutGubun()));
         dest.setTaskGubunName(CommonCodeUtils.getName("TASK_GUBUN", src.getTaskGubun()));
     }

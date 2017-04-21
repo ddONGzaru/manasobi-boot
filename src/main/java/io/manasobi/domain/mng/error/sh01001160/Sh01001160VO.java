@@ -3,19 +3,18 @@ package io.manasobi.domain.mng.error.sh01001160;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
 
+import java.sql.Timestamp;
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class Sh01001160VO extends BaseVO {
 
     private String jisaCode;
@@ -58,10 +57,9 @@ public class Sh01001160VO extends BaseVO {
 
 
     public static Sh01001160VO of(Sh01001160 sh01001160) {
-        /*BoundMapperFacade<Sh01001160, Sh01001160VO> mapper =
+        BoundMapperFacade<Sh01001160, Sh01001160VO> mapper =
                 ModelMapperUtils.getMapper("Sh01001160", Sh01001160VO.class.getPackage().getName());
-        return mapper.map(sh01001160);*/
-        return ModelMapperUtils.map(sh01001160, Sh01001160VO.class);
+        return mapper.map(sh01001160);
     }
 
     public static List<Sh01001160VO> of(List<Sh01001160> sh01001160List) {

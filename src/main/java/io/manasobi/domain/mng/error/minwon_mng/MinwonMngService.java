@@ -26,6 +26,9 @@ public class MinwonMngService extends BaseService<MinwonMng, MinwonMng.MinwonMng
         String branchCode = requestParams.getString("branchCode");
         String cornerCode = requestParams.getString("cornerCode");
         String terminalNo = requestParams.getString("terminalNo");
+        String minwonType = requestParams.getString("minwonType");
+        String handleDept = requestParams.getString("handleDept");
+        String minwonStatus = requestParams.getString("minwonStatus");
         Timestamp startDate = requestParams.getTimestamp("startDate");
         Timestamp endDate = requestParams.getTimestamp("endDate");
 
@@ -47,6 +50,18 @@ public class MinwonMngService extends BaseService<MinwonMng, MinwonMng.MinwonMng
 
         if (isNotEmpty(terminalNo)) {
             builder.and(qMinwonMng.terminalNo.eq(terminalNo));
+        }
+
+        if (isNotEmpty(minwonType)) {
+            builder.and(qMinwonMng.minwonType.eq(minwonType));
+        }
+
+        if (isNotEmpty(handleDept)) {
+            builder.and(qMinwonMng.handleDept.eq(handleDept));
+        }
+
+        if (isNotEmpty(minwonStatus)) {
+            builder.and(qMinwonMng.minwonStatus.eq(minwonStatus));
         }
 
         if (startDate != null && endDate != null) {

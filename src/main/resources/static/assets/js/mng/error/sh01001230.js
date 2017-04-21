@@ -204,7 +204,8 @@ fnObj.pageButtonView = axboot.viewExtend({
                 ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+                fnObj.gridView01.excel("후처리내역 통보이력-"+getFormattedDate(new Date())+".xls");
+                // ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
             },
             "search-view-clear": function () {
                 $("#filter").val("");
@@ -292,7 +293,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
 
         this.target = axboot.gridBuilder({
             showRowSelector: true,
-            frozenColumnIndex: 7,
+            frozenColumnIndex: 0,
             target: $('[data-ax5grid="grid-view-01"]'),
             columns: [
                 {
@@ -378,6 +379,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 

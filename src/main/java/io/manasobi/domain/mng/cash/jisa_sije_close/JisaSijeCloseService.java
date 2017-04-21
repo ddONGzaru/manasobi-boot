@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -16,14 +17,18 @@ public class JisaSijeCloseService extends BaseService<JisaSijeClose, JisaSijeClo
     public JisaSijeCloseMapper jisaSijeCloseMapper;
 
     @Inject
-    public JisaSijeCloseService(JisaSijeCloseRepo jisaSijeCloseRepo) {
-        super(jisaSijeCloseRepo);
+    public JisaSijeCloseService(JisaSijeCloseRepo jisaSijeCloseRepository) {
+        super(jisaSijeCloseRepository);
     }
 
     public Page<JisaSijeClose> find(Pageable pageable, RequestParams<JisaSijeClose> requestParams) {
 
+        Timestamp closeDate = requestParams.getTimestamp("closeDate");
+        Timestamp prevCloseDate = new Timestamp(closeDate.getTime() - (1*24*60*60*1000));
+
         JisaSijeClose jisaSijeClose = new JisaSijeClose();
-        jisaSijeClose.setCloseDate(requestParams.getTimestamp("closeDate"));
+        jisaSijeClose.setPrevCloseDate(prevCloseDate);
+        jisaSijeClose.setCloseDate(closeDate);
 
         List<JisaSijeClose> resultList = jisaSijeCloseMapper.findAll(jisaSijeClose);
 

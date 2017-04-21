@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public enum ErrorProcessType {
 
-    장애1차("1"), 장애2차("2"), 현금부족예보("3"), 현금부족("4"), 자체출동("5");
+    장애1차("1"), 장애2차("2"), 현금부족예보("3"), 현금부족("4"), 자체출동("5"), 민원점검("6");
 
     private String code;
 

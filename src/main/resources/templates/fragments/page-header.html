@@ -1151,6 +1151,58 @@
 </th:block>
 
 
+<th:block layout:fragment="search-s-m2-no-terminal(label1, label2, label3)">
+    <form th:name="${id}" th:id="${id}" method="post" onsubmit="return false" page-header="search-bar">
+        <div data-ax-tbl class="ax-search-tbl" minWidth="500px">
+            <div data-ax-tr>
+                <div data-ax-td style="width: 200px">
+                    <div data-ax-td-label th:text="${label1}"></div>
+                    <div data-ax-td-wrap>
+                        <!--<div data-ax5select="select_jisa" data-ax5select-config="{}"></div>-->
+                        <select th:class="form-control" th:classappend="${class}" name="jisaCode" id="jisaCode">
+                            <option value="">전체</option>
+                            <option th:each="item : ${jisaCode}" th:value="${item.code}" th:text="${item.name}"/>
+                        </select>
+                    </div>
+                </div>
+                <div data-ax-td style="width: 330px">
+                    <div data-ax-td-label th:text="${label2}"></div>
+                    <div class="form-inline">
+                        <div data-ax-td-wrap class="form-group">
+                            <input type="text" id="branchName" class="form-control W150" value=""
+                                   data-searchview-btn="modal" readonly="readonly" style="text-align: center" placeholder="클릭시 검색"/>
+                            <input type="text" id="branchCode" class="form-control W60" value="" maxlength="4" minlength="4"/>
+                        </div>
+                    </div>
+                </div>
+                <div data-ax-td style="width: 350px">
+                    <div data-ax-td-label th:text="${label3}" style="width: 110px"></div>
+                    <div class="form-inline">
+                        <div data-ax-td-wrap class="form-group">
+                            <input type="text" id="cornerName" class="form-control W150" value=""
+                                   data-searchview-btn="modal" readonly="readonly" style="text-align: center" placeholder="클릭시 검색"/>
+                        </div>
+                    </div>
+                </div>
+                <div data-ax-td style="width: 200px">
+                    <div data-ax-td-wrap>
+                        <div class="input-group" data-ax5picker="date">
+                            <button type="button" class="btn btn-default" data-page-btn="search">
+                                <i class="cqc-magnifier"></i> 조회
+                            </button>
+                            <button class="btn btn-primary" data-page-btn="search-view-clear" style="margin-left: 5px;">
+                                <i class="cqc-zoomout"></i> 초기화
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="H5"></div>
+</th:block>
+
+
 <th:block layout:fragment="search-s-m2-d2(label1, label2, label3, label4)">
     <form th:name="${id}" th:id="${id}" method="post" onsubmit="return false" page-header="search-bar">
         <div data-ax-tbl class="ax-search-tbl" minWidth="500px">

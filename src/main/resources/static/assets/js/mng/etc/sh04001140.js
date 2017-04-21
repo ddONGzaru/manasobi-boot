@@ -299,7 +299,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                 ACTIONS.dispatch(ACTIONS.ITEM_DEL);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+                _this.excel("기기점검결과-"+getFormattedDate(new Date())+".xls");
             }
         });
     },
@@ -318,6 +318,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 
@@ -509,4 +512,22 @@ var buildParams = function (json) {
 
     return params;
 
+}
+
+function getFormattedDate(date, isStart) {
+    var day;
+    var tempDate;
+    if(isStart){
+        date.setDate(date.getDate() - 7);
+        tempDate = date.getDate();
+    }else{
+        tempDate = date.getDate();
+    }
+    day = tempDate.toString();
+
+    var year = date.getFullYear();
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    day = day.length > 1 ? day : '0' + day;
+    return year + '-' + month + '-' + day;
 }

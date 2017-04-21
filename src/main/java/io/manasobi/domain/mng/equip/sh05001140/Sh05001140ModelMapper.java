@@ -1,6 +1,6 @@
 package io.manasobi.domain.mng.equip.sh05001140;
 
-import io.manasobi.core.domain.file.AX5File;
+import io.manasobi.domain.core.upload.AX5File;
 import io.manasobi.utils.DateUtils;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Component
 public class Sh05001140ModelMapper extends CustomMapper<Sh05001140, Sh05001140VO> {
 
-    @Value("${appConfig.upload.repository}")
+    @Value("${onsemiro.upload.repository.img}")
     private String filePath;
 
     @Override

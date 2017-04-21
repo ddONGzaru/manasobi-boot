@@ -32,7 +32,6 @@
 <script type="text/javascript" th:src="@{/assets/js/fullcalendar.min.js}"></script>
 <script type="text/javascript" th:src="@{/assets/js/locale-all.js}"></script>
 <script type="text/javascript" th:src="@{/assets/js/ax5uploader.js}"></script>
-<script type="text/javascript" th:src="@{/axboot.config.js}"></script>
 <script type="text/javascript">
     var sessionJson    = convertJsonObj('[[${scriptSession}]]');
 
@@ -43,6 +42,7 @@
         return jsonStr == null || jsonStr == '' ? null : JSON.parse(jsonStr.replace(/&quot;/gi, '"'));
     }
 </script>
+<script type="text/javascript" th:src="@{/axboot.config.js}"></script>
 <script layout:fragment="js"></script>
 <script layout:fragment="script"></script>
 

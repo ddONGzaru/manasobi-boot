@@ -23,6 +23,8 @@ public class ScriptSessionVO {
 
     protected boolean login = true;
 
+    protected String menuGrpCd;
+
     private Map<String, Object> details = new HashMap<>();
 
     @Getter(AccessLevel.NONE)

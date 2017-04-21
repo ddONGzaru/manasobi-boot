@@ -2,6 +2,7 @@ package io.manasobi.domain.mng.cash.sh03001120;
 
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
+import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_03001120")
 @IdClass(Sh03001120.Sh03001120Id.class)
+@Alias("sh03001120")
 public class Sh03001120 extends SimpleJpaModel<Sh03001120.Sh03001120Id> {
 
 	@Column(name = "JISA_CODE", length = 2, nullable = false)
@@ -30,11 +32,9 @@ public class Sh03001120 extends SimpleJpaModel<Sh03001120.Sh03001120Id> {
 	@Column(name = "TERMINAL_NO", length = 4, nullable = false)
 	private String terminalNo;
 
-	@Id
 	@Column(name = "REFER_DATE", nullable = false)
 	private Timestamp referDate;
 
-	@Id
 	@Column(name = "REFER_STATEMENT_NO", length = 4, nullable = false)
 	private String referStatementNo;
 
@@ -44,9 +44,11 @@ public class Sh03001120 extends SimpleJpaModel<Sh03001120.Sh03001120Id> {
 	@Column(name = "REFER_END_TIME")
 	private Timestamp referEndTime;
 
+	@Id
 	@Column(name = "DEAL_SEQ_NO", length = 4)
 	private String dealSeqNo;
 
+	@Id
 	@Column(name = "DEAL_TIME")
 	private Timestamp dealTime;
 
@@ -77,7 +79,7 @@ public class Sh03001120 extends SimpleJpaModel<Sh03001120.Sh03001120Id> {
 
 	@Override
 	public Sh03001120Id getId() {
-		return Sh03001120Id.of(branchCode, terminalNo, referDate, referStatementNo);
+		return Sh03001120Id.of(branchCode, terminalNo, dealTime, dealSeqNo);
 	}
 
 	@Embeddable
@@ -93,10 +95,10 @@ public class Sh03001120 extends SimpleJpaModel<Sh03001120.Sh03001120Id> {
 		private String terminalNo;
 
 		@NonNull
-		private Timestamp referDate;
+		private Timestamp dealTime;
 
 		@NonNull
-		private String referStatementNo;
+		private String dealSeqNo;
 
 	}
 }

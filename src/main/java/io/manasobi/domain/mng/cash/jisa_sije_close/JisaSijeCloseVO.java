@@ -3,7 +3,6 @@ package io.manasobi.domain.mng.cash.jisa_sije_close;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
@@ -15,7 +14,6 @@ import static java.util.stream.Collectors.*;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class JisaSijeCloseVO extends BaseVO {
 
 	private String txId;
@@ -28,7 +26,11 @@ public class JisaSijeCloseVO extends BaseVO {
 
 	private String thisDayCashDepositAmt;
 
+	private String jisaToShinhanSendAmt;
+
 	private String closeAmt;
+
+	private String unCheckAmt;
 
 	private String sijeMistakeAmt;
 
@@ -44,10 +46,9 @@ public class JisaSijeCloseVO extends BaseVO {
 
 
     public static JisaSijeCloseVO of(JisaSijeClose jisaSijeClose) {
-		/*BoundMapperFacade<JisaSijeClose, JisaSijeCloseVO> mapper =
+		BoundMapperFacade<JisaSijeClose, JisaSijeCloseVO> mapper =
 				ModelMapperUtils.getMapper("JisaSijeClose", JisaSijeCloseVO.class.getPackage().getName());
-        return mapper.map(jisaSijeClose);*/
-		return ModelMapperUtils.map(jisaSijeClose, JisaSijeCloseVO.class);
+        return mapper.map(jisaSijeClose);
     }
 
     public static List<JisaSijeCloseVO> of(List<JisaSijeClose> jisaSijeCloseList) {

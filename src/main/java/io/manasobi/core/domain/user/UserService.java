@@ -133,12 +133,17 @@ public class UserService extends BaseService<User, String> {
 
     public List<User> get(RequestParams requestParams) {
         String userCd = requestParams.getString("userCd");
+        String jisaCode = requestParams.getString("jisaCode");
         String filter = requestParams.getString("filter");
 
         BooleanBuilder builder = new BooleanBuilder();
 
         if (isNotEmpty(userCd)) {
             builder.and(qUser.userCd.eq(userCd));
+        }
+
+        if (isNotEmpty(jisaCode)) {
+            builder.and(qUser.jisaCode.eq(jisaCode));
         }
 
         List<User> list = select().from(qUser).where(builder).orderBy(qUser.userNm.asc()).fetch();

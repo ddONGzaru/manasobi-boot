@@ -1,6 +1,7 @@
 package io.manasobi.domain.mng.cash.sh03001190;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.OrderSpecifier;
 import io.manasobi.core.api.ApiException;
 import io.manasobi.core.api.response.ApiResponse;
 import io.manasobi.core.base.BaseService;
@@ -73,7 +74,9 @@ public class Sh03001190Service extends BaseService<Sh03001190, Sh03001190.Sh0300
             builder.and(qSh03001190.reqDate.between(startDate, endDate));
         }
 
-        List<Sh03001190> resultList = select().from(qSh03001190).where(builder).fetch();
+        OrderSpecifier<Timestamp> sortOrder = qSh03001190.txId.desc();
+
+        List<Sh03001190> resultList = select().from(qSh03001190).where(builder).orderBy(sortOrder).fetch();
 
         return filter(resultList, pageable, filter, Sh03001190.class);
     }
@@ -92,7 +95,7 @@ public class Sh03001190Service extends BaseService<Sh03001190, Sh03001190.Sh0300
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Sh03001190Service-sendAndReceive :: {}", e.getMessage());
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            throw new ApiException(ApiStatus.SYSTEM_ERROR, "운영자금청구서 전문응답코드가 99입니다.");
         }
 
         Sh03001190 sh03001190 = findResult(vo);

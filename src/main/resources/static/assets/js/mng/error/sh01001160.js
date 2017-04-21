@@ -163,7 +163,8 @@ fnObj.pageButtonView = axboot.viewExtend({
                 ACTIONS.dispatch(ACTIONS.PAGE_SEARCH);
             },
             "excel": function () {
-                ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
+                fnObj.gridView01.excel("도착예정통보 이력-"+getFormattedDate(new Date())+".xls");
+                // ACTIONS.dispatch(ACTIONS.EXCEL_DOWNLOAD);
             },
             "search-view-clear": function () {
                 $("#filter").val("");
@@ -251,7 +252,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
 
         this.target = axboot.gridBuilder({
             showRowSelector: true,
-            frozenColumnIndex: 7,
+            frozenColumnIndex: 0,
             target: $('[data-ax5grid="grid-view-01"]'),
             columns: [
                 /* {key: 'calleeReqDatetime', label: '출동요청일시', width: 130, align: 'center', editor: 'text'},*/
@@ -279,7 +280,7 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                 {key: 'calleeCancleReasonCode', label: '출동취소사유', width: 100, align: 'center', editor: 'text', formatter: function formatter() {
                     return parent.COMMON_CODE["CALLEE_CANCEL_REQ_REASON_CODE"].map[this.value];
                 }},
-                {key: 'handleUnusl', label: '특이사항', width: 150, align: 'left', editor: 'text'},
+                {key: 'unusl', label: '특이사항', width: 150, align: 'left', editor: 'text'},
                 {key: 'crtNo', label: 'CRT-NO', width: 100, align: 'left', editor: 'text'},
                 {key: 'totalClassifyCode', label: '장애메세지', width: 150, align: 'left', formatter: function formatter() {
                     return parent.COMMON_CODE["TOTAL_CLASSIFY_CODE"].map[this.value];
@@ -321,6 +322,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     },
     addRow: function () {
         this.target.addRow({__created__: true}, "last");
+    },
+    excel: function (file) {
+        this.target.exportExcel(file);
     }
 });
 

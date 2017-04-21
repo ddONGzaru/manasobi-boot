@@ -92,8 +92,11 @@
         <div layout:fragment="panel-2">
 
             <div class="ax-button-group" role="panel-header">
-                <div class="left">
+                <div class="left" style="width: 150px">
                     <h2><i class="cqc-news"></i> 회수자금결과</h2>
+                </div>
+                <div class="left">
+                    <h6> (*)항목 변경시 마감정보가 조회됩니다.</h6>
                 </div>
                 <div class="right">
                     <button type="button" class="btn btn-default" data-form-view-01-btn="form-clear">
@@ -107,7 +110,7 @@
 
             <form name="formView01" id="formView01" method="post" onsubmit="return false">
                 <div data-ax-tbl class="ax-search-tbl" minWidth="700px">
-                    <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='지사명', text2='지점명/코드', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
+                    <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='지사명', text2='지점명/코드(*)', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
                         <div layout:fragment="wrap-1">
                             <select th:class="form-control" th:classappend="${class}" data-ax-path="jisaCode"
                                     name="jisaCodeForm" id="jisaCodeForm" style="width: 150px">
@@ -119,12 +122,12 @@
                             <div class="form-inline">
                                 <input type="text" id="branchNameForm" class="form-control W150" value="" data-ax-path="branchName"
                                        data-searchview-btn="form_modal" readonly="readonly" style="text-align: center" placeholder="클릭시 검색"/>
-                                <input type="text" id="branchCodeForm" class="form-control W60" value="" data-ax-path="branchName"
+                                <input type="text" id="branchCodeForm" class="form-control W60" value="" data-ax-path="branchCode"
                                        data-searchview-btn="form_modal" readonly="readonly" style="text-align: center" maxlength="4" minlength="4"/>
                             </div>
                         </div>
                     </th:block>
-                    <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='코너명/단말번호', text2='마감일', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
+                    <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='코너명/단말번호(*)', text2='마감일(*)', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
                         <div layout:fragment="wrap-1">
                             <div class="form-inline">
                                 <input type="text" id="cornerNameForm" class="form-control W150" value="" data-ax-path="cornerName"
@@ -146,17 +149,17 @@
                                    type="text" class="form-control W150" placeholder data-ax5formatter="money(int)">
                         </div>
                         <div layout:fragment="wrap-2">
-                            <input id="depositAmt" name="depositAmt" data-ax-path="depositAmt" title="입금금액"
+                            <input id="depositAmt" name="depositAmt" data-ax-path="depositAmt" title="입금금액" readonly="readonly"
                                    type="text" class="form-control W150" placeholder data-ax5formatter="money(int)">
                         </div>
                     </th:block>
                     <th:block layout:insert="~{/fragments/table :: tr-td2-label(text1='지급금액', text2='마감금액', style1='width: 150px', style2='width: 230px', style='width: 380px')}">
                         <div layout:fragment="wrap-1">
-                            <input id="giveAmt" name="giveAmt" data-ax-path="giveAmt" title="지급금액"
+                            <input id="giveAmt" name="giveAmt" data-ax-path="giveAmt" title="지급금액" readonly="readonly"
                                    type="text" class="form-control W150" placeholder data-ax5formatter="money(int)">
                         </div>
                         <div layout:fragment="wrap-2">
-                            <input id="closeAmt" name="closeAmt" data-ax-path="closeAmt" title="마감금액"
+                            <input id="closeAmt" name="closeAmt" data-ax-path="closeAmt" title="마감금액" readonly="readonly"
                                    type="text" class="form-control W150" placeholder data-ax5formatter="money(int)">
                         </div>
                     </th:block>

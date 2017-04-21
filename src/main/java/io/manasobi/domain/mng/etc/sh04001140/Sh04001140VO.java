@@ -3,19 +3,17 @@ package io.manasobi.domain.mng.etc.sh04001140;
 import io.manasobi.core.vo.BaseVO;
 import io.manasobi.utils.ModelMapperUtils;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class Sh04001140VO extends BaseVO {
 
 	private String seqNo;
@@ -61,10 +59,9 @@ public class Sh04001140VO extends BaseVO {
 
 
     public static Sh04001140VO of(Sh04001140 sh04001140) {
-		/*BoundMapperFacade<Sh04001140, Sh04001140VO> mapper =
+		BoundMapperFacade<Sh04001140, Sh04001140VO> mapper =
 				ModelMapperUtils.getMapper("Sh04001140", Sh04001140VO.class.getPackage().getName());
-		return mapper.map(sh04001140);*/
-		return ModelMapperUtils.map(sh04001140, Sh04001140VO.class);
+		return mapper.map(sh04001140);
     }
 
     public static List<Sh04001140VO> of(List<Sh04001140> sh04001140List) {

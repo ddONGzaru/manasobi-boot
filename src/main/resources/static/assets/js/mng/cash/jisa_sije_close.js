@@ -124,16 +124,16 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
                         return parent.COMMON_CODE["JISA_CODE"].map[this.value];
                     }
                 },
-                {key: 'prevDayReserveSije', label: '전일예비시재', width: 130, align: 'right',  formatter: "money", editor: 'number', editor: 'number'},
-                {key: 'thisDayCashDepositAmt', label: '금일입금액', width: 130, align: 'right',  formatter: "money", editor: 'number', editor: 'number'},
-                {key: 'jisaToShinhanSendAmt', label: '지사>신한', width: 130, align: 'right',  formatter: "money", editor: 'number', editor: 'number'},
-                {key: 'closeAmt', label: '금일마감금액', width: 130, align: 'right',  formatter: "money", editor: 'number', editor: 'number'},
-                {key: 'unCheckAmt', label: '미확인금액', width: 130, align: 'right',  formatter: "money", editor: 'number', editor: 'number'},
-                {key: 'sijeMistakeAmt', label: '시재착오금', width: 130, align: 'right',  formatter: "money", editor: 'number', editor: 'number'},
-                {key: 'cashSendingAmt', label: '현송금액', width: 130, align: 'right',  formatter: "money", editor: 'number', editor: 'number'},
-                {key: 'addCashSendingAmt', label: '추가현송금액', width: 130, align: 'right',  formatter: "money", editor: 'number', editor: 'number'},
+                {key: 'prevDayReserveSije', label: '전일예비시재', width: 130, align: 'right',  formatter: "money"},
+                {key: 'thisDayCashDepositAmt', label: '금일입금액(*)', width: 130, align: 'right',  formatter: "money", editor: 'number'},
+                {key: 'jisaToShinhanSendAmt', label: '지사>신한(*)', width: 130, align: 'right',  formatter: "money", editor: 'number'},
+                {key: 'closeAmt', label: '금일마감금액', width: 130, align: 'right',  formatter: "money"},
+                {key: 'unCheckAmt', label: '미확인금액(*)', width: 130, align: 'right',  formatter: "money", editor: 'number'},
+                {key: 'sijeMistakeAmt', label: '시재착오금(*)', width: 130, align: 'right',  formatter: "money", editor: 'number'},
+                {key: 'cashSendingAmt', label: '현송금액', width: 130, align: 'right',  formatter: "money"},
+                {key: 'addCashSendingAmt', label: '추가현송금액', width: 130, align: 'right',  formatter: "money"},
                 {key: 'jisaSafeAmt', label: '금고보관액', width: 130, align: 'right',  formatter: "money"},
-                {key: 'memoContent', label: '메모', width: 520, align: 'left', editor: 'text'},
+                {key: 'memoContent', label: '메모(*)', width: 520, align: 'left', editor: 'text'},
                 {key: 'userNm', label: '변경사용자', width: 100, align: 'center',
                     formatter: function formatter() {
                         if(this.value) {

@@ -1,5 +1,6 @@
 package io.manasobi.domain.mng.equip.sh02001100;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,6 +22,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_02001100")
+@Comment("")
 @Alias("sh02001100")
 public class Sh02001100 extends SimpleJpaModel<String> {
 

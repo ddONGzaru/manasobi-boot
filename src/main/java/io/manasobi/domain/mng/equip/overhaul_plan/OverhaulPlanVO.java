@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.glasnost.orika.BoundMapperFacade;
 import org.springframework.data.domain.Page;
-
 import java.util.List;
-
-import static java.util.stream.Collectors.*;
+import java.sql.Timestamp;
+import static java.util.stream.Collectors.toList;
 
 
 @Data
@@ -33,10 +32,9 @@ public class OverhaulPlanVO extends BaseVO {
 
 
     public static OverhaulPlanVO of(OverhaulPlan overhaulPlan) {
-        /*BoundMapperFacade<OverhaulPlan, OverhaulPlanVO> mapper =
+        BoundMapperFacade<OverhaulPlan, OverhaulPlanVO> mapper =
                 ModelMapperUtils.getMapper("OverhaulPlan", OverhaulPlanVO.class.getPackage().getName());
-        return mapper.map(overhaulPlan);*/
-        return ModelMapperUtils.map(overhaulPlan, OverhaulPlanVO.class);
+        return mapper.map(overhaulPlan);
     }
 
     public static List<OverhaulPlanVO> of(List<OverhaulPlan> overhaulPlanList) {

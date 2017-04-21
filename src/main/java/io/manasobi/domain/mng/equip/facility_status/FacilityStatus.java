@@ -1,7 +1,9 @@
 package io.manasobi.domain.mng.equip.facility_status;
 
+import io.manasobi.core.annotations.Comment;
 import io.manasobi.core.base.model.SimpleJpaModel;
 import lombok.*;
+import org.apache.ibatis.type.Alias;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -16,7 +18,9 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "ATMS_FACILITY_STATUS")
+@Comment(value = "")
 @IdClass(FacilityStatus.FacilityStatusId.class)
+@Alias("facilityStatus")
 public class FacilityStatus extends SimpleJpaModel<FacilityStatus.FacilityStatusId> {
 
 	@Id

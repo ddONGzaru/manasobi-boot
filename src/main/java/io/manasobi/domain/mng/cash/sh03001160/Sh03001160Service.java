@@ -32,8 +32,8 @@ public class Sh03001160Service extends BaseService<Sh03001160, Sh03001160.Sh0300
     public Sh03001160Mapper sh03001160Mapper;
 
     @Inject
-    public Sh03001160Service(Sh03001160Repo sh03001160Repo) {
-        super(sh03001160Repo);
+    public Sh03001160Service(Sh03001160Repo sh03001160Repository) {
+        super(sh03001160Repository);
     }
 
     @Autowired
@@ -61,7 +61,7 @@ public class Sh03001160Service extends BaseService<Sh03001160, Sh03001160.Sh0300
             apiResponseEntity = restTemplate.postForEntity(url, sh03001160VO, ApiResponse.class);
         } catch (RestClientException e) {
             log.error("sh03001160Service-sendAndReceive :: {}", e.getMessage());
-            throw new ApiException(ApiStatus.SYSTEM_ERROR, "Socket 통신 중에 오류가 발생하였습니다.");
+            throw new ApiException(ApiStatus.SYSTEM_ERROR, "추가현송계획 전문응답코드가 99입니다.");
         }
 
         return apiResponseEntity.getBody();
@@ -73,7 +73,7 @@ public class Sh03001160Service extends BaseService<Sh03001160, Sh03001160.Sh0300
         String jisaCode = requestParams.getString("jisaCode");
         String branchCode = requestParams.getString("branchCode");
         String terminalNo = requestParams.getString("terminalNo");
-        Timestamp cashSendingDate = requestParams.getTimestamp("cashSendingDate");
+        Timestamp cashSendingStndDate = requestParams.getTimestamp("cashSendingStndDate");
 
         QSh03001160 qSh03001160 = QSh03001160.sh03001160;
 
@@ -91,8 +91,8 @@ public class Sh03001160Service extends BaseService<Sh03001160, Sh03001160.Sh0300
             builder.and(qSh03001160.terminalNo.eq(terminalNo));
         }
 
-        if (cashSendingDate != null) {
-            builder.and(qSh03001160.cashSendingDate.eq(cashSendingDate));
+        if (cashSendingStndDate != null) {
+            builder.and(qSh03001160.cashSendingStndDate.eq(cashSendingStndDate));
         }
 
         OrderSpecifier<String> sortOrder = qSh03001160.addCashSendingSeqNo.asc();
@@ -118,10 +118,9 @@ public class Sh03001160Service extends BaseService<Sh03001160, Sh03001160.Sh0300
         if (sh03001160 == null) {
             return new Sh03001160VO();
         } else {
-            /*BoundMapperFacade<Sh03001160, Sh03001160VO> mapper =
+            BoundMapperFacade<Sh03001160, Sh03001160VO> mapper =
                     ModelMapperUtils.getMapper("Sh03001160", this.getClass().getPackage().getName());
-            return mapper.map(sh03001160);*/
-            return ModelMapperUtils.map(sh03001160, Sh03001160VO.class);
+            return mapper.map(sh03001160);
         }
     }
 }
