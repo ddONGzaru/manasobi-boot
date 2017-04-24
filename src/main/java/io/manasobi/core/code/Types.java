@@ -97,6 +97,10 @@ public class Types {
         public static final String H2 = "h2";
     }
 
+    public enum DataSource {
+        DBCP2, HIKARI
+    }
+
     public enum DataStatus {
         CREATED,
         MODIFIED,

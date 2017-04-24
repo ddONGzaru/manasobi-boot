@@ -2,6 +2,7 @@ package io.manasobi.config;
 
 import ch.qos.logback.classic.LoggerContext;
 import io.manasobi.core.code.PackageManager;
+import io.manasobi.core.code.Types;
 import io.manasobi.core.db.dbcp.DataSourceFactory;
 import io.manasobi.core.db.monitor.SqlMonitoringService;
 import io.manasobi.core.domain.log.BaseErrorLogService;
@@ -64,7 +65,7 @@ public class AppConfig implements ApplicationContextAware {
     @Bean
     @Primary
     public DataSource dataSource(@Named(value = "propsConfig") PropsConfig propsConfig) throws Exception {
-        return DataSourceFactory.create(propsConfig.getDataSourceConfig());
+        return DataSourceFactory.create(Types.DataSource.HIKARI, propsConfig.getDataSourceConfig());
     }
 
     @Bean
