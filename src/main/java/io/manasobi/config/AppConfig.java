@@ -24,6 +24,8 @@ import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.*;
@@ -62,10 +64,16 @@ public class AppConfig implements ApplicationContextAware {
     @Bean
     public PropsConfig propsConfig() { return new PropsConfig(); }
 
-    @Bean
+    /*@Bean
     @Primary
     public DataSource dataSource(@Named(value = "propsConfig") PropsConfig propsConfig) throws Exception {
         return DataSourceFactory.create(Types.DataSource.HIKARI, propsConfig.getDataSourceConfig());
+    }*/
+
+    @Bean(destroyMethod = "close")
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
+        return DataSourceBuilder.create().build();
     }
 
     @Bean

@@ -24,6 +24,7 @@ dependencies {
     compile 'com.querydsl:querydsl-jpa:4.1.4'
     compile 'com.querydsl:querydsl-apt:4.1.4'
     compile 'com.zaxxer:HikariCP:2.6.1'
+    compile group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
 
     //compile 'com.oracle:ojdbc6:11.2.0.3' // oracle
     compile 'org.mariadb.jdbc:mariadb-java-client:1.5.5' // maria-db

@@ -12,15 +12,23 @@
         <appender-ref ref="CONSOLE" />
     </root>
 
-    <logger name="com.bgf.shbank" level="DEBUG"/>
+    <logger name="io.manasobi" level="DEBUG"/>
 
     <!-- Framework Category -->
     <logger name="org.apache" level="WARN" />
     <logger name="org.springframework" level="INFO" />
 
-    <logger name="org.hibernate.SQL" level="WARN" />
+    <!--<logger name="org.hibernate.SQL" level="WARN" />
     <logger name="org.hibernate.type" level="WARN" />
     <logger name="org.hibernate.engine.query" level="WARN" />
-    <logger name="org.hibernate.jdbc" level="WARN" />
+    <logger name="org.hibernate.jdbc" level="WARN" />-->
+
+    <!-- SQL Query Logging -->
+    <logger name="jdbc.sqlonly"        level="DEBUG"/>
+    <logger name="jdbc.sqltiming"      level="INFO"/>
+    <logger name="jdbc.audit"          level="INFO"/>
+    <logger name="jdbc.resultset"      level="ERROR"/>
+    <logger name="jdbc.resultsettable" level="ERROR"/>
+    <logger name="jdbc.connection"     level="DEBUG"/>
 
 </configuration>

@@ -13,7 +13,8 @@ appConfig:
   # DataSource
   data-source:
     #driver-class-name: oracle.jdbc.driver.OracleDriver
-    driver-class-name: org.mariadb.jdbc.Driver
+    #driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     initial-size: 5
     max-idle: -1
     max-total: 10
@@ -42,6 +43,22 @@ appConfig:
 # Active Profiles :: [local|dev|test|stage|prod]
 spring:
   profiles.active: local
+
+  #dataSource
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mariadb://localhost:3307/manasobi?useUnicode=true&charaterEncoding=utf-8
+    username: root
+    password: admin
+    hikari:
+      connection-timeout: 60000 #60 sec
+      maximum-pool-size: 5 # max 5
+#spring.datasource.hikari.connection-test-query=SELECT 1 FROM DUAL
+#spring.datasource.hikari.minimum-idle=5
+#dataSource.cachePrepStmts=true
+#dataSource.prepStmtCacheSize=100
+#dataSource.prepStmtCacheSqlLimit=2048
+#dataSource.useServerPrepStmts=true
 
   #jpa
   jpa:
@@ -123,7 +140,7 @@ spring:
 appConfig:
   # DataSource
   data-source:
-    url: jdbc:mariadb://localhost:3307/manasobi
+    url: jdbc:log4jdbc:mariadb://localhost:3307/manasobi?useUnicode=true&charaterEncoding=utf-8
     username: root
     password: admin
 

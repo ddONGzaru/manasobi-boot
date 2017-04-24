@@ -174,6 +174,8 @@ public class PropsConfig implements ApplicationContextAware {
             private boolean queryCache = false;
             private String dialect;
             private String hbm2ddlAuto = "none";
+            private boolean showSql = false;
+            private boolean formatSql = false;
 
             public HibernateJpaVendorAdapter getHibernateJpaVendorAdapter() {
 
@@ -252,6 +254,9 @@ public class PropsConfig implements ApplicationContextAware {
                 additionalProperties.put(Environment.USE_SECOND_LEVEL_CACHE, this.isL2Cache());
                 additionalProperties.put(Environment.USE_QUERY_CACHE, isQueryCache());
                 additionalProperties.put(Environment.HBM2DDL_AUTO, getHbm2ddlAuto());
+
+                additionalProperties.put(Environment.SHOW_SQL, isShowSql());
+                additionalProperties.put(Environment.FORMAT_SQL, isFormatSql());
 
                 return additionalProperties;
             }
