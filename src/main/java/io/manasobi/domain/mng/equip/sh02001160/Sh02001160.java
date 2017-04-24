@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_02001160")
+@Table(name = "atms_02001160")
 @Comment("")
 @Alias("sh02001160")
 public class Sh02001160 extends SimpleJpaModel<String> {

@@ -23,7 +23,7 @@ import java.util.List;
 @DynamicInsert
 @DynamicUpdate
 @Entity
-@Table(name = "ATMS_USER")
+@Table(name = "atms_user")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userCd")
 public class User extends BaseJpaModel<String> {
 

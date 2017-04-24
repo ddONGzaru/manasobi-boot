@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_ERROR_STATUS")
+@Table(name = "atms_ERROR_STATUS")
 @IdClass(ErrorStatus.ErrorStatusId.class)
 @Alias("errorStatus")
 public class ErrorStatus extends SimpleJpaModel<ErrorStatus.ErrorStatusId> {

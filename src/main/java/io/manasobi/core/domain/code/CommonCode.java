@@ -17,7 +17,7 @@ import java.io.Serializable;
 @DynamicInsert
 @DynamicUpdate
 @Entity
-@Table(name = "ATMS_COMMON_CODE")
+@Table(name = "atms_common_code")
 @IdClass(CommonCode.CommonCodeId.class)
 public class CommonCode extends BaseJpaModel<CommonCode.CommonCodeId> {
 

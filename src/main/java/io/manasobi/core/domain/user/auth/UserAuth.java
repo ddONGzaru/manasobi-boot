@@ -14,15 +14,15 @@ import java.io.Serializable;
 @DynamicInsert
 @DynamicUpdate
 @Entity
-@Table(name = "ATMS_USER_AUTH")
-@SequenceGenerator(name = "USER_AUTH_SEQ_GENERATOR", sequenceName = "SEQ_USER_AUTH", allocationSize = 1)
+@Table(name = "atms_user_auth")
+//@SequenceGenerator(name = "USER_AUTH_SEQ_GENERATOR", sequenceName = "SEQ_USER_AUTH", allocationSize = 1)
 public class UserAuth extends BaseJpaModel<Long> {
 
     @Id
     @Column(name = "ID", precision = 19, nullable = false)
     @Comment("ID")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_AUTH_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_AUTH_SEQ_GENERATOR")
     private Long id;
 
     @Column(name = "USER_CD")

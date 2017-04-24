@@ -22,7 +22,7 @@ import java.util.List;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_MENU")
+@Table(name = "atms_menu")
 @Comment(value = "메뉴")
 //oracle에서 사용하기 위해 만들어진 시퀀스 제너레이터. 다른 벤더에서는 사용하지 않아도 무방.
 @SequenceGenerator(name = "MENU_SEQ_GENERATOR", sequenceName = "SEQ_MENU_ID", allocationSize = 1)

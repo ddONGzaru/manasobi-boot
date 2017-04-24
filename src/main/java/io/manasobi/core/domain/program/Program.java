@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @DynamicInsert
 @DynamicUpdate
 @Entity
-@Table(name = "ATMS_PROGRAM")
+@Table(name = "atms_program")
 public class Program extends BaseJpaModel<String> {
 
     @Id

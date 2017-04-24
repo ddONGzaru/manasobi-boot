@@ -18,7 +18,7 @@ import java.io.Serializable;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_AUTH_GROUP_MAP")
+@Table(name = "atms_auth_group_map")
 @Comment(value = "권한그룹 맵")
 @IdClass(AuthGroupMenu.AuthGroupMenuId.class)
 public class AuthGroupMenu extends BaseJpaModel<AuthGroupMenu.AuthGroupMenuId> {

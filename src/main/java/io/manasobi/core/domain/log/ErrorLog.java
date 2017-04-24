@@ -21,7 +21,7 @@ import java.time.Instant;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @ToString
-@Table(name = "ATMS_ERROR_LOG")
+@Table(name = "atms_ERROR_LOG")
 @SequenceGenerator(name = "ERROR_LOG_SEQ_GENERATOR", sequenceName = "SEQ_ERROR_LOG", allocationSize = 1)
 @Comment(value = "에러로그")
 public class ErrorLog extends SimpleJpaModel<Long> {

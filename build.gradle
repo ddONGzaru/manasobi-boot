@@ -55,7 +55,7 @@ task buildApp(type: Copy) {
 def localUser = 'tw_jang'
 
 flyway {
-	url = 'jdbc:mariadb://localhost:3306/manasobi'
+	url = 'jdbc:mariadb://localhost:3307/manasobi'
 	user = 'root'
 	password = 'admin'
 	locations = ["filesystem:${projectDir}/src/test/resources/db/migration"]

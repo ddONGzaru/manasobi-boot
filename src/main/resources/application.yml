@@ -21,7 +21,8 @@ appConfig:
     slow-query-threshold: 3000
     hibernate:
       hbm2ddlAuto: none
-      databaseType: oracle
+      databaseType: mysql
+      implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
   # File Upload
   upload.repository:
     img: /ams_NAS/shinhan_file/img_upload
@@ -41,6 +42,12 @@ appConfig:
 # Active Profiles :: [local|dev|test|stage|prod]
 spring:
   profiles.active: local
+
+  #jpa
+  jpa:
+    show-sql: false
+    hibernate.implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+    properties.hibernate.enable_lazy_load_no_trans: true
 
   # Thymeleaf
   thymeleaf:
@@ -96,10 +103,8 @@ msg.exchange.gateway.online:
     port: 33001
 
 msg.exchange.gateway.batch:
-  ip: 10.200.1.78
-  port: 8888
-  #ip: localhost
-  #port: 9000
+  ip: localhost
+  port: 9000
   security-corp:
     ip: localhost
     port: 33001
@@ -118,9 +123,9 @@ spring:
 appConfig:
   # DataSource
   data-source:
-    url: jdbc:oracle:thin:@shinhan.cwozeqnjffgl.ap-northeast-2.rds.amazonaws.com:1521:shinhan
-    username: tw_jang
-    password: ParkSt0re!
+    url: jdbc:mariadb://localhost:3307/manasobi
+    username: root
+    password: admin
 
   #data-source:
     #url: jdbc:oracle:thin:@//10.200.2.16:1531/amsdb

@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_04001190")
+@Table(name = "atms_04001190")
 @Comment("")
 @Alias("sh04001190")
 public class Sh04001190 extends SimpleJpaModel<Timestamp> {

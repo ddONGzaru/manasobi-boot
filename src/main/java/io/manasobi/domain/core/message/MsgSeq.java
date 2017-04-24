@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @IdClass(MsgSeq.MsgSeqId.class)
-@Table(name = "ATMS_STEXT_SEQ")
+@Table(name = "atms_STEXT_SEQ")
 public class MsgSeq extends SimpleJpaModel<MsgSeq.MsgSeqId> {
 
     @Id

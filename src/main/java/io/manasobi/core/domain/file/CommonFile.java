@@ -26,7 +26,7 @@ import javax.persistence.*;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_FILE")
+@Table(name = "atms_FILE")
 @Comment(value = "공통 파일")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @ToString

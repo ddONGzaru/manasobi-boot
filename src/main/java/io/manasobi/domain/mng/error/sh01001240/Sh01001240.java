@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_01001240")
+@Table(name = "atms_01001240")
 @Comment(value = "")
 @IdClass(Sh01001240.Sh01001240Id.class)
 @Alias("sh01001240")

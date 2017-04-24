@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_CORNER_STATUS")
+@Table(name = "atms_CORNER_STATUS")
 @Comment(value = "")
 @IdClass(CornerStatus.CornerStatusId.class)
 @Alias("cornerStatus")

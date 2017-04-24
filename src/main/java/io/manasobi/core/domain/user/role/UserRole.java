@@ -19,7 +19,7 @@ import javax.persistence.*;
 @DynamicUpdate
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "ATMS_USER_ROLE")
+@Table(name = "atms_user_role")
 @Comment(value = "사용자 롤")
 @Alias("userRole")
 public class UserRole extends BaseJpaModel<Long> {
