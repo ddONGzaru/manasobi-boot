@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{/layout/base}">
 
 <!-- ===== [ script ] ===== -->
@@ -11,6 +11,20 @@
 <div layout:fragment="base-title" class="ax-base-title" role="page-title">
     <h1 class="title"><i class="cqc-tv"></i> <span>장애 모니터링</span></h1>
     <p class="desc" th:text="${pageRemark}"/>
+
+    <div sec:authorize="isAuthenticated()">
+        This content is only shown to authenticated users.
+    </div>
+    <div sec:authorize="hasRole('ROLE_SYSTEM_MANAGER')">
+        This content is only shown to administrators.
+    </div>
+    <div sec:authorize="hasRole('ROLE_ASP_ACCESS')">
+        This content is only shown to users.
+    </div>
+
+    Logged user: <span sec:authentication="name">Bob</span>
+    Roles: <span sec:authentication="authorities">[ROLE_USER, ROLE_ADMIN]</span>
+
 </div>
 <!-- ===== [ base-title ] _END_ ===== -->
 
