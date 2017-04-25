@@ -4,10 +4,12 @@ import io.manasobi.core.vo.BaseVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.Alias;
 
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Alias("searchTerminalVO")
 public class SearchTerminalVO extends BaseVO {
 
     private String jisaCode;

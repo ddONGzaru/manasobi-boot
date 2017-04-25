@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
-import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
@@ -84,12 +83,13 @@ public class AppConfig implements ApplicationContextAware {
       ==================================================
     */
     @Bean
-    public SqlSessionFactory sqlSessionFactory(SpringManagedTransactionFactory springManagedTransactionFactory, DataSource dataSource, PropsConfig propsConfig) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(SpringManagedTransactionFactory springManagedTransactionFactory, DataSource dataSource) throws Exception {
 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         //sqlSessionFactoryBean.setTypeAliasesPackage(PackageManager.DOMAIN);
-        sqlSessionFactoryBean.setTypeHandlers(propsConfig.getMyBatisTypeHandlers());
+        //sqlSessionFactoryBean.setTypeHandlers(propsConfig.getMyBatisTypeHandlers());
+        sqlSessionFactoryBean.setTypeHandlersPackage("org.apache.ibatis.type");
         sqlSessionFactoryBean.setTransactionFactory(springManagedTransactionFactory);
         //sqlSessionFactoryBean.setConfiguration(mybatisConfig());
         sqlSessionFactoryBean.setMapperLocations(context.getResources("classpath:mybatis/mapper/**/*.xml"));
@@ -97,19 +97,6 @@ public class AppConfig implements ApplicationContextAware {
         sqlSessionFactoryBean.setDatabaseIdProvider(databaseIdProvider());
 
         return sqlSessionFactoryBean.getObject();
-    }
-
-    private org.apache.ibatis.session.Configuration mybatisConfig() {
-
-        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
-
-        config.setCacheEnabled(false);
-        config.setUseGeneratedKeys(true);
-        config.setDefaultExecutorType(ExecutorType.REUSE);
-        config.setAggressiveLazyLoading(false);
-        config.setMapUnderscoreToCamelCase(true);
-
-        return config;
     }
 
     private VendorDatabaseIdProvider databaseIdProvider() {
