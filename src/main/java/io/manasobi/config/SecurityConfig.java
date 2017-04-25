@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anonymous()
                 .and()
             .authorizeRequests()
-                .anyRequest().hasRole(Constants.Security.ROLE)
+                //.anyRequest().hasRole(Constants.Security.ROLE)
                 .antMatchers(HttpMethod.POST, Constants.Security.LOGIN_API).permitAll()
                 .antMatchers(Constants.Security.LOGIN_PAGE).permitAll()
                 .and()

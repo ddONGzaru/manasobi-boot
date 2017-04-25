@@ -20,6 +20,10 @@ public interface Constants {
 
         String ROLE = "ASP_ACCESS";
 
+        String ROLE_ADMIN = "SYSTEM_MANAGER";
+
+        String ROLE_USER = "ASP_ACCESS";
+
         String ACCESS_DENIED_PAGE = "/jsp/common/not-authorized.jsp?errorCode=401";
     }
 

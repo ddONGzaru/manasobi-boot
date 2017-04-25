@@ -2,8 +2,6 @@ package io.manasobi.config;
 
 import ch.qos.logback.classic.LoggerContext;
 import io.manasobi.core.code.PackageManager;
-import io.manasobi.core.code.Types;
-import io.manasobi.core.db.dbcp.DataSourceFactory;
 import io.manasobi.core.db.monitor.SqlMonitoringService;
 import io.manasobi.core.domain.log.BaseErrorLogService;
 import io.manasobi.core.logging.LogbackAppender;
@@ -28,19 +26,20 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.AdviceMode;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import javax.inject.Named;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -51,45 +50,39 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = PackageManager.BASE)
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @MapperScan(basePackages = PackageManager.DOMAIN, markerInterface = MyBatisMapper.class)
-@EntityScan(basePackageClasses = Jsr310JpaConverters.class)
+@EntityScan(basePackages = "io.manasobi", basePackageClasses = Jsr310JpaConverters.class)
 public class AppConfig implements ApplicationContextAware {
 
-    private ApplicationContext context;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
-    }
-
-    @Bean
-    public PropsConfig propsConfig() { return new PropsConfig(); }
-
-    /*@Bean
-    @Primary
-    public DataSource dataSource(@Named(value = "propsConfig") PropsConfig propsConfig) throws Exception {
-        return DataSourceFactory.create(Types.DataSource.HIKARI, propsConfig.getDataSourceConfig());
-    }*/
-
+    /*
+      ==================================================
+        DataSource Config
+      ==================================================
+    */
     @Bean(destroyMethod = "close")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
 
+    /*
+      ==================================================
+        Hibernate Config
+      ==================================================
+    */
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, PropsConfig propsConfig) {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) throws ClassNotFoundException {
 
-        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactory.setDataSource(dataSource);
-        entityManagerFactory.setPackagesToScan(PackageManager.BASE);
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
 
-        PropsConfig.DataSourceConfig.HibernateConfig hibernateConfig = propsConfig.getDataSourceConfig().getHibernateConfig();
-        entityManagerFactory.setJpaVendorAdapter(hibernateConfig.getHibernateJpaVendorAdapter());
-        entityManagerFactory.setJpaProperties(hibernateConfig.getAdditionalProperties());
-
-        return entityManagerFactory;
+        return jpaTransactionManager;
     }
 
+    /*
+      ==================================================
+        mybatis Config
+      ==================================================
+    */
     @Bean
     public SqlSessionFactory sqlSessionFactory(SpringManagedTransactionFactory springManagedTransactionFactory, DataSource dataSource, PropsConfig propsConfig) throws Exception {
 
@@ -143,14 +136,38 @@ public class AppConfig implements ApplicationContextAware {
         return new SpringManagedTransactionFactory();
     }
 
-    @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) throws ClassNotFoundException {
 
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
+    private ApplicationContext context;
 
-        return jpaTransactionManager;
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
     }
+
+    @Bean
+    public PropsConfig propsConfig() { return new PropsConfig(); }
+
+    /*@Bean
+    @Primary
+    public DataSource dataSource(@Named(value = "propsConfig") PropsConfig propsConfig) throws Exception {
+        return DataSourceFactory.create(Types.DataSource.HIKARI, propsConfig.getDataSourceConfig());
+    }*/
+
+
+    /*@Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, PropsConfig propsConfig) {
+
+        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactory.setDataSource(dataSource);
+        entityManagerFactory.setPackagesToScan(PackageManager.BASE);
+
+        PropsConfig.DataSourceConfig.HibernateConfig hibernateConfig = propsConfig.getDataSourceConfig().getHibernateConfig();
+        entityManagerFactory.setJpaVendorAdapter(hibernateConfig.getHibernateJpaVendorAdapter());
+        entityManagerFactory.setJpaProperties(hibernateConfig.getAdditionalProperties());
+
+        return entityManagerFactory;
+    }*/
+
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
@@ -231,7 +248,7 @@ public class AppConfig implements ApplicationContextAware {
         return config;
     }*/
 
-/*@Bean
+    /*@Bean
     public String databaseId() {
 
         try {

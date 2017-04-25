@@ -3,11 +3,14 @@ package io.manasobi.controller;
 import io.manasobi.core.api.ApiException;
 import io.manasobi.core.api.response.ApiResponse;
 import io.manasobi.core.code.ApiStatus;
+import io.manasobi.core.code.Constants;
 import io.manasobi.core.validator.CollectionValidator;
+import io.manasobi.utils.ContextUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -21,9 +24,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import javax.inject.Inject;
 import javax.persistence.RollbackException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.nio.file.AccessDeniedException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 @ControllerAdvice
@@ -52,8 +57,10 @@ public class BaseController {
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ApiResponse handleForbidden(Exception e) {
-        return ApiResponse.error(ApiStatus.FORBIDDEN, e.getMessage());
+    public String handleForbidden(Exception e) throws IOException, ServletException {
+        errorLogging(e);
+        return "/access-denied";
+        //return ApiResponse.error(ApiStatus.FORBIDDEN, e.getMessage());
     }
 
     @ExceptionHandler(TypeMismatchException.class)

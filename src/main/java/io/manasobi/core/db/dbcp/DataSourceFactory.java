@@ -13,21 +13,21 @@ import java.sql.Connection;
 @Slf4j
 public class DataSourceFactory {
 
-    public static DataSource create(Types.DataSource dataSourceType, PropsConfig.DataSourceConfig dataSourceConfig) throws Exception {
+    public static DataSource create(Types.DataSource dataSourceType) throws Exception {
 
-        if (dataSourceType == Types.DataSource.DBCP2) {
+        /*if (dataSourceType == Types.DataSource.DBCP2) {
             return createDBCP2(dataSourceConfig);
         } else if (dataSourceType == Types.DataSource.HIKARI) {
             return createHikari(dataSourceConfig);
-        }
+        }*/
 
         log.error("DataSourceFactory-create :: 지원하지 않는 DataSource 타입입니다. [{}]", dataSourceType);
         return null;
     }
 
-    public static DBCP2DataSource createDBCP2(PropsConfig.DataSourceConfig dataSourceConfig) throws Exception {
+    public static DBCP2DataSource createDBCP2() throws Exception {
 
-        try {
+        /*try {
             DBCP2DataSource DBCP2DataSource = new ModelMapper().map(dataSourceConfig, DBCP2DataSource.class);
             DBCP2DataSource.setDatabaseType(dataSourceConfig.getHibernateConfig().getDatabaseType());
             Connection conn = DBCP2DataSource.getConnection();
@@ -38,12 +38,14 @@ public class DataSourceFactory {
         } catch (Exception exception) {
             log.error("DataSourceFactory-create :: fail to create DataSource(DBCP2) - {}", exception);
             throw exception;
-        }
+        }*/
+
+        return null;
     }
 
-    public static DataSource createHikari(PropsConfig.DataSourceConfig dataSourceConfig) throws Exception {
+    public static DataSource createHikari() throws Exception {
 
-        HikariConfig config = new HikariConfig();
+        /*HikariConfig config = new HikariConfig();
 
         config.setJdbcUrl(dataSourceConfig.getUrl());
         config.setUsername(dataSourceConfig.getUsername());
@@ -52,6 +54,8 @@ public class DataSourceFactory {
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
-        return new HikariDataSource(config);
+        return new HikariDataSource(config);*/
+
+        return null;
     }
 }

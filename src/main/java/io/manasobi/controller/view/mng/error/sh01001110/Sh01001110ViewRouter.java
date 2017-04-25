@@ -1,7 +1,9 @@
 package io.manasobi.controller.view.mng.error.sh01001110;
 
 import io.manasobi.controller.BaseController;
+import io.manasobi.core.code.Constants;
 import io.manasobi.utils.CommonCodeUtils;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class Sh01001110ViewRouter extends BaseController {
 
+    @Secured(Constants.Security.ROLE_ADMIN)
     @GetMapping("/mng/error/sh01001110")
     public String view(ModelMap model) {
         model.addAttribute("jisaCode", CommonCodeUtils.get("JISA_CODE"));

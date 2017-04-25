@@ -39,7 +39,8 @@ public class JdbcMetadataService {
     }
 
     public String getDatabaseType() {
-        return propsConfig.getDataSourceConfig().getHibernateConfig().getDatabaseType().toLowerCase();
+        //return propsConfig.getDataSourceConfig().getHibernateConfig().getDatabaseType().toLowerCase();
+        return null;
     }
 
     public String getCatalog() {
@@ -58,7 +59,8 @@ public class JdbcMetadataService {
         Connection connection = null;
 
         if ("oracle".equals(getDatabaseType())) {
-            return propsConfig.getDataSourceConfig().getUsername().toUpperCase();
+            //return propsConfig.getDataSourceConfig().getUsername().toUpperCase();
+            return null;
         }
         try {
             return connection.getCatalog().toString();
@@ -139,7 +141,7 @@ public class JdbcMetadataService {
             ResultSet columnsResultSet = connection.getMetaData().getColumns(getCatalog(), null, tableName, null);
             columns.addAll(new ColumnToBeanPropertyRowMapper<>(Column.class).mapRows(columnsResultSet));
 
-            if ("oracle".equals(propsConfig.getDataSourceConfig().getHibernateConfig().getDatabaseType().toLowerCase())) {
+            /*if ("oracle".equals(propsConfig.getDataSourceConfig().getHibernateConfig().getDatabaseType().toLowerCase())) {
                 List<Map<String, Object>> comments = jdbcTemplate.queryForList(String.format("SELECT A.COLUMN_NAME, B.COMMENTS FROM ALL_TAB_COLUMNS A, ALL_COL_COMMENTS B WHERE  A.TABLE_NAME = B.TABLE_NAME AND  A.COLUMN_NAME = B.COLUMN_NAME AND A.OWNER = 'SR' AND A.TABLE_NAME = '%s'", tableName));
 
                 for (Column column : columns) {
@@ -151,7 +153,7 @@ public class JdbcMetadataService {
                         }
                     });
                 }
-            }
+            }*/
 
             DbUtils.closeQuietly(columnsResultSet);
 

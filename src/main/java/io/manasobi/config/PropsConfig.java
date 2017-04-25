@@ -37,17 +37,11 @@ public class PropsConfig implements ApplicationContextAware {
 
     private String systemName;
 
-    private DataSourceConfig dataSource;
-
     private Logging log;
 
     private Modeler modeler;
 
     private static PropsConfig instance;
-
-    public DataSourceConfig getDataSourceConfig() {
-        return dataSource;
-    }
 
     public Logging getLoggingConfig() {
         return log == null ? new Logging() : log;
@@ -114,166 +108,7 @@ public class PropsConfig implements ApplicationContextAware {
         }
     }
 
-    @Data
-    @NoArgsConstructor
-    public static class DataSourceConfig {
 
-        @Getter(AccessLevel.NONE)
-        private String databaseType;
-        private String username;
-        private String password;
-        private String url;
-        private String driverClassName;
-        private int initialSize = 5;
-        private int maxTotal = 10;
-        private int maxWaitMillis = 3000;
-        private boolean sqlOutput = true;
-        private long slowQueryThreshold = 5000;
-        private long timeBetweenEvictionRunsMillis = 300000;
-        private boolean testOnBorrow = false;
-        private boolean testOnReturn = false;
-        private boolean testWhileIdle = true;
-        private long defaultQueryTimeout = 30000;
-
-        @Getter(AccessLevel.NONE)
-        private String validationQuery;
-
-        private HibernateConfig hibernate;
-
-        public String getValidationQuery() {
-
-            String _driverClassName = driverClassName.toLowerCase();
-
-            if (_driverClassName.contains("mysql") ||
-                    _driverClassName.contains("mariadb") ||
-                    _driverClassName.contains("microsft") ||
-                    _driverClassName.contains("sqlserver")) {
-                return "SELECT 1";
-            }
-
-            if (_driverClassName.contains("oracle")) {
-                return "SELECT 1 FROM DUAL";
-            }
-
-            if (_driverClassName.contains("postgres") || _driverClassName.contains("pg")) {
-                return "";
-            }
-
-            return "SELECT 1";
-        }
-
-        public HibernateConfig getHibernateConfig() {
-            return hibernate == null ? new HibernateConfig() : hibernate;
-        }
-
-        @Data
-        public static class HibernateConfig {
-
-            private String databaseType;
-            private boolean l2Cache = false;
-            private boolean queryCache = false;
-            private String dialect;
-            private String hbm2ddlAuto = "none";
-            private boolean showSql = false;
-            private boolean formatSql = false;
-
-            public HibernateJpaVendorAdapter getHibernateJpaVendorAdapter() {
-
-                HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-
-                switch (databaseType.toLowerCase()) {
-                    case Types.DatabaseType.MSSQL:
-                        vendorAdapter.setDatabase(Database.SQL_SERVER);
-                        break;
-
-                    case Types.DatabaseType.MYSQL:
-                        vendorAdapter.setDatabase(Database.MYSQL);
-                        break;
-
-                    case Types.DatabaseType.ORACLE:
-                        vendorAdapter.setDatabase(Database.ORACLE);
-                        break;
-
-                    case Types.DatabaseType.POSTGRESQL:
-                        vendorAdapter.setDatabase(Database.POSTGRESQL);
-                        break;
-
-                    case Types.DatabaseType.H2:
-                        vendorAdapter.setDatabase(Database.H2);
-                        break;
-                }
-
-                if (StringUtils.isEmpty(dialect)) {
-
-                    switch (databaseType.toLowerCase()) {
-                        case Types.DatabaseType.MSSQL:
-                            vendorAdapter.setDatabase(Database.SQL_SERVER);
-                            vendorAdapter.setDatabasePlatform(SQLServer2005Dialect.class.getName());
-                            break;
-
-                        case Types.DatabaseType.MYSQL:
-                            vendorAdapter.setDatabase(Database.MYSQL);
-                            vendorAdapter.setDatabasePlatform(MySQL57InnoDBDialect.class.getName());
-                            break;
-
-                        case Types.DatabaseType.ORACLE:
-                            vendorAdapter.setDatabase(Database.ORACLE);
-                            vendorAdapter.setDatabasePlatform(Oracle10gDialect.class.getName());
-                            break;
-
-                        case Types.DatabaseType.POSTGRESQL:
-                            vendorAdapter.setDatabase(Database.POSTGRESQL);
-                            vendorAdapter.setDatabasePlatform(PostgreSQL9Dialect.class.getName());
-                            break;
-
-                        case Types.DatabaseType.H2:
-                            vendorAdapter.setDatabase(Database.H2);
-                            vendorAdapter.setDatabasePlatform(H2Dialect.class.getName());
-                    }
-
-                } else {
-
-                    try {
-                        vendorAdapter.setDatabasePlatform(Class.forName("org.hibernate.dialect." + dialect).getName());
-                    } catch (ClassNotFoundException e) {
-                        try {
-                            vendorAdapter.setDatabasePlatform(Class.forName(String.format("com.chequer.axboot.core.db.dialect.%s", dialect)).getName());
-                        } catch (ClassNotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                }
-
-                return vendorAdapter;
-            }
-
-            public Properties getAdditionalProperties() {
-
-                Properties additionalProperties = new Properties();
-
-                additionalProperties.put(Environment.USE_SECOND_LEVEL_CACHE, this.isL2Cache());
-                additionalProperties.put(Environment.USE_QUERY_CACHE, isQueryCache());
-                additionalProperties.put(Environment.HBM2DDL_AUTO, getHbm2ddlAuto());
-
-                additionalProperties.put(Environment.SHOW_SQL, isShowSql());
-                additionalProperties.put(Environment.FORMAT_SQL, isFormatSql());
-
-                return additionalProperties;
-            }
-        }
-
-    }
-
-    /*private Application application = new Application();*/
-
-    /*@Data
-    public static class Application {
-        public Application() {
-            this.name = "AXBOOT";
-        }
-
-        private String name;
-    }*/
 }
 
 
